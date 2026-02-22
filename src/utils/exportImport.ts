@@ -54,8 +54,8 @@ export async function exportData(options: ExportOptions): Promise<ExportData> {
 
   if (options.settings) {
     data.settings = {
-      language: localStorage.getItem('my-resources-language') ?? 'en',
-      theme: localStorage.getItem('my-resources-theme') ?? 'system',
+      language: localStorage.getItem('my-purchases-language') ?? 'en',
+      theme: localStorage.getItem('my-purchases-theme') ?? 'system',
     };
   }
 
@@ -66,7 +66,7 @@ export async function exportData(options: ExportOptions): Promise<ExportData> {
 export async function exportToFile(options: ExportOptions): Promise<void> {
   const data = await exportData(options);
   const dateStr = new Date().toISOString().split('T')[0];
-  downloadJson(data, `my-resources-export-${dateStr}.json`);
+  downloadJson(data, `my-purchases-export-${dateStr}.json`);
 }
 
 // ─── Import ─────────────────────────────────────────────────
@@ -174,10 +174,10 @@ export async function importData(
 
   if (data.settings) {
     if (data.settings.language) {
-      localStorage.setItem('my-resources-language', data.settings.language);
+      localStorage.setItem('my-purchases-language', data.settings.language);
     }
     if (data.settings.theme) {
-      localStorage.setItem('my-resources-theme', data.settings.theme);
+      localStorage.setItem('my-purchases-theme', data.settings.theme);
     }
     console.info('[Import] Settings imported');
   }

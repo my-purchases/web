@@ -4,7 +4,7 @@ import { validateInvitation } from '@/types/invitation';
 import type { ProviderCredentials } from '@/providers/types';
 import { tracker, AnalyticsEvents } from '@/analytics';
 
-const STORAGE_KEY = 'my-resources-invitation';
+const STORAGE_KEY = 'my-purchases-invitation';
 const BASE_URL = import.meta.env.BASE_URL;
 
 interface InvitationState {

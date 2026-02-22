@@ -67,7 +67,7 @@ export class MyResourcesDB extends Dexie {
   syncState!: EntityTable<SyncState, 'providerId'>;
 
   constructor() {
-    super('my-resources');
+    super('my-purchases');
 
     this.version(1).stores({
       purchases: 'id, providerId, purchaseDate, [providerId+purchaseDate], [providerId+providerItemId]',

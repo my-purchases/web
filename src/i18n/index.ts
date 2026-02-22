@@ -61,7 +61,7 @@ i18n
     },
     detection: {
       order: ['localStorage', 'navigator', 'htmlTag'],
-      lookupLocalStorage: 'my-resources-language',
+      lookupLocalStorage: 'my-purchases-language',
       caches: ['localStorage'],
     },
   });

@@ -11,7 +11,7 @@ export function Footer() {
           © {new Date().getFullYear()} {t('common.appName')}. Open Source.
         </p>
         <a
-          href="https://github.com/zenedith/my-resources"
+          href="https://github.com/mobulum/my-purchases/"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors"

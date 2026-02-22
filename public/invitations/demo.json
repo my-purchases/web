@@ -11,7 +11,7 @@
     "olx": {
       "clientId": "",
       "clientSecret": "",
-      "redirectUri": "https://localhost-vite.mobulum.xyz/my-resources/auth/olx"
+      "redirectUri": "https://localhost-vite.mobulum.xyz/my-purchases/auth/olx"
     }
   },
   "createdAt": "2026-02-22T00:00:00Z"

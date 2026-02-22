@@ -27,7 +27,7 @@ export default function AboutPage() {
       <p>
         {t('about.openSourceDescription')}{' '}
         <a
-          href="https://github.com/zenedith/my-resources"
+          href="https://github.com/mobulum/my-purchases/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-primary-600 hover:text-primary-700 dark:text-primary-400"

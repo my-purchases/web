@@ -6,7 +6,7 @@ import { tracker, AnalyticsEvents } from '@/analytics';
 
 export type Theme = 'light' | 'dark' | 'system';
 
-const THEME_KEY = 'my-resources-theme';
+const THEME_KEY = 'my-purchases-theme';
 
 interface SettingsState {
   theme: Theme;
