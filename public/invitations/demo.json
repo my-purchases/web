@@ -1,0 +1,18 @@
+{
+  "code": "demo",
+  "label": "Demo Invitation",
+  "description": "A demo invitation with Allegro API credentials.",
+  "providers": {
+    "allegro": {
+      "clientId": "",
+      "clientSecret": "",
+      "redirectUri": "https://localhost-vite.mobulum.xyz/my-resources/auth/allegro"
+    },
+    "olx": {
+      "clientId": "",
+      "clientSecret": "",
+      "redirectUri": "https://localhost-vite.mobulum.xyz/my-resources/auth/olx"
+    }
+  },
+  "createdAt": "2026-02-22T00:00:00Z"
+}
