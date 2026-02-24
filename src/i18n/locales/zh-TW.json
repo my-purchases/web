@@ -26,7 +26,11 @@
     "apply": "套用",
     "noResults": "找不到結果",
     "error": "發生了錯誤",
-    "success": "成功"
+    "success": "成功",
+    "page": "頁碼",
+    "of": "/",
+    "previous": "上一頁",
+    "clear": "清除"
   },
   "nav": {
     "purchases": "購買紀錄",
@@ -67,7 +71,33 @@
     "importProvider": "匯入提供商",
     "configure": "設定",
     "connected": "已連線",
-    "disconnected": "未連線"
+    "connect": "連接",
+    "disconnected": "未連線",
+    "deviceFlow": {
+      "title": "連接到 {{provider}}",
+      "step1": "點擊下方連結（或掃描 QR 碼）並登入您的帳戶：",
+      "step2": "在提示時輸入代碼：",
+      "openLink": "開啟授權頁面",
+      "waiting": "等待授權...",
+      "waitingDescription": "授權後，此對話框將自動關閉。",
+      "success": "連接成功！",
+      "denied": "使用者拒絕了授權。",
+      "expired": "代碼已過期。請重試。",
+      "error": "授權過程中發生錯誤。",
+      "tryAgain": "重試",
+      "codeExpires": "代碼將在 {{minutes}} 分鐘後過期"
+    },
+    "import": {
+      "importing": "正在匯入購買記錄...",
+      "complete": "匯入完成",
+      "added": "新增",
+      "skipped": "已跳過",
+      "updated": "已更新",
+      "totalProcessed": "總計處理",
+      "newlyAdded": "新匯入",
+      "alreadyExisted": "已存在（已跳過）",
+      "updatedItems": "已更新（資料變更）"
+    }
   },
   "purchases": {
     "title": "我的購買",
@@ -115,6 +145,9 @@
     "create": "建立群組",
     "name": "群組名稱",
     "namePlaceholder": "例如：新電腦配置",
+    "nameRequired": "群組名稱不能為空。",
+    "minPurchases": "請至少選擇 2 項購買以建立群組。",
+    "createDescription": "將 {{count}} 項選定的購買歸為一個組合項。",
     "selectPurchases": "選擇要分組的購買",
     "selected": "已選擇 {{count}} 項",
     "totalPrice": "總價",
@@ -142,6 +175,7 @@
     "importMode": "匯入模式",
     "importMerge": "與現有資料合併",
     "importOverwrite": "覆蓋現有資料",
+    "overwriteWarning": "警告：這將用匯入的資料取代所有現有資料。",
     "importPreview": "預覽",
     "importConfirm": "匯入",
     "fileFormat": "檔案格式：JSON",
@@ -156,10 +190,13 @@
     "themeLight": "淺色",
     "themeDark": "深色",
     "themeSystem": "跟隨系統",
+    "appearance": "外觀",
     "dataManagement": "資料管理",
     "clearAllData": "清除所有資料",
     "clearConfirm": "您確定嗎？這將永久刪除您的所有購買紀錄、標籤、群組和設定。",
-    "tagManagement": "標籤管理"
+    "tagManagement": "標籤管理",
+    "account": "帳戶",
+    "logout": "登出"
   },
   "about": {
     "title": "關於 My Resources",
@@ -173,6 +210,7 @@
     "feature6": "支援 17 種語言",
     "openSource": "開源",
     "openSourceDescription": "本專案是開源的，可在 GitHub 上取得。",
+    "technology": "技術堆疊",
     "viewOnGitHub": "在 GitHub 上檢視",
     "version": "版本"
   },

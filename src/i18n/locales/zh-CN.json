@@ -26,7 +26,11 @@
     "apply": "应用",
     "noResults": "未找到结果",
     "error": "发生了错误",
-    "success": "成功"
+    "success": "成功",
+    "page": "页码",
+    "of": "/",
+    "previous": "上一页",
+    "clear": "清除"
   },
   "nav": {
     "purchases": "购买记录",
@@ -67,7 +71,33 @@
     "importProvider": "导入提供商",
     "configure": "配置",
     "connected": "已连接",
-    "disconnected": "未连接"
+    "connect": "连接",
+    "disconnected": "未连接",
+    "deviceFlow": {
+      "title": "连接到 {{provider}}",
+      "step1": "点击下方链接（或扫描二维码）并登录您的账户：",
+      "step2": "在提示时输入代码：",
+      "openLink": "打开授权页面",
+      "waiting": "等待授权...",
+      "waitingDescription": "授权后，此对话框将自动关闭。",
+      "success": "连接成功！",
+      "denied": "用户拒绝了授权。",
+      "expired": "代码已过期。请重试。",
+      "error": "授权过程中发生错误。",
+      "tryAgain": "重试",
+      "codeExpires": "代码将在 {{minutes}} 分钟后过期"
+    },
+    "import": {
+      "importing": "正在导入购买记录...",
+      "complete": "导入完成",
+      "added": "新增",
+      "skipped": "已跳过",
+      "updated": "已更新",
+      "totalProcessed": "总计处理",
+      "newlyAdded": "新导入",
+      "alreadyExisted": "已存在（已跳过）",
+      "updatedItems": "已更新（数据变更）"
+    }
   },
   "purchases": {
     "title": "我的购买",
@@ -115,6 +145,9 @@
     "create": "创建分组",
     "name": "分组名称",
     "namePlaceholder": "例如：新电脑配置",
+    "nameRequired": "组名不能为空。",
+    "minPurchases": "请至少选择2项购买以创建分组。",
+    "createDescription": "将 {{count}} 项选中的购买归为一个组合项。",
     "selectPurchases": "选择要分组的购买",
     "selected": "已选择 {{count}} 项",
     "totalPrice": "总价",
@@ -142,6 +175,7 @@
     "importMode": "导入模式",
     "importMerge": "与现有数据合并",
     "importOverwrite": "覆盖现有数据",
+    "overwriteWarning": "警告：这将用导入的数据替换所有现有数据。",
     "importPreview": "预览",
     "importConfirm": "导入",
     "fileFormat": "文件格式：JSON",
@@ -156,10 +190,13 @@
     "themeLight": "浅色",
     "themeDark": "深色",
     "themeSystem": "跟随系统",
+    "appearance": "外观",
     "dataManagement": "数据管理",
     "clearAllData": "清除所有数据",
     "clearConfirm": "您确定吗？这将永久删除您的所有购买记录、标签、分组和设置。",
-    "tagManagement": "标签管理"
+    "tagManagement": "标签管理",
+    "account": "账户",
+    "logout": "退出登录"
   },
   "about": {
     "title": "关于 My Resources",
@@ -173,6 +210,7 @@
     "feature6": "支持 17 种语言",
     "openSource": "开源",
     "openSourceDescription": "本项目是开源的，可在 GitHub 上获取。",
+    "technology": "技术栈",
     "viewOnGitHub": "在 GitHub 上查看",
     "version": "版本"
   },

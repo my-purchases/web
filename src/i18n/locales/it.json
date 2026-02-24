@@ -26,7 +26,11 @@
     "apply": "Applica",
     "noResults": "Nessun risultato trovato",
     "error": "Si è verificato un errore",
-    "success": "Successo"
+    "success": "Successo",
+    "page": "Pagina",
+    "of": "di",
+    "previous": "Precedente",
+    "clear": "Cancella"
   },
   "nav": {
     "purchases": "Acquisti",
@@ -67,7 +71,33 @@
     "importProvider": "Fornitore di importazione",
     "configure": "Configura",
     "connected": "Connesso",
-    "disconnected": "Disconnesso"
+    "connect": "Connetti",
+    "disconnected": "Disconnesso",
+    "deviceFlow": {
+      "title": "Connetti a {{provider}}",
+      "step1": "Clicca sul link sottostante (o scansiona il codice QR) e accedi al tuo account:",
+      "step2": "Inserisci il codice quando richiesto:",
+      "openLink": "Apri pagina di autorizzazione",
+      "waiting": "In attesa di autorizzazione...",
+      "waitingDescription": "Dopo l'autorizzazione, questa finestra si chiuderà automaticamente.",
+      "success": "Connesso con successo!",
+      "denied": "Autorizzazione negata dall'utente.",
+      "expired": "Il codice è scaduto. Riprova.",
+      "error": "Si è verificato un errore durante l'autorizzazione.",
+      "tryAgain": "Riprova",
+      "codeExpires": "Il codice scade tra {{minutes}} min"
+    },
+    "import": {
+      "importing": "Importazione acquisti...",
+      "complete": "Importazione completata",
+      "added": "Nuovo",
+      "skipped": "Saltato",
+      "updated": "Aggiornato",
+      "totalProcessed": "Totale elaborato",
+      "newlyAdded": "Appena importato",
+      "alreadyExisted": "Già esistente (saltato)",
+      "updatedItems": "Aggiornato (dati modificati)"
+    }
   },
   "purchases": {
     "title": "I miei acquisti",
@@ -115,6 +145,9 @@
     "create": "Crea gruppo",
     "name": "Nome del gruppo",
     "namePlaceholder": "es. Nuovo PC",
+    "nameRequired": "Il nome del gruppo è obbligatorio.",
+    "minPurchases": "Seleziona almeno 2 acquisti per creare un gruppo.",
+    "createDescription": "Raggruppa {{count}} acquisti selezionati in un articolo composto.",
     "selectPurchases": "Seleziona acquisti da raggruppare",
     "selected": "{{count}} selezionato/i",
     "totalPrice": "Prezzo totale",
@@ -142,6 +175,7 @@
     "importMode": "Modalità di importazione",
     "importMerge": "Unisci ai dati esistenti",
     "importOverwrite": "Sovrascrivi dati esistenti",
+    "overwriteWarning": "Attenzione: questo sostituirà tutti i dati esistenti con i dati importati.",
     "importPreview": "Anteprima",
     "importConfirm": "Importa",
     "fileFormat": "Formato file: JSON",
@@ -156,10 +190,13 @@
     "themeLight": "Chiaro",
     "themeDark": "Scuro",
     "themeSystem": "Sistema",
+    "appearance": "Aspetto",
     "dataManagement": "Gestione dati",
     "clearAllData": "Cancella tutti i dati",
     "clearConfirm": "Sei sicuro? Questo eliminerà permanentemente tutti i tuoi acquisti, tag, gruppi e impostazioni.",
-    "tagManagement": "Gestione tag"
+    "tagManagement": "Gestione tag",
+    "account": "Account",
+    "logout": "Esci"
   },
   "about": {
     "title": "Informazioni su My Resources",
@@ -173,6 +210,7 @@
     "feature6": "Disponibile in 17 lingue",
     "openSource": "Open Source",
     "openSourceDescription": "Questo progetto è open source e disponibile su GitHub.",
+    "technology": "Stack tecnologico",
     "viewOnGitHub": "Vedi su GitHub",
     "version": "Versione"
   },

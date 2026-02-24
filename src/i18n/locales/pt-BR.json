@@ -26,7 +26,11 @@
     "apply": "Aplicar",
     "noResults": "Nenhum resultado encontrado",
     "error": "Ocorreu um erro",
-    "success": "Sucesso"
+    "success": "Sucesso",
+    "page": "Página",
+    "of": "de",
+    "previous": "Anterior",
+    "clear": "Limpar"
   },
   "nav": {
     "purchases": "Compras",
@@ -67,7 +71,33 @@
     "importProvider": "Provedor de importação",
     "configure": "Configurar",
     "connected": "Conectado",
-    "disconnected": "Desconectado"
+    "connect": "Conectar",
+    "disconnected": "Desconectado",
+    "deviceFlow": {
+      "title": "Conectar ao {{provider}}",
+      "step1": "Clique no link abaixo (ou escaneie o QR code) e faça login na sua conta:",
+      "step2": "Digite o código quando solicitado:",
+      "openLink": "Abrir página de autorização",
+      "waiting": "Aguardando autorização...",
+      "waitingDescription": "Após a autorização, este diálogo será fechado automaticamente.",
+      "success": "Conectado com sucesso!",
+      "denied": "Autorização negada pelo usuário.",
+      "expired": "O código expirou. Por favor, tente novamente.",
+      "error": "Ocorreu um erro durante a autorização.",
+      "tryAgain": "Tentar novamente",
+      "codeExpires": "O código expira em {{minutes}} min"
+    },
+    "import": {
+      "importing": "Importando compras...",
+      "complete": "Importação concluída",
+      "added": "Novo",
+      "skipped": "Ignorado",
+      "updated": "Atualizado",
+      "totalProcessed": "Total processado",
+      "newlyAdded": "Recém-importado",
+      "alreadyExisted": "Já existia (ignorado)",
+      "updatedItems": "Atualizado (dados alterados)"
+    }
   },
   "purchases": {
     "title": "Minhas compras",
@@ -115,6 +145,9 @@
     "create": "Criar grupo",
     "name": "Nome do grupo",
     "namePlaceholder": "ex. Novo PC",
+    "nameRequired": "O nome do grupo é obrigatório.",
+    "minPurchases": "Selecione pelo menos 2 compras para criar um grupo.",
+    "createDescription": "Agrupar {{count}} compras selecionadas em um item composto.",
     "selectPurchases": "Selecionar compras para agrupar",
     "selected": "{{count}} selecionado(s)",
     "totalPrice": "Preço total",
@@ -142,6 +175,7 @@
     "importMode": "Modo de importação",
     "importMerge": "Mesclar com dados existentes",
     "importOverwrite": "Sobrescrever dados existentes",
+    "overwriteWarning": "Aviso: isto substituirá todos os dados existentes pelos dados importados.",
     "importPreview": "Pré-visualização",
     "importConfirm": "Importar",
     "fileFormat": "Formato do arquivo: JSON",
@@ -156,10 +190,13 @@
     "themeLight": "Claro",
     "themeDark": "Escuro",
     "themeSystem": "Sistema",
+    "appearance": "Aparência",
     "dataManagement": "Gerenciamento de dados",
     "clearAllData": "Limpar todos os dados",
     "clearConfirm": "Tem certeza? Isso excluirá permanentemente todas as suas compras, tags, grupos e configurações.",
-    "tagManagement": "Gerenciamento de tags"
+    "tagManagement": "Gerenciamento de tags",
+    "account": "Conta",
+    "logout": "Sair"
   },
   "about": {
     "title": "Sobre o My Resources",
@@ -173,6 +210,7 @@
     "feature6": "Disponível em 17 idiomas",
     "openSource": "Código aberto",
     "openSourceDescription": "Este projeto é de código aberto e está disponível no GitHub.",
+    "technology": "Stack tecnológico",
     "viewOnGitHub": "Ver no GitHub",
     "version": "Versão"
   },

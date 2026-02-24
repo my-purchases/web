@@ -26,7 +26,11 @@
     "apply": "تطبيق",
     "noResults": "لم يتم العثور على نتائج",
     "error": "حدث خطأ",
-    "success": "نجاح"
+    "success": "نجاح",
+    "page": "صفحة",
+    "of": "من",
+    "previous": "السابق",
+    "clear": "مسح"
   },
   "nav": {
     "purchases": "المشتريات",
@@ -67,14 +71,37 @@
     "importProvider": "مزود الاستيراد",
     "configure": "تهيئة",
     "connected": "متصل",
-    "disconnected": "غير متصل"
+    "connect": "اتصال",
+    "disconnected": "غير متصل",
+    "deviceFlow": {
+      "title": "الاتصال بـ {{provider}}",
+      "step1": "انقر على الرابط أدناه (أو امسح رمز QR) وسجّل الدخول إلى حسابك:",
+      "step2": "أدخل الرمز عند المطالبة:",
+      "openLink": "فتح صفحة التفويض",
+      "waiting": "في انتظار التفويض...",
+      "waitingDescription": "بعد التفويض، سيُغلق هذا الحوار تلقائياً.",
+      "success": "تم الاتصال بنجاح!",
+      "denied": "تم رفض التفويض من قبل المستخدم.",
+      "expired": "انتهت صلاحية الرمز. يرجى المحاولة مرة أخرى.",
+      "error": "حدث خطأ أثناء التفويض.",
+      "tryAgain": "حاول مرة أخرى",
+      "codeExpires": "ينتهي الرمز خلال {{minutes}} دقيقة"
+    },
+    "import": {
+      "importing": "جارٍ استيراد المشتريات...",
+      "complete": "اكتمل الاستيراد",
+      "added": "جديد",
+      "skipped": "تم تخطيه",
+      "updated": "تم التحديث",
+      "totalProcessed": "إجمالي المعالج",
+      "newlyAdded": "مستورد حديثاً",
+      "alreadyExisted": "موجود مسبقاً (تم تخطيه)",
+      "updatedItems": "تم التحديث (بيانات متغيرة)"
+    }
   },
   "purchases": {
     "title": "مشترياتي",
     "totalItems": "{{count}} عنصر",
-    "totalItems_two": "{{count}} عنصران",
-    "totalItems_few": "{{count}} عناصر",
-    "totalItems_many": "{{count}} عنصراً",
     "totalItems_other": "{{count}} عنصر",
     "sortByDate": "ترتيب حسب التاريخ",
     "ascending": "الأقدم أولاً",
@@ -89,7 +116,10 @@
     "provider": "المزود",
     "viewOriginal": "عرض الإعلان الأصلي",
     "deleteSelected": "حذف المحدد",
-    "deleteSelectedConfirm": "هل أنت متأكد أنك تريد حذف {{count}} عملية شراء محددة؟ لا يمكن التراجع عن هذا الإجراء."
+    "deleteSelectedConfirm": "هل أنت متأكد أنك تريد حذف {{count}} عملية شراء محددة؟ لا يمكن التراجع عن هذا الإجراء.",
+    "totalItems_two": "{{count}} عنصران",
+    "totalItems_few": "{{count}} عناصر",
+    "totalItems_many": "{{count}} عنصراً"
   },
   "tags": {
     "title": "الوسوم",
@@ -118,21 +148,24 @@
     "create": "إنشاء مجموعة",
     "name": "اسم المجموعة",
     "namePlaceholder": "مثال: تجميع حاسوب جديد",
+    "nameRequired": "اسم المجموعة مطلوب.",
+    "minPurchases": "اختر عمليتي شراء على الأقل لإنشاء مجموعة.",
+    "createDescription": "تجميع {{count}} عملية شراء محددة في عنصر مركّب.",
     "selectPurchases": "اختر المشتريات للتجميع",
     "selected": "{{count}} محدد",
     "totalPrice": "السعر الإجمالي",
     "latestDate": "أحدث تاريخ",
     "members": "{{count}} عنصر",
-    "members_two": "{{count}} عنصران",
-    "members_few": "{{count}} عناصر",
-    "members_many": "{{count}} عنصراً",
     "members_other": "{{count}} عنصر",
     "expand": "توسيع المجموعة",
     "collapse": "طي المجموعة",
     "addItems": "إضافة عناصر",
     "removeItem": "إزالة من المجموعة",
     "deleteGroup": "حذف المجموعة",
-    "confirmDelete": "هل أنت متأكد أنك تريد حذف المجموعة \"{{name}}\"؟ سيتم الاحتفاظ بالمشتريات الفردية."
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف المجموعة \"{{name}}\"؟ سيتم الاحتفاظ بالمشتريات الفردية.",
+    "members_two": "{{count}} عنصران",
+    "members_few": "{{count}} عناصر",
+    "members_many": "{{count}} عنصراً"
   },
   "exportImport": {
     "exportTitle": "تصدير البيانات",
@@ -148,6 +181,7 @@
     "importMode": "وضع الاستيراد",
     "importMerge": "دمج مع البيانات الموجودة",
     "importOverwrite": "استبدال البيانات الموجودة",
+    "overwriteWarning": "تحذير: سيؤدي هذا إلى استبدال جميع البيانات الموجودة بالبيانات المستوردة.",
     "importPreview": "معاينة",
     "importConfirm": "استيراد",
     "fileFormat": "تنسيق الملف: JSON",
@@ -162,10 +196,13 @@
     "themeLight": "فاتح",
     "themeDark": "داكن",
     "themeSystem": "النظام",
+    "appearance": "المظهر",
     "dataManagement": "إدارة البيانات",
     "clearAllData": "مسح جميع البيانات",
     "clearConfirm": "هل أنت متأكد؟ سيؤدي هذا إلى حذف جميع مشترياتك ووسومك ومجموعاتك وإعداداتك نهائياً.",
-    "tagManagement": "إدارة الوسوم"
+    "tagManagement": "إدارة الوسوم",
+    "account": "الحساب",
+    "logout": "تسجيل الخروج"
   },
   "about": {
     "title": "حول My Resources",
@@ -179,6 +216,7 @@
     "feature6": "متوفر بـ 17 لغة",
     "openSource": "مفتوح المصدر",
     "openSourceDescription": "هذا المشروع مفتوح المصدر ومتاح على GitHub.",
+    "technology": "التقنيات المستخدمة",
     "viewOnGitHub": "عرض على GitHub",
     "version": "الإصدار"
   },

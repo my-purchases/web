@@ -26,7 +26,11 @@
     "apply": "適用",
     "noResults": "結果が見つかりません",
     "error": "エラーが発生しました",
-    "success": "成功"
+    "success": "成功",
+    "page": "ページ",
+    "of": "/",
+    "previous": "前へ",
+    "clear": "クリア"
   },
   "nav": {
     "purchases": "購入履歴",
@@ -67,7 +71,33 @@
     "importProvider": "インポートプロバイダー",
     "configure": "設定",
     "connected": "接続済み",
-    "disconnected": "未接続"
+    "connect": "接続",
+    "disconnected": "未接続",
+    "deviceFlow": {
+      "title": "{{provider}}に接続",
+      "step1": "下のリンクをクリック（またはQRコードをスキャン）してアカウントにログインしてください：",
+      "step2": "求められたらコードを入力してください：",
+      "openLink": "認証ページを開く",
+      "waiting": "認証を待っています...",
+      "waitingDescription": "認証後、このダイアログは自動的に閉じます。",
+      "success": "接続に成功しました！",
+      "denied": "ユーザーによって認証が拒否されました。",
+      "expired": "コードの有効期限が切れました。もう一度お試しください。",
+      "error": "認証中にエラーが発生しました。",
+      "tryAgain": "再試行",
+      "codeExpires": "コードの有効期限: {{minutes}}分"
+    },
+    "import": {
+      "importing": "購入データをインポート中...",
+      "complete": "インポート完了",
+      "added": "新規",
+      "skipped": "スキップ",
+      "updated": "更新済み",
+      "totalProcessed": "処理合計",
+      "newlyAdded": "新規インポート",
+      "alreadyExisted": "既存（スキップ）",
+      "updatedItems": "更新済み（データ変更）"
+    }
   },
   "purchases": {
     "title": "購入履歴",
@@ -115,6 +145,9 @@
     "create": "グループを作成",
     "name": "グループ名",
     "namePlaceholder": "例：新しいPC構成",
+    "nameRequired": "グループ名は必須です。",
+    "minPurchases": "グループを作成するには、少なくとも2つの購入を選択してください。",
+    "createDescription": "{{count}}件の選択した購入を複合アイテムにグループ化します。",
     "selectPurchases": "グループに追加する購入を選択",
     "selected": "{{count}}件選択",
     "totalPrice": "合計金額",
@@ -142,6 +175,7 @@
     "importMode": "インポートモード",
     "importMerge": "既存データと統合",
     "importOverwrite": "既存データを上書き",
+    "overwriteWarning": "警告：これにより、既存のすべてのデータがインポートされたデータに置き換えられます。",
     "importPreview": "プレビュー",
     "importConfirm": "インポート",
     "fileFormat": "ファイル形式: JSON",
@@ -156,10 +190,13 @@
     "themeLight": "ライト",
     "themeDark": "ダーク",
     "themeSystem": "システム",
+    "appearance": "外観",
     "dataManagement": "データ管理",
     "clearAllData": "すべてのデータを削除",
     "clearConfirm": "本当によろしいですか？すべての購入履歴、タグ、グループ、設定が完全に削除されます。",
-    "tagManagement": "タグ管理"
+    "tagManagement": "タグ管理",
+    "account": "アカウント",
+    "logout": "ログアウト"
   },
   "about": {
     "title": "My Resources について",
@@ -173,6 +210,7 @@
     "feature6": "17言語で利用可能",
     "openSource": "オープンソース",
     "openSourceDescription": "このプロジェクトはオープンソースであり、GitHub で公開されています。",
+    "technology": "技術スタック",
     "viewOnGitHub": "GitHub で見る",
     "version": "バージョン"
   },

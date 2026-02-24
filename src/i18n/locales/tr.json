@@ -26,7 +26,11 @@
     "apply": "Uygula",
     "noResults": "Sonuç bulunamadı",
     "error": "Bir hata oluştu",
-    "success": "Başarılı"
+    "success": "Başarılı",
+    "page": "Sayfa",
+    "of": "/",
+    "previous": "Önceki",
+    "clear": "Temizle"
   },
   "nav": {
     "purchases": "Satın Alımlar",
@@ -67,7 +71,33 @@
     "importProvider": "İçe Aktarma Sağlayıcısı",
     "configure": "Yapılandır",
     "connected": "Bağlı",
-    "disconnected": "Bağlı Değil"
+    "connect": "Bağlan",
+    "disconnected": "Bağlı Değil",
+    "deviceFlow": {
+      "title": "{{provider}} ile bağlan",
+      "step1": "Aşağıdaki bağlantıya tıklayın (veya QR kodunu tarayın) ve hesabınıza giriş yapın:",
+      "step2": "İstendiğinde kodu girin:",
+      "openLink": "Yetkilendirme sayfasını aç",
+      "waiting": "Yetkilendirme bekleniyor...",
+      "waitingDescription": "Yetkilendirmeden sonra bu iletişim kutusu otomatik olarak kapanacaktır.",
+      "success": "Başarıyla bağlandı!",
+      "denied": "Yetkilendirme kullanıcı tarafından reddedildi.",
+      "expired": "Kodun süresi doldu. Lütfen tekrar deneyin.",
+      "error": "Yetkilendirme sırasında bir hata oluştu.",
+      "tryAgain": "Tekrar Dene",
+      "codeExpires": "Kod {{minutes}} dk içinde sona erer"
+    },
+    "import": {
+      "importing": "Satın almalar içe aktarılıyor...",
+      "complete": "İçe aktarma tamamlandı",
+      "added": "Yeni",
+      "skipped": "Atlandı",
+      "updated": "Güncellendi",
+      "totalProcessed": "Toplam işlenen",
+      "newlyAdded": "Yeni içe aktarılan",
+      "alreadyExisted": "Zaten mevcut (atlandı)",
+      "updatedItems": "Güncellendi (değişen veriler)"
+    }
   },
   "purchases": {
     "title": "Satın Alımlarım",
@@ -115,6 +145,9 @@
     "create": "Grup Oluştur",
     "name": "Grup adı",
     "namePlaceholder": "örn. Yeni PC Yapılandırması",
+    "nameRequired": "Grup adı gereklidir.",
+    "minPurchases": "Grup oluşturmak için en az 2 satın alma seçin.",
+    "createDescription": "{{count}} seçili satın almayı bileşik bir öğeye grupla.",
     "selectPurchases": "Gruplamak için satın alımları seçin",
     "selected": "{{count}} seçili",
     "totalPrice": "Toplam fiyat",
@@ -142,6 +175,7 @@
     "importMode": "İçe aktarma modu",
     "importMerge": "Mevcut verilerle birleştir",
     "importOverwrite": "Mevcut verilerin üzerine yaz",
+    "overwriteWarning": "Uyarı: Bu, mevcut tüm verileri içe aktarılan verilerle değiştirecektir.",
     "importPreview": "Önizleme",
     "importConfirm": "İçe Aktar",
     "fileFormat": "Dosya formatı: JSON",
@@ -156,10 +190,13 @@
     "themeLight": "Açık",
     "themeDark": "Koyu",
     "themeSystem": "Sistem",
+    "appearance": "Görünüm",
     "dataManagement": "Veri Yönetimi",
     "clearAllData": "Tüm Verileri Sil",
     "clearConfirm": "Emin misiniz? Bu, tüm satın alımlarınızı, etiketlerinizi, gruplarınızı ve ayarlarınızı kalıcı olarak silecektir.",
-    "tagManagement": "Etiket Yönetimi"
+    "tagManagement": "Etiket Yönetimi",
+    "account": "Hesap",
+    "logout": "Çıkış Yap"
   },
   "about": {
     "title": "My Resources Hakkında",
@@ -173,6 +210,7 @@
     "feature6": "17 dilde kullanılabilir",
     "openSource": "Açık Kaynak",
     "openSourceDescription": "Bu proje açık kaynaklıdır ve GitHub'da mevcuttur.",
+    "technology": "Teknoloji Yığını",
     "viewOnGitHub": "GitHub'da Görüntüle",
     "version": "Sürüm"
   },

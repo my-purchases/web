@@ -26,7 +26,11 @@
     "apply": "Anwenden",
     "noResults": "Keine Ergebnisse gefunden",
     "error": "Ein Fehler ist aufgetreten",
-    "success": "Erfolg"
+    "success": "Erfolg",
+    "page": "Seite",
+    "of": "von",
+    "previous": "Vorherige",
+    "clear": "Löschen"
   },
   "nav": {
     "purchases": "Einkäufe",
@@ -67,7 +71,33 @@
     "importProvider": "Import-Anbieter",
     "configure": "Konfigurieren",
     "connected": "Verbunden",
-    "disconnected": "Getrennt"
+    "connect": "Verbinden",
+    "disconnected": "Getrennt",
+    "deviceFlow": {
+      "title": "Mit {{provider}} verbinden",
+      "step1": "Klicken Sie auf den Link unten (oder scannen Sie den QR-Code) und melden Sie sich bei Ihrem Konto an:",
+      "step2": "Geben Sie den Code ein, wenn Sie dazu aufgefordert werden:",
+      "openLink": "Autorisierungsseite öffnen",
+      "waiting": "Warte auf Autorisierung...",
+      "waitingDescription": "Nach der Autorisierung wird dieser Dialog automatisch geschlossen.",
+      "success": "Erfolgreich verbunden!",
+      "denied": "Autorisierung vom Benutzer abgelehnt.",
+      "expired": "Der Code ist abgelaufen. Bitte versuchen Sie es erneut.",
+      "error": "Bei der Autorisierung ist ein Fehler aufgetreten.",
+      "tryAgain": "Erneut versuchen",
+      "codeExpires": "Code läuft in {{minutes}} Min. ab"
+    },
+    "import": {
+      "importing": "Einkäufe werden importiert...",
+      "complete": "Import abgeschlossen",
+      "added": "Neu",
+      "skipped": "Übersprungen",
+      "updated": "Aktualisiert",
+      "totalProcessed": "Insgesamt verarbeitet",
+      "newlyAdded": "Neu importiert",
+      "alreadyExisted": "Bereits vorhanden (übersprungen)",
+      "updatedItems": "Aktualisiert (geänderte Daten)"
+    }
   },
   "purchases": {
     "title": "Meine Einkäufe",
@@ -115,6 +145,9 @@
     "create": "Gruppe erstellen",
     "name": "Gruppenname",
     "namePlaceholder": "z.B. Neuer PC-Bau",
+    "nameRequired": "Gruppenname ist erforderlich.",
+    "minPurchases": "Wählen Sie mindestens 2 Einkäufe aus, um eine Gruppe zu erstellen.",
+    "createDescription": "{{count}} ausgewählte Einkäufe zu einem Sammelartikel gruppieren.",
     "selectPurchases": "Einkäufe zum Gruppieren auswählen",
     "selected": "{{count}} ausgewählt",
     "totalPrice": "Gesamtpreis",
@@ -142,6 +175,7 @@
     "importMode": "Importmodus",
     "importMerge": "Mit vorhandenen Daten zusammenführen",
     "importOverwrite": "Vorhandene Daten überschreiben",
+    "overwriteWarning": "Warnung: Dies ersetzt alle vorhandenen Daten durch die importierten Daten.",
     "importPreview": "Vorschau",
     "importConfirm": "Importieren",
     "fileFormat": "Dateiformat: JSON",
@@ -156,10 +190,13 @@
     "themeLight": "Hell",
     "themeDark": "Dunkel",
     "themeSystem": "System",
+    "appearance": "Erscheinungsbild",
     "dataManagement": "Datenverwaltung",
     "clearAllData": "Alle Daten löschen",
     "clearConfirm": "Sind Sie sicher? Dadurch werden alle Ihre Einkäufe, Tags, Gruppen und Einstellungen dauerhaft gelöscht.",
-    "tagManagement": "Tag-Verwaltung"
+    "tagManagement": "Tag-Verwaltung",
+    "account": "Konto",
+    "logout": "Abmelden"
   },
   "about": {
     "title": "Über My Resources",
@@ -173,6 +210,7 @@
     "feature6": "Verfügbar in 17 Sprachen",
     "openSource": "Open Source",
     "openSourceDescription": "Dieses Projekt ist Open Source und auf GitHub verfügbar.",
+    "technology": "Technologie-Stack",
     "viewOnGitHub": "Auf GitHub ansehen",
     "version": "Version"
   },

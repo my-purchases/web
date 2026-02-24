@@ -26,7 +26,11 @@
     "apply": "Toepassen",
     "noResults": "Geen resultaten gevonden",
     "error": "Er is een fout opgetreden",
-    "success": "Succes"
+    "success": "Succes",
+    "page": "Pagina",
+    "of": "van",
+    "previous": "Vorige",
+    "clear": "Wissen"
   },
   "nav": {
     "purchases": "Aankopen",
@@ -67,7 +71,33 @@
     "importProvider": "Importaanbieder",
     "configure": "Configureren",
     "connected": "Verbonden",
-    "disconnected": "Niet verbonden"
+    "connect": "Verbinden",
+    "disconnected": "Niet verbonden",
+    "deviceFlow": {
+      "title": "Verbinden met {{provider}}",
+      "step1": "Klik op de link hieronder (of scan de QR-code) en log in op uw account:",
+      "step2": "Voer de code in wanneer daarom wordt gevraagd:",
+      "openLink": "Autorisatiepagina openen",
+      "waiting": "Wachten op autorisatie...",
+      "waitingDescription": "Na autorisatie wordt dit dialoogvenster automatisch gesloten.",
+      "success": "Succesvol verbonden!",
+      "denied": "Autorisatie geweigerd door gebruiker.",
+      "expired": "De code is verlopen. Probeer het opnieuw.",
+      "error": "Er is een fout opgetreden tijdens de autorisatie.",
+      "tryAgain": "Opnieuw proberen",
+      "codeExpires": "Code verloopt over {{minutes}} min"
+    },
+    "import": {
+      "importing": "Aankopen importeren...",
+      "complete": "Import voltooid",
+      "added": "Nieuw",
+      "skipped": "Overgeslagen",
+      "updated": "Bijgewerkt",
+      "totalProcessed": "Totaal verwerkt",
+      "newlyAdded": "Nieuw geïmporteerd",
+      "alreadyExisted": "Bestond al (overgeslagen)",
+      "updatedItems": "Bijgewerkt (gewijzigde gegevens)"
+    }
   },
   "purchases": {
     "title": "Mijn aankopen",
@@ -115,6 +145,9 @@
     "create": "Groep aanmaken",
     "name": "Groepsnaam",
     "namePlaceholder": "bijv. Nieuwe PC-bouw",
+    "nameRequired": "Groepsnaam is vereist.",
+    "minPurchases": "Selecteer minstens 2 aankopen om een groep te maken.",
+    "createDescription": "Groepeer {{count}} geselecteerde aankopen in een samengesteld item.",
     "selectPurchases": "Selecteer aankopen om te groeperen",
     "selected": "{{count}} geselecteerd",
     "totalPrice": "Totaalprijs",
@@ -142,6 +175,7 @@
     "importMode": "Importmodus",
     "importMerge": "Samenvoegen met bestaande gegevens",
     "importOverwrite": "Bestaande gegevens overschrijven",
+    "overwriteWarning": "Waarschuwing: dit vervangt alle bestaande gegevens door de geïmporteerde gegevens.",
     "importPreview": "Voorbeeld",
     "importConfirm": "Importeren",
     "fileFormat": "Bestandsformaat: JSON",
@@ -156,10 +190,13 @@
     "themeLight": "Licht",
     "themeDark": "Donker",
     "themeSystem": "Systeem",
+    "appearance": "Uiterlijk",
     "dataManagement": "Gegevensbeheer",
     "clearAllData": "Alle gegevens wissen",
     "clearConfirm": "Weet u het zeker? Dit verwijdert permanent al uw aankopen, tags, groepen en instellingen.",
-    "tagManagement": "Tagbeheer"
+    "tagManagement": "Tagbeheer",
+    "account": "Account",
+    "logout": "Uitloggen"
   },
   "about": {
     "title": "Over My Resources",
@@ -173,6 +210,7 @@
     "feature6": "Beschikbaar in 17 talen",
     "openSource": "Open Source",
     "openSourceDescription": "Dit project is open source en beschikbaar op GitHub.",
+    "technology": "Technologie-stack",
     "viewOnGitHub": "Bekijk op GitHub",
     "version": "Versie"
   },

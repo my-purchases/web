@@ -26,7 +26,11 @@
     "apply": "적용",
     "noResults": "결과를 찾을 수 없습니다",
     "error": "오류가 발생했습니다",
-    "success": "성공"
+    "success": "성공",
+    "page": "페이지",
+    "of": "/",
+    "previous": "이전",
+    "clear": "지우기"
   },
   "nav": {
     "purchases": "구매 내역",
@@ -67,7 +71,33 @@
     "importProvider": "가져오기 제공업체",
     "configure": "구성",
     "connected": "연결됨",
-    "disconnected": "연결 해제됨"
+    "connect": "연결",
+    "disconnected": "연결 해제됨",
+    "deviceFlow": {
+      "title": "{{provider}}에 연결",
+      "step1": "아래 링크를 클릭(또는 QR 코드 스캔)하고 계정에 로그인하세요:",
+      "step2": "요청 시 코드를 입력하세요:",
+      "openLink": "인증 페이지 열기",
+      "waiting": "인증 대기 중...",
+      "waitingDescription": "인증 후 이 대화상자가 자동으로 닫힙니다.",
+      "success": "성공적으로 연결되었습니다!",
+      "denied": "사용자가 인증을 거부했습니다.",
+      "expired": "코드가 만료되었습니다. 다시 시도해 주세요.",
+      "error": "인증 중 오류가 발생했습니다.",
+      "tryAgain": "다시 시도",
+      "codeExpires": "코드 만료까지 {{minutes}}분"
+    },
+    "import": {
+      "importing": "구매 내역 가져오는 중...",
+      "complete": "가져오기 완료",
+      "added": "신규",
+      "skipped": "건너뜀",
+      "updated": "업데이트됨",
+      "totalProcessed": "총 처리",
+      "newlyAdded": "새로 가져옴",
+      "alreadyExisted": "이미 존재함 (건너뜀)",
+      "updatedItems": "업데이트됨 (데이터 변경)"
+    }
   },
   "purchases": {
     "title": "내 구매 내역",
@@ -115,6 +145,9 @@
     "create": "그룹 생성",
     "name": "그룹 이름",
     "namePlaceholder": "예: 새 PC 조립",
+    "nameRequired": "그룹 이름은 필수입니다.",
+    "minPurchases": "그룹을 만들려면 최소 2개의 구매를 선택하세요.",
+    "createDescription": "{{count}}개의 선택한 구매를 복합 항목으로 그룹화합니다.",
     "selectPurchases": "그룹에 추가할 구매 선택",
     "selected": "{{count}}개 선택됨",
     "totalPrice": "총 가격",
@@ -142,6 +175,7 @@
     "importMode": "가져오기 모드",
     "importMerge": "기존 데이터와 병합",
     "importOverwrite": "기존 데이터 덮어쓰기",
+    "overwriteWarning": "경고: 기존의 모든 데이터가 가져온 데이터로 대체됩니다.",
     "importPreview": "미리보기",
     "importConfirm": "가져오기",
     "fileFormat": "파일 형식: JSON",
@@ -156,10 +190,13 @@
     "themeLight": "라이트",
     "themeDark": "다크",
     "themeSystem": "시스템",
+    "appearance": "모양",
     "dataManagement": "데이터 관리",
     "clearAllData": "모든 데이터 삭제",
     "clearConfirm": "정말로 삭제하시겠습니까? 모든 구매 내역, 태그, 그룹, 설정이 영구적으로 삭제됩니다.",
-    "tagManagement": "태그 관리"
+    "tagManagement": "태그 관리",
+    "account": "계정",
+    "logout": "로그아웃"
   },
   "about": {
     "title": "My Resources 정보",
@@ -173,6 +210,7 @@
     "feature6": "17개 언어로 이용 가능",
     "openSource": "오픈소스",
     "openSourceDescription": "이 프로젝트는 오픈소스이며 GitHub에서 이용할 수 있습니다.",
+    "technology": "기술 스택",
     "viewOnGitHub": "GitHub에서 보기",
     "version": "버전"
   },
