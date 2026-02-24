@@ -116,8 +116,13 @@ export function mapRowToPurchase(row: Record<string, string>, index: number): Pu
   const website = row['Website'] ?? '';
   const seller = row['Seller'] ?? undefined;
   const condition = row['Product Condition'] ?? undefined;
+  const orderStatus =
+    row['Order Status'] ?? row['order status'] ?? '';
 
   if (!title || !orderId) return null;
+
+  // Skip cancelled orders
+  if (orderStatus.toLowerCase() === 'cancelled') return null;
 
   // Build a unique ID per line item (includes date for uniqueness)
   const datePart = dateStr ? new Date(dateStr).toISOString().split('T')[0] : 'nodate';

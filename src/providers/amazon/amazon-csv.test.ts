@@ -15,8 +15,8 @@ const csv = readFileSync(FIXTURE_PATH, 'utf-8');
 describe('parseCsvToRows', () => {
   const rows = parseCsvToRows(csv);
 
-  it('parses all 7 data rows from the fixture', () => {
-    expect(rows).toHaveLength(7);
+  it('parses all 8 data rows from the fixture', () => {
+    expect(rows).toHaveLength(8);
   });
 
   it('returns objects with expected column names', () => {
@@ -232,8 +232,15 @@ describe('full CSV → purchases pipeline', () => {
     .map((row, i) => mapRowToPurchase(row, i))
     .filter((p): p is NonNullable<typeof p> => p !== null);
 
-  it('creates a purchase for every row', () => {
+  it('creates a purchase for every non-cancelled row', () => {
     expect(purchases).toHaveLength(7);
+  });
+
+  it('filters out cancelled orders', () => {
+    const cancelledRow = rows.find((r) => r['Order Status'] === 'Cancelled');
+    expect(cancelledRow).toBeDefined();
+    const result = mapRowToPurchase(cancelledRow!, 99);
+    expect(result).toBeNull();
   });
 
   it('all have providerId = amazon', () => {

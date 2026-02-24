@@ -84,7 +84,9 @@
     "date": "Fecha",
     "category": "Categoría",
     "provider": "Proveedor",
-    "viewOriginal": "Ver anuncio original"
+    "viewOriginal": "Ver anuncio original",
+    "deleteSelected": "Eliminar seleccionados",
+    "deleteSelectedConfirm": "¿Estás seguro de que deseas eliminar {{count}} compra(s) seleccionada(s)? Esta acción no se puede deshacer."
   },
   "tags": {
     "title": "Etiquetas",
@@ -105,7 +107,8 @@
     "unassigned": "Sin asignar",
     "bulkAssignMode": "Modo de asignación de etiquetas",
     "bulkAssignHint": "Haz clic en las compras para alternar la etiqueta seleccionada",
-    "exitBulkMode": "Salir"
+    "exitBulkMode": "Salir",
+    "noTagsAssigned": "Sin etiquetas"
   },
   "groups": {
     "title": "Grupos de compras",

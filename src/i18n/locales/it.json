@@ -84,7 +84,9 @@
     "date": "Data",
     "category": "Categoria",
     "provider": "Fornitore",
-    "viewOriginal": "Vedi annuncio originale"
+    "viewOriginal": "Vedi annuncio originale",
+    "deleteSelected": "Elimina selezionati",
+    "deleteSelectedConfirm": "Sei sicuro di voler eliminare {{count}} acquisto/i selezionato/i? Questa azione non può essere annullata."
   },
   "tags": {
     "title": "Tag",
@@ -105,7 +107,8 @@
     "unassigned": "Non assegnato",
     "bulkAssignMode": "Modalità assegnazione tag",
     "bulkAssignHint": "Clicca sugli acquisti per attivare/disattivare il tag selezionato",
-    "exitBulkMode": "Esci"
+    "exitBulkMode": "Esci",
+    "noTagsAssigned": "Senza tag"
   },
   "groups": {
     "title": "Gruppi di acquisti",

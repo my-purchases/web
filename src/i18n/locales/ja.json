@@ -84,7 +84,9 @@
     "date": "日付",
     "category": "カテゴリー",
     "provider": "プロバイダー",
-    "viewOriginal": "元の出品を表示"
+    "viewOriginal": "元の出品を表示",
+    "deleteSelected": "選択を削除",
+    "deleteSelectedConfirm": "選択した{{count}}件の購入を削除してもよろしいですか？この操作は元に戻せません。"
   },
   "tags": {
     "title": "タグ",
@@ -105,7 +107,8 @@
     "unassigned": "未割り当て",
     "bulkAssignMode": "タグ割り当てモード",
     "bulkAssignHint": "購入をクリックして、選択したタグを切り替えます",
-    "exitBulkMode": "終了"
+    "exitBulkMode": "終了",
+    "noTagsAssigned": "タグなし"
   },
   "groups": {
     "title": "購入グループ",

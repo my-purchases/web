@@ -84,7 +84,9 @@
     "date": "Datum",
     "category": "Categorie",
     "provider": "Aanbieder",
-    "viewOriginal": "Originele advertentie bekijken"
+    "viewOriginal": "Originele advertentie bekijken",
+    "deleteSelected": "Geselecteerde verwijderen",
+    "deleteSelectedConfirm": "Weet je zeker dat je {{count}} geselecteerde aankoop(en) wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
   },
   "tags": {
     "title": "Tags",
@@ -105,7 +107,8 @@
     "unassigned": "Niet toegewezen",
     "bulkAssignMode": "Tag-toewijzingsmodus",
     "bulkAssignHint": "Klik op aankopen om de geselecteerde tag te schakelen",
-    "exitBulkMode": "Sluiten"
+    "exitBulkMode": "Sluiten",
+    "noTagsAssigned": "Zonder tags"
   },
   "groups": {
     "title": "Aankoopgroepen",

@@ -14,6 +14,7 @@ export function PurchaseFilters() {
     setSearchQuery,
     setSortDirection,
     setTagFilter,
+    setUntaggedFilter,
   } = usePurchaseStore();
 
   const providers = getAllProviderMetas();
@@ -37,7 +38,7 @@ export function PurchaseFilters() {
     }
   };
 
-  const hasActiveTagFilters = Object.keys(filters.tagFilters).length > 0;
+  const hasActiveTagFilters = Object.keys(filters.tagFilters).length > 0 || filters.untaggedOnly;
 
   return (
     <div className="space-y-4 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-900">
@@ -117,6 +118,7 @@ export function PurchaseFilters() {
                   for (const groupId of Object.keys(filters.tagFilters)) {
                     setTagFilter(groupId, []);
                   }
+                  setUntaggedFilter(false);
                 }}
                 className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300 transition-colors"
               >
@@ -124,6 +126,20 @@ export function PurchaseFilters() {
                 {t('common.clear')}
               </button>
             )}
+          </div>
+
+          {/* Untagged filter */}
+          <div className="flex flex-wrap items-center gap-1.5">
+            <button
+              onClick={() => setUntaggedFilter(!filters.untaggedOnly)}
+              className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium transition-colors ${
+                filters.untaggedOnly
+                  ? 'bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300'
+                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
+              }`}
+            >
+              {t('tags.noTagsAssigned')}
+            </button>
           </div>
 
           {tagGroups.map((group) => {

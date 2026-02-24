@@ -84,7 +84,9 @@
     "date": "তারিখ",
     "category": "বিভাগ",
     "provider": "প্রদানকারী",
-    "viewOriginal": "মূল তালিকা দেখুন"
+    "viewOriginal": "মূল তালিকা দেখুন",
+    "deleteSelected": "নির্বাচিত মুছুন",
+    "deleteSelectedConfirm": "আপনি কি {{count}}টি নির্বাচিত ক্রয় মুছে ফেলতে চান? এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না।"
   },
   "tags": {
     "title": "ট্যাগ",
@@ -105,7 +107,8 @@
     "unassigned": "বরাদ্দ করা হয়নি",
     "bulkAssignMode": "ট্যাগ অ্যাসাইনমেন্ট মোড",
     "bulkAssignHint": "নির্বাচিত ট্যাগ টগল করতে ক্রয়ে ক্লিক করুন",
-    "exitBulkMode": "প্রস্থান"
+    "exitBulkMode": "প্রস্থান",
+    "noTagsAssigned": "ট্যাগ ছাড়া"
   },
   "groups": {
     "title": "কেনাকাটা গ্রুপ",

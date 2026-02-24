@@ -114,7 +114,9 @@
     "date": "Date",
     "category": "Category",
     "provider": "Provider",
-    "viewOriginal": "View original listing"
+    "viewOriginal": "View original listing",
+    "deleteSelected": "Delete selected",
+    "deleteSelectedConfirm": "Are you sure you want to delete {{count}} selected purchase(s)? This action cannot be undone."
   },
   "tags": {
     "title": "Tags",
@@ -135,7 +137,8 @@
     "unassigned": "Unassigned",
     "bulkAssignMode": "Tag assignment mode",
     "bulkAssignHint": "Click on purchases to toggle the selected tag",
-    "exitBulkMode": "Exit"
+    "exitBulkMode": "Exit",
+    "noTagsAssigned": "Without tags"
   },
   "groups": {
     "title": "Purchase Groups",

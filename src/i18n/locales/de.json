@@ -84,7 +84,9 @@
     "date": "Datum",
     "category": "Kategorie",
     "provider": "Anbieter",
-    "viewOriginal": "Originalanzeige ansehen"
+    "viewOriginal": "Originalanzeige ansehen",
+    "deleteSelected": "Ausgewählte löschen",
+    "deleteSelectedConfirm": "Möchten Sie wirklich {{count}} ausgewählte Käufe löschen? Diese Aktion kann nicht rückgängig gemacht werden."
   },
   "tags": {
     "title": "Tags",
@@ -105,7 +107,8 @@
     "unassigned": "Nicht zugewiesen",
     "bulkAssignMode": "Tag-Zuweisungsmodus",
     "bulkAssignHint": "Klicke auf Käufe, um den ausgewählten Tag umzuschalten",
-    "exitBulkMode": "Beenden"
+    "exitBulkMode": "Beenden",
+    "noTagsAssigned": "Ohne Tags"
   },
   "groups": {
     "title": "Einkaufsgruppen",

@@ -84,7 +84,9 @@
     "date": "Data",
     "category": "Categoria",
     "provider": "Provedor",
-    "viewOriginal": "Ver anúncio original"
+    "viewOriginal": "Ver anúncio original",
+    "deleteSelected": "Excluir selecionados",
+    "deleteSelectedConfirm": "Tem certeza de que deseja excluir {{count}} compra(s) selecionada(s)? Esta ação não pode ser desfeita."
   },
   "tags": {
     "title": "Tags",
@@ -105,7 +107,8 @@
     "unassigned": "Não atribuído",
     "bulkAssignMode": "Modo de atribuição de tags",
     "bulkAssignHint": "Clique nas compras para alternar a tag selecionada",
-    "exitBulkMode": "Sair"
+    "exitBulkMode": "Sair",
+    "noTagsAssigned": "Sem tags"
   },
   "groups": {
     "title": "Grupos de compras",

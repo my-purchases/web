@@ -6,13 +6,13 @@ import { usePurchaseStore } from '@/stores';
 import { Button } from '@/components/common';
 import { TagAssignmentBar, useTagToggle } from '@/components/tags/TagAssignmentBar';
 import type { TagAssignmentModeState } from '@/components/tags/TagAssignmentBar';
-import { PackagePlus } from 'lucide-react';
+import { PackagePlus, Trash2 } from 'lucide-react';
 import { tracker } from '@/analytics';
 import { useEffect } from 'react';
 
 export default function PurchasesPage() {
   const { t } = useTranslation();
-  const { selectedPurchaseIds } = usePurchaseStore();
+  const { selectedPurchaseIds, deleteSelectedPurchases } = usePurchaseStore();
   const [showGroupModal, setShowGroupModal] = useState(false);
   const [tagMode, setTagMode] = useState<TagAssignmentModeState>({
     active: false,
@@ -35,6 +35,19 @@ export default function PurchasesPage() {
         </h2>
         <div className="flex items-center gap-2">
           <TagAssignmentBar mode={tagMode} onModeChange={setTagMode} />
+          {selectedPurchaseIds.size >= 1 && (
+            <Button
+              variant="danger"
+              onClick={() => {
+                if (window.confirm(t('purchases.deleteSelectedConfirm', { count: selectedPurchaseIds.size }))) {
+                  deleteSelectedPurchases();
+                }
+              }}
+            >
+              <Trash2 className="h-4 w-4" />
+              {t('purchases.deleteSelected')} ({selectedPurchaseIds.size})
+            </Button>
+          )}
           {selectedPurchaseIds.size >= 2 && (
             <Button onClick={() => setShowGroupModal(true)}>
               <PackagePlus className="h-4 w-4" />

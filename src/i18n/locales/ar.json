@@ -87,7 +87,9 @@
     "date": "التاريخ",
     "category": "الفئة",
     "provider": "المزود",
-    "viewOriginal": "عرض الإعلان الأصلي"
+    "viewOriginal": "عرض الإعلان الأصلي",
+    "deleteSelected": "حذف المحدد",
+    "deleteSelectedConfirm": "هل أنت متأكد أنك تريد حذف {{count}} عملية شراء محددة؟ لا يمكن التراجع عن هذا الإجراء."
   },
   "tags": {
     "title": "الوسوم",
@@ -108,7 +110,8 @@
     "unassigned": "غير معيّن",
     "bulkAssignMode": "وضع تعيين العلامات",
     "bulkAssignHint": "انقر على المشتريات لتبديل العلامة المحددة",
-    "exitBulkMode": "خروج"
+    "exitBulkMode": "خروج",
+    "noTagsAssigned": "بدون علامات"
   },
   "groups": {
     "title": "مجموعات المشتريات",

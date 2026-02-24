@@ -84,7 +84,9 @@
     "date": "तिथि",
     "category": "श्रेणी",
     "provider": "प्रदाता",
-    "viewOriginal": "मूल सूची देखें"
+    "viewOriginal": "मूल सूची देखें",
+    "deleteSelected": "चयनित हटाएं",
+    "deleteSelectedConfirm": "क्या आप वाकई {{count}} चयनित खरीदारी हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती।"
   },
   "tags": {
     "title": "टैग",
@@ -105,7 +107,8 @@
     "unassigned": "असाइन नहीं किया गया",
     "bulkAssignMode": "टैग असाइनमेंट मोड",
     "bulkAssignHint": "चयनित टैग को टॉगल करने के लिए खरीदारी पर क्लिक करें",
-    "exitBulkMode": "बाहर निकलें"
+    "exitBulkMode": "बाहर निकलें",
+    "noTagsAssigned": "बिना टैग के"
   },
   "groups": {
     "title": "खरीदारी समूह",

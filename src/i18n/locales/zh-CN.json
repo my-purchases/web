@@ -84,7 +84,9 @@
     "date": "日期",
     "category": "分类",
     "provider": "提供商",
-    "viewOriginal": "查看原始商品"
+    "viewOriginal": "查看原始商品",
+    "deleteSelected": "删除所选",
+    "deleteSelectedConfirm": "确定要删除{{count}}个选中的购买记录吗？此操作无法撤销。"
   },
   "tags": {
     "title": "标签",
@@ -105,7 +107,8 @@
     "unassigned": "未分配",
     "bulkAssignMode": "标签分配模式",
     "bulkAssignHint": "点击购买项以切换所选标签",
-    "exitBulkMode": "退出"
+    "exitBulkMode": "退出",
+    "noTagsAssigned": "无标签"
   },
   "groups": {
     "title": "购买分组",

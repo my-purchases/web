@@ -116,7 +116,9 @@
     "date": "Data",
     "category": "Kategoria",
     "provider": "Dostawca",
-    "viewOriginal": "Zobacz oryginalne ogłoszenie"
+    "viewOriginal": "Zobacz oryginalne ogłoszenie",
+    "deleteSelected": "Usuń zaznaczone",
+    "deleteSelectedConfirm": "Czy na pewno chcesz usunąć {{count}} zaznaczonych zakupów? Tej operacji nie można cofnąć."
   },
   "tags": {
     "title": "Tagi",
@@ -137,7 +139,8 @@
     "unassigned": "Nieprzypisane",
     "bulkAssignMode": "Tryb przypisywania tagów",
     "bulkAssignHint": "Kliknij na zakupy, aby przełączyć wybrany tag",
-    "exitBulkMode": "Zakończ"
+    "exitBulkMode": "Zakończ",
+    "noTagsAssigned": "Bez przypisanych tagów"
   },
   "groups": {
     "title": "Grupy zakupów",

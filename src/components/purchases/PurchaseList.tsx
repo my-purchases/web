@@ -48,6 +48,12 @@ export function PurchaseList({ tagMode, assignedTargetIds, onTagToggle }: Purcha
       );
     }
 
+    // Filter by "untagged only"
+    if (filters.untaggedOnly && allTagAssignments) {
+      const taggedIds = new Set(allTagAssignments.map((a) => a.targetId));
+      result = result.filter((p) => !taggedIds.has(p.id));
+    }
+
     // Filter by tags
     if (Object.keys(filters.tagFilters).length > 0 && allTagAssignments) {
       result = result.filter((purchase) => {

@@ -84,7 +84,9 @@
     "date": "날짜",
     "category": "카테고리",
     "provider": "제공업체",
-    "viewOriginal": "원본 목록 보기"
+    "viewOriginal": "원본 목록 보기",
+    "deleteSelected": "선택 삭제",
+    "deleteSelectedConfirm": "선택한 {{count}}개의 구매를 삭제하시겠습니까? 이 작업은 취소할 수 없습니다."
   },
   "tags": {
     "title": "태그",
@@ -105,7 +107,8 @@
     "unassigned": "미할당",
     "bulkAssignMode": "태그 할당 모드",
     "bulkAssignHint": "구매를 클릭하여 선택한 태그를 전환합니다",
-    "exitBulkMode": "종료"
+    "exitBulkMode": "종료",
+    "noTagsAssigned": "태그 없음"
   },
   "groups": {
     "title": "구매 그룹",

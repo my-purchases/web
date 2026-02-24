@@ -24,6 +24,7 @@ interface PurchaseFilters {
   providerIds: string[]; // Empty = all providers
   searchQuery: string;
   tagFilters: Record<string, string[]>; // tagGroupId → selected values
+  untaggedOnly: boolean; // Show only purchases without any tag assignments
 }
 
 interface PurchaseState {
@@ -36,6 +37,7 @@ interface PurchaseState {
   setSearchQuery: (query: string) => void;
   setSortDirection: (direction: SortDirection) => void;
   setTagFilter: (tagGroupId: string, values: string[]) => void;
+  setUntaggedFilter: (enabled: boolean) => void;
   clearFilters: () => void;
   toggleSelection: (purchaseId: string) => void;
   selectAll: (purchaseIds: string[]) => void;
@@ -47,6 +49,7 @@ interface PurchaseState {
     onProgress?: (progress: ImportProgress) => void,
   ) => Promise<ImportResult>;
   deletePurchase: (id: string) => Promise<void>;
+  deleteSelectedPurchases: () => Promise<number>;
   clearProviderPurchases: (providerId: string) => Promise<void>;
   clearAllPurchases: () => Promise<void>;
 }
@@ -55,6 +58,7 @@ const defaultFilters: PurchaseFilters = {
   providerIds: [],
   searchQuery: '',
   tagFilters: {},
+  untaggedOnly: false,
 };
 
 export const usePurchaseStore = create<PurchaseState>((set, get) => ({
@@ -90,6 +94,12 @@ export const usePurchaseStore = create<PurchaseState>((set, get) => ({
     set({ filters: { ...get().filters, tagFilters } });
     tracker.trackEvent(AnalyticsEvents.TAG_FILTER_APPLIED, { tagGroupId, values });
     console.info('[Purchases] Tag filter:', tagGroupId, values);
+  },
+
+  setUntaggedFilter: (untaggedOnly) => {
+    set({ filters: { ...get().filters, untaggedOnly } });
+    tracker.trackEvent(AnalyticsEvents.TAG_FILTER_APPLIED, { untaggedOnly });
+    console.info('[Purchases] Untagged filter:', untaggedOnly);
   },
 
   clearFilters: () => {
@@ -186,6 +196,20 @@ export const usePurchaseStore = create<PurchaseState>((set, get) => ({
     // Also clean up tag assignments
     await db.tagAssignments.where('targetId').equals(id).delete();
     console.info('[Purchases] Deleted:', id);
+  },
+
+  deleteSelectedPurchases: async () => {
+    const ids = [...get().selectedPurchaseIds];
+    if (ids.length === 0) return 0;
+
+    for (const id of ids) {
+      await db.purchases.delete(id);
+      await db.tagAssignments.where('targetId').equals(id).delete();
+    }
+
+    set({ selectedPurchaseIds: new Set() });
+    console.info('[Purchases] Deleted selected:', ids.length);
+    return ids.length;
   },
 
   clearProviderPurchases: async (providerId) => {
