@@ -5,7 +5,8 @@ import { useGroupStore } from '@/stores';
 import { PurchaseCard } from './PurchaseCard';
 import { TagAssigner } from '@/components/tags/TagAssigner';
 import { formatDate, formatCurrency } from '@/utils';
-import { ChevronDown, ChevronUp, Layers, Trash2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, Layers, Trash2, Tag } from 'lucide-react';
+import type { TagAssignmentModeState } from '@/components/tags/TagAssignmentBar';
 
 interface PurchaseGroupCardProps {
   group: PurchaseGroup;
@@ -13,6 +14,9 @@ interface PurchaseGroupCardProps {
   totalPrice: number;
   latestDate: string;
   currency: string;
+  tagMode?: TagAssignmentModeState;
+  isTagged?: boolean;
+  onTagToggle?: () => void;
 }
 
 export function PurchaseGroupCard({
@@ -21,10 +25,14 @@ export function PurchaseGroupCard({
   totalPrice,
   latestDate,
   currency,
+  tagMode,
+  isTagged,
+  onTagToggle,
 }: PurchaseGroupCardProps) {
   const { t } = useTranslation();
   const { deleteGroup, removePurchaseFromGroup } = useGroupStore();
   const [isExpanded, setIsExpanded] = useState(false);
+  const isTagMode = tagMode?.active && onTagToggle;
 
   const handleDelete = () => {
     if (window.confirm(t('groups.confirmDelete', { name: group.name }))) {
@@ -32,13 +40,45 @@ export function PurchaseGroupCard({
     }
   };
 
+  const handleGroupClick = () => {
+    if (isTagMode) {
+      onTagToggle();
+    }
+  };
+
   return (
-    <div className="rounded-xl border-2 border-accent-200 bg-accent-50/50 dark:border-accent-800 dark:bg-accent-900/10">
+    <div
+      onClick={handleGroupClick}
+      className={`rounded-xl border-2 ${
+        isTagMode
+          ? isTagged
+            ? 'border-primary-500 ring-2 ring-primary-500/20 cursor-pointer bg-accent-50/50 dark:bg-accent-900/10'
+            : 'border-accent-200 dark:border-accent-800 bg-accent-50/50 dark:bg-accent-900/10 cursor-pointer hover:border-primary-300 dark:hover:border-primary-700'
+          : 'border-accent-200 bg-accent-50/50 dark:border-accent-800 dark:bg-accent-900/10'
+      }`}
+    >
       {/* Group header */}
       <div className="flex items-center gap-4 p-4">
-        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-accent-100 dark:bg-accent-900/30">
-          <Layers className="h-5 w-5 text-accent-600 dark:text-accent-400" />
-        </div>
+        {/* Tag mode indicator */}
+        {isTagMode ? (
+          <div
+            className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg transition-colors ${
+              isTagged
+                ? 'bg-primary-500 text-white'
+                : 'bg-accent-100 dark:bg-accent-900/30'
+            }`}
+          >
+            {isTagged ? (
+              <Tag className="h-5 w-5" />
+            ) : (
+              <Layers className="h-5 w-5 text-accent-600 dark:text-accent-400" />
+            )}
+          </div>
+        ) : (
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-accent-100 dark:bg-accent-900/30">
+            <Layers className="h-5 w-5 text-accent-600 dark:text-accent-400" />
+          </div>
+        )}
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">

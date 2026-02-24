@@ -2,39 +2,67 @@ import { useTranslation } from 'react-i18next';
 import type { Purchase } from '@/db';
 import { usePurchaseStore } from '@/stores';
 import { formatDate, formatCurrency } from '@/utils';
-import { ExternalLink, Check } from 'lucide-react';
+import { ExternalLink, Check, Tag } from 'lucide-react';
 import { TagAssigner } from '@/components/tags/TagAssigner';
+import type { TagAssignmentModeState } from '@/components/tags/TagAssignmentBar';
 
 interface PurchaseCardProps {
   purchase: Purchase;
   showTagAssigner?: boolean;
+  tagMode?: TagAssignmentModeState;
+  isTagged?: boolean;
+  onTagToggle?: () => void;
 }
 
-export function PurchaseCard({ purchase, showTagAssigner = true }: PurchaseCardProps) {
+export function PurchaseCard({ purchase, showTagAssigner = true, tagMode, isTagged, onTagToggle }: PurchaseCardProps) {
   const { t } = useTranslation();
   const { selectedPurchaseIds, toggleSelection } = usePurchaseStore();
   const isSelected = selectedPurchaseIds.has(purchase.id);
+  const isTagMode = tagMode?.active && onTagToggle;
+
+  const handleCardClick = () => {
+    if (isTagMode) {
+      onTagToggle();
+    }
+  };
 
   return (
     <div
-      className={`group relative rounded-xl border bg-white p-4 transition-all hover:shadow-md dark:bg-gray-900 ${
-        isSelected
-          ? 'border-primary-500 ring-2 ring-primary-500/20'
-          : 'border-gray-200 dark:border-gray-800'
+      onClick={handleCardClick}
+      className={`group relative rounded-xl border bg-white p-4 transition-all dark:bg-gray-900 ${
+        isTagMode
+          ? isTagged
+            ? 'border-primary-500 ring-2 ring-primary-500/20 cursor-pointer hover:ring-primary-500/40'
+            : 'border-gray-200 dark:border-gray-800 cursor-pointer hover:border-primary-300 hover:bg-primary-50/30 dark:hover:border-primary-700 dark:hover:bg-primary-900/10'
+          : isSelected
+            ? 'border-primary-500 ring-2 ring-primary-500/20'
+            : 'border-gray-200 dark:border-gray-800 hover:shadow-md'
       }`}
     >
       <div className="flex gap-4">
-        {/* Selection checkbox */}
-        <button
-          onClick={() => toggleSelection(purchase.id)}
-          className={`mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded border transition-colors ${
-            isSelected
-              ? 'border-primary-500 bg-primary-500 text-white'
-              : 'border-gray-300 hover:border-primary-400 dark:border-gray-600'
-          }`}
-        >
-          {isSelected && <Check className="h-3 w-3" />}
-        </button>
+        {/* Selection checkbox / Tag indicator */}
+        {isTagMode ? (
+          <div
+            className={`mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded transition-colors ${
+              isTagged
+                ? 'bg-primary-500 text-white'
+                : 'border border-gray-300 dark:border-gray-600'
+            }`}
+          >
+            {isTagged && <Tag className="h-3 w-3" />}
+          </div>
+        ) : (
+          <button
+            onClick={(e) => { e.stopPropagation(); toggleSelection(purchase.id); }}
+            className={`mt-1 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded border transition-colors ${
+              isSelected
+                ? 'border-primary-500 bg-primary-500 text-white'
+                : 'border-gray-300 hover:border-primary-400 dark:border-gray-600'
+            }`}
+          >
+            {isSelected && <Check className="h-3 w-3" />}
+          </button>
+        )}
 
         {/* Image */}
         {purchase.imageUrl ? (
@@ -80,11 +108,12 @@ export function PurchaseCard({ purchase, showTagAssigner = true }: PurchaseCardP
         </div>
 
         {/* External link */}
-        {purchase.originalUrl && (
+        {purchase.originalUrl && !isTagMode && (
           <a
             href={purchase.originalUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
             className="mt-1 flex-shrink-0 text-gray-400 opacity-0 group-hover:opacity-100 hover:text-primary-500 transition-all"
             title={t('purchases.viewOriginal')}
           >

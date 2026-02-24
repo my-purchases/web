@@ -102,7 +102,10 @@
     "noGroups": "タググループがまだありません。購入を整理するためにグループを作成してください。",
     "confirmDelete": "タググループ「{{name}}」を削除してもよろしいですか？すべてのタグの割り当てが削除されます。",
     "assigned": "割り当て済み",
-    "unassigned": "未割り当て"
+    "unassigned": "未割り当て",
+    "bulkAssignMode": "タグ割り当てモード",
+    "bulkAssignHint": "購入をクリックして、選択したタグを切り替えます",
+    "exitBulkMode": "終了"
   },
   "groups": {
     "title": "購入グループ",

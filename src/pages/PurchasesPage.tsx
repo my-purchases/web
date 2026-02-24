@@ -4,6 +4,8 @@ import { PurchaseList, PurchaseFilters, CreateGroupModal } from '@/components/pu
 import { ProviderPanel } from '@/components/providers';
 import { usePurchaseStore } from '@/stores';
 import { Button } from '@/components/common';
+import { TagAssignmentBar, useTagToggle } from '@/components/tags/TagAssignmentBar';
+import type { TagAssignmentModeState } from '@/components/tags/TagAssignmentBar';
 import { PackagePlus } from 'lucide-react';
 import { tracker } from '@/analytics';
 import { useEffect } from 'react';
@@ -12,6 +14,12 @@ export default function PurchasesPage() {
   const { t } = useTranslation();
   const { selectedPurchaseIds } = usePurchaseStore();
   const [showGroupModal, setShowGroupModal] = useState(false);
+  const [tagMode, setTagMode] = useState<TagAssignmentModeState>({
+    active: false,
+    tagGroupId: null,
+    tagValue: null,
+  });
+  const { assignedTargetIds, toggleTag } = useTagToggle(tagMode);
 
   useEffect(() => {
     tracker.trackPageView('purchases');
@@ -25,16 +33,23 @@ export default function PurchasesPage() {
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           {t('purchases.title')}
         </h2>
-        {selectedPurchaseIds.size >= 2 && (
-          <Button onClick={() => setShowGroupModal(true)}>
-            <PackagePlus className="h-4 w-4" />
-            {t('groups.create')} ({selectedPurchaseIds.size})
-          </Button>
-        )}
+        <div className="flex items-center gap-2">
+          <TagAssignmentBar mode={tagMode} onModeChange={setTagMode} />
+          {selectedPurchaseIds.size >= 2 && (
+            <Button onClick={() => setShowGroupModal(true)}>
+              <PackagePlus className="h-4 w-4" />
+              {t('groups.create')} ({selectedPurchaseIds.size})
+            </Button>
+          )}
+        </div>
       </div>
 
       <PurchaseFilters />
-      <PurchaseList />
+      <PurchaseList
+        tagMode={tagMode}
+        assignedTargetIds={assignedTargetIds}
+        onTagToggle={toggleTag}
+      />
 
       <CreateGroupModal
         open={showGroupModal}

@@ -102,7 +102,10 @@
     "noGroups": "Nessun gruppo di tag ancora. Creane uno per iniziare a organizzare i tuoi acquisti.",
     "confirmDelete": "Sei sicuro di voler eliminare il gruppo di tag \"{{name}}\"? Tutte le assegnazioni di tag verranno rimosse.",
     "assigned": "Assegnato",
-    "unassigned": "Non assegnato"
+    "unassigned": "Non assegnato",
+    "bulkAssignMode": "Modalità assegnazione tag",
+    "bulkAssignHint": "Clicca sugli acquisti per attivare/disattivare il tag selezionato",
+    "exitBulkMode": "Esci"
   },
   "groups": {
     "title": "Gruppi di acquisti",

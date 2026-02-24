@@ -102,7 +102,10 @@
     "noGroups": "Henüz etiket grubu yok. Satın alımlarınızı düzenlemeye başlamak için bir tane oluşturun.",
     "confirmDelete": "\"{{name}}\" etiket grubunu silmek istediğinizden emin misiniz? Tüm etiket atamaları kaldırılacaktır.",
     "assigned": "Atanmış",
-    "unassigned": "Atanmamış"
+    "unassigned": "Atanmamış",
+    "bulkAssignMode": "Etiket atama modu",
+    "bulkAssignHint": "Seçilen etiketi değiştirmek için satın alımlara tıklayın",
+    "exitBulkMode": "Çıkış"
   },
   "groups": {
     "title": "Satın Alma Grupları",

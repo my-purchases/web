@@ -134,7 +134,10 @@
     "noGroups": "Brak grup tagów. Utwórz jedną, aby rozpocząć organizowanie zakupów.",
     "confirmDelete": "Czy na pewno chcesz usunąć grupę tagów \"{{name}}\"? Wszystkie przypisania tagów zostaną usunięte.",
     "assigned": "Przypisane",
-    "unassigned": "Nieprzypisane"
+    "unassigned": "Nieprzypisane",
+    "bulkAssignMode": "Tryb przypisywania tagów",
+    "bulkAssignHint": "Kliknij na zakupy, aby przełączyć wybrany tag",
+    "exitBulkMode": "Zakończ"
   },
   "groups": {
     "title": "Grupy zakupów",

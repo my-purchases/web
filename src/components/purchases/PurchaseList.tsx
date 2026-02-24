@@ -7,10 +7,17 @@ import { usePurchaseStore } from '@/stores';
 import { PurchaseCard } from './PurchaseCard';
 import { PurchaseGroupCard } from './PurchaseGroupCard';
 import { ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react';
+import type { TagAssignmentModeState } from '@/components/tags/TagAssignmentBar';
 
 const PAGE_SIZE = 100;
 
-export function PurchaseList() {
+interface PurchaseListProps {
+  tagMode?: TagAssignmentModeState;
+  assignedTargetIds?: Set<string>;
+  onTagToggle?: (targetId: string, targetType: 'purchase' | 'group') => void;
+}
+
+export function PurchaseList({ tagMode, assignedTargetIds, onTagToggle }: PurchaseListProps) {
   const { t } = useTranslation();
   const { filters, sortDirection } = usePurchaseStore();
 
@@ -186,6 +193,9 @@ export function PurchaseList() {
                 <PurchaseCard
                   key={item.purchase.id}
                   purchase={item.purchase}
+                  tagMode={tagMode}
+                  isTagged={assignedTargetIds?.has(item.purchase.id)}
+                  onTagToggle={onTagToggle ? () => onTagToggle(item.purchase.id, 'purchase') : undefined}
                 />
               );
             }
@@ -197,6 +207,9 @@ export function PurchaseList() {
                 totalPrice={item.groupData.totalPrice}
                 latestDate={item.groupData.latestDate}
                 currency={item.groupData.currency}
+                tagMode={tagMode}
+                isTagged={assignedTargetIds?.has(item.groupData.group.id)}
+                onTagToggle={onTagToggle ? () => onTagToggle(item.groupData.group.id, 'group') : undefined}
               />
             );
           })}

@@ -132,7 +132,10 @@
     "noGroups": "No tag groups yet. Create one to start organizing your purchases.",
     "confirmDelete": "Are you sure you want to delete the tag group \"{{name}}\"? All tag assignments will be removed.",
     "assigned": "Assigned",
-    "unassigned": "Unassigned"
+    "unassigned": "Unassigned",
+    "bulkAssignMode": "Tag assignment mode",
+    "bulkAssignHint": "Click on purchases to toggle the selected tag",
+    "exitBulkMode": "Exit"
   },
   "groups": {
     "title": "Purchase Groups",

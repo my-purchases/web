@@ -102,7 +102,10 @@
     "noGroups": "Aún no hay grupos de etiquetas. Crea uno para empezar a organizar tus compras.",
     "confirmDelete": "¿Estás seguro de que quieres eliminar el grupo de etiquetas \"{{name}}\"? Se eliminarán todas las asignaciones de etiquetas.",
     "assigned": "Asignado",
-    "unassigned": "Sin asignar"
+    "unassigned": "Sin asignar",
+    "bulkAssignMode": "Modo de asignación de etiquetas",
+    "bulkAssignHint": "Haz clic en las compras para alternar la etiqueta seleccionada",
+    "exitBulkMode": "Salir"
   },
   "groups": {
     "title": "Grupos de compras",

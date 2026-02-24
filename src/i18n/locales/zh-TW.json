@@ -102,7 +102,10 @@
     "noGroups": "尚無標籤群組。建立一個來開始整理您的購買紀錄。",
     "confirmDelete": "您確定要刪除標籤群組「{{name}}」嗎？所有標籤指派將被移除。",
     "assigned": "已指派",
-    "unassigned": "未指派"
+    "unassigned": "未指派",
+    "bulkAssignMode": "標籤分配模式",
+    "bulkAssignHint": "點擊購買項以切換所選標籤",
+    "exitBulkMode": "退出"
   },
   "groups": {
     "title": "購買群組",

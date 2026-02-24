@@ -102,7 +102,10 @@
     "noGroups": "暂无标签组。创建一个来开始整理您的购买记录。",
     "confirmDelete": "您确定要删除标签组\"{{name}}\"吗？所有标签分配将被移除。",
     "assigned": "已分配",
-    "unassigned": "未分配"
+    "unassigned": "未分配",
+    "bulkAssignMode": "标签分配模式",
+    "bulkAssignHint": "点击购买项以切换所选标签",
+    "exitBulkMode": "退出"
   },
   "groups": {
     "title": "购买分组",

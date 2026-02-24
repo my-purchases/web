@@ -102,7 +102,10 @@
     "noGroups": "Noch keine Tag-Gruppen. Erstellen Sie eine, um Ihre Einkäufe zu organisieren.",
     "confirmDelete": "Sind Sie sicher, dass Sie die Tag-Gruppe \"{{name}}\" löschen möchten? Alle Tag-Zuweisungen werden entfernt.",
     "assigned": "Zugewiesen",
-    "unassigned": "Nicht zugewiesen"
+    "unassigned": "Nicht zugewiesen",
+    "bulkAssignMode": "Tag-Zuweisungsmodus",
+    "bulkAssignHint": "Klicke auf Käufe, um den ausgewählten Tag umzuschalten",
+    "exitBulkMode": "Beenden"
   },
   "groups": {
     "title": "Einkaufsgruppen",

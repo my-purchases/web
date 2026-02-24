@@ -102,7 +102,10 @@
     "noGroups": "아직 태그 그룹이 없습니다. 구매를 정리하려면 그룹을 만드세요.",
     "confirmDelete": "태그 그룹 \"{{name}}\"을(를) 삭제하시겠습니까? 모든 태그 할당이 제거됩니다.",
     "assigned": "할당됨",
-    "unassigned": "미할당"
+    "unassigned": "미할당",
+    "bulkAssignMode": "태그 할당 모드",
+    "bulkAssignHint": "구매를 클릭하여 선택한 태그를 전환합니다",
+    "exitBulkMode": "종료"
   },
   "groups": {
     "title": "구매 그룹",

@@ -102,7 +102,10 @@
     "noGroups": "Nog geen taggroepen. Maak er een aan om uw aankopen te organiseren.",
     "confirmDelete": "Weet u zeker dat u de taggroep \"{{name}}\" wilt verwijderen? Alle tagtoewijzingen worden verwijderd.",
     "assigned": "Toegewezen",
-    "unassigned": "Niet toegewezen"
+    "unassigned": "Niet toegewezen",
+    "bulkAssignMode": "Tag-toewijzingsmodus",
+    "bulkAssignHint": "Klik op aankopen om de geselecteerde tag te schakelen",
+    "exitBulkMode": "Sluiten"
   },
   "groups": {
     "title": "Aankoopgroepen",
