@@ -175,9 +175,9 @@ describe('mapRowToPurchase', () => {
     expect(p!.price).toBeCloseTo(36.86, 2); // Total Amount, not 9.99*3
   });
 
-  it('generates unique IDs based on orderId and ASIN', () => {
+  it('generates unique IDs based on orderId, date and ASIN', () => {
     const p = mapRowToPurchase(rows[0], 0);
-    expect(p!.id).toBe('amazon-404-9369579-4557113-B00ARPM4XY');
+    expect(p!.id).toBe('amazon-404-9369579-4557113-2020-03-07-B00ARPM4XY');
   });
 
   it('parses dates as ISO 8601', () => {

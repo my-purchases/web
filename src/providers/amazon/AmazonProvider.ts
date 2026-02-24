@@ -119,8 +119,9 @@ export function mapRowToPurchase(row: Record<string, string>, index: number): Pu
 
   if (!title || !orderId) return null;
 
-  // Build a unique ID per line item
-  const id = `${PROVIDER_ID}-${orderId}-${asin || index}`;
+  // Build a unique ID per line item (includes date for uniqueness)
+  const datePart = dateStr ? new Date(dateStr).toISOString().split('T')[0] : 'nodate';
+  const id = `${PROVIDER_ID}-${orderId}-${datePart}-${asin || index}`;
 
   // Build original URL from ASIN + website domain
   let originalUrl: string | undefined;

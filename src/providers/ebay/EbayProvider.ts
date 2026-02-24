@@ -14,6 +14,7 @@ interface EbayImportItem {
   imageUrl?: string;
   url?: string;
   itemId?: string;
+  quantity?: number;
 }
 
 export const ebayProvider: PurchaseProvider = {
@@ -49,14 +50,22 @@ export const ebayProvider: PurchaseProvider = {
       headers.forEach((h, j) => {
         row[h] = values[j] ?? '';
       });
+
+      const dateStr = row['Date'] ?? row['Purchase Date'] ?? '';
+      const purchaseDate = dateStr ? new Date(dateStr).toISOString() : new Date().toISOString();
+      const datePart = purchaseDate.split('T')[0];
+      const quantity = parseInt(row['Quantity'] ?? '1', 10) || 1;
+      const unitPrice = parseFloat((row['Price'] ?? row['Total'] ?? '0').replace(/[^0-9.-]/g, '')) || 0;
+      const itemId = row['Item ID'] ?? row['itemId'] ?? String(i);
+
       purchases.push({
-        id: `${PROVIDER_ID}-${row['Order ID'] ?? row['orderId'] ?? i}`,
+        id: `${PROVIDER_ID}-${datePart}-${row['Order ID'] ?? row['orderId'] ?? i}-${itemId}`,
         providerId: PROVIDER_ID,
-        providerItemId: row['Item ID'] ?? row['itemId'] ?? String(i),
+        providerItemId: itemId,
         title: row['Title'] ?? row['Item Title'] ?? 'Unknown Item',
-        price: parseFloat((row['Price'] ?? row['Total'] ?? '0').replace(/[^0-9.-]/g, '')) || 0,
+        price: unitPrice * quantity,
         currency: row['Currency'] ?? 'USD',
-        purchaseDate: row['Date'] ?? row['Purchase Date'] ? new Date(row['Date'] ?? row['Purchase Date']).toISOString() : new Date().toISOString(),
+        purchaseDate,
         imageUrl: row['Image URL'] ?? undefined,
         categoryName: row['Category'] ?? undefined,
         rawData: row as unknown as Record<string, unknown>,
@@ -77,14 +86,19 @@ export const ebayProvider: PurchaseProvider = {
 };
 
 function mapToPayment(item: EbayImportItem, index: number): Purchase {
+  const purchaseDate = item.date ? new Date(item.date).toISOString() : new Date().toISOString();
+  const datePart = purchaseDate.split('T')[0];
+  const quantity = item.quantity ?? 1;
+  const unitPrice = typeof item.price === 'string' ? parseFloat(item.price) : (item.price ?? 0);
+
   return {
-    id: `${PROVIDER_ID}-${item.orderId ?? index}`,
+    id: `${PROVIDER_ID}-${datePart}-${item.orderId ?? item.itemId ?? index}`,
     providerId: PROVIDER_ID,
     providerItemId: item.itemId ?? item.orderId ?? String(index),
     title: item.title ?? 'Unknown Item',
-    price: typeof item.price === 'string' ? parseFloat(item.price) : (item.price ?? 0),
+    price: unitPrice * quantity,
     currency: item.currency ?? 'USD',
-    purchaseDate: item.date ? new Date(item.date).toISOString() : new Date().toISOString(),
+    purchaseDate,
     imageUrl: item.imageUrl,
     categoryName: item.category,
     originalUrl: item.url,

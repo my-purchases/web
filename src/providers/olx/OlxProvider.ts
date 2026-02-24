@@ -16,6 +16,7 @@ interface OlxImportItem {
   category?: string;
   imageUrl?: string;
   url?: string;
+  quantity?: number;
 }
 
 export const olxProvider: PurchaseProvider = {
@@ -95,20 +96,27 @@ export const olxProvider: PurchaseProvider = {
       ? data
       : (data.items ?? data.purchases ?? []);
 
-    return items.map((item, index) => ({
-      id: `${PROVIDER_ID}-${item.id ?? index}`,
-      providerId: PROVIDER_ID,
-      providerItemId: String(item.id ?? index),
-      title: item.title ?? 'Unknown Item',
-      price: typeof item.price === 'string' ? parseFloat(item.price) : (item.price ?? 0),
-      currency: item.currency ?? 'PLN',
-      purchaseDate: item.date ? new Date(item.date).toISOString() : new Date().toISOString(),
-      imageUrl: item.imageUrl,
-      categoryName: item.category,
-      originalUrl: item.url,
-      rawData: item as unknown as Record<string, unknown>,
-      importedAt: new Date().toISOString(),
-    }));
+    return items.map((item, index) => {
+      const purchaseDate = item.date ? new Date(item.date).toISOString() : new Date().toISOString();
+      const datePart = purchaseDate.split('T')[0];
+      const quantity = item.quantity ?? 1;
+      const unitPrice = typeof item.price === 'string' ? parseFloat(item.price) : (item.price ?? 0);
+
+      return {
+        id: `${PROVIDER_ID}-${datePart}-${item.id ?? index}`,
+        providerId: PROVIDER_ID,
+        providerItemId: String(item.id ?? index),
+        title: item.title ?? 'Unknown Item',
+        price: unitPrice * quantity,
+        currency: item.currency ?? 'PLN',
+        purchaseDate,
+        imageUrl: item.imageUrl,
+        categoryName: item.category,
+        originalUrl: item.url,
+        rawData: item as unknown as Record<string, unknown>,
+        importedAt: new Date().toISOString(),
+      };
+    });
   },
 
   async validateImportFile(file: File): Promise<string[]> {
