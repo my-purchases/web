@@ -5,6 +5,7 @@ import { olxProvider } from './olx/OlxProvider';
 import { ebayProvider } from './ebay/EbayProvider';
 import { vintedProvider } from './vinted/VintedProvider';
 import { allegroLokalnieProvider } from './allegro-lokalnie/AllegroLokalnieProvider';
+import { aliexpressProvider } from './aliexpress/AliexpressProvider';
 
 // ─── Provider Registry ──────────────────────────────────────
 
@@ -21,6 +22,7 @@ register(olxProvider);
 register(ebayProvider);
 register(vintedProvider);
 register(allegroLokalnieProvider);
+register(aliexpressProvider);
 
 /**
  * Get a provider by its ID
