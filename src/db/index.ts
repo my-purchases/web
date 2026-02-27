@@ -5,4 +5,5 @@ export type {
   TagGroup,
   TagAssignment,
   SyncState,
+  CurrencyRate,
 } from './database';

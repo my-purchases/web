@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Purchase, PurchaseGroup } from '@/db';
-import { useGroupStore } from '@/stores';
+import { useGroupStore, useSettingsStore } from '@/stores';
 import { PurchaseCard } from './PurchaseCard';
 import { TagAssigner } from '@/components/tags/TagAssigner';
 import { formatDate, formatCurrency } from '@/utils';
@@ -31,8 +31,23 @@ export function PurchaseGroupCard({
 }: PurchaseGroupCardProps) {
   const { t } = useTranslation();
   const { deleteGroup, removePurchaseFromGroup } = useGroupStore();
+  const { preferredCurrency } = useSettingsStore();
   const [isExpanded, setIsExpanded] = useState(false);
   const isTagMode = tagMode?.active && onTagToggle;
+
+  // Compute converted total if preferred currency is set and members have converted prices
+  const hasConvertedPrices =
+    preferredCurrency &&
+    memberPurchases.every(
+      (p) => p.convertedPrice !== undefined && p.convertedCurrency === preferredCurrency,
+    );
+  const convertedTotal = hasConvertedPrices
+    ? Math.round(memberPurchases.reduce((sum, p) => sum + (p.convertedPrice ?? 0), 0) * 100) / 100
+    : null;
+  const showConverted =
+    convertedTotal !== null &&
+    preferredCurrency &&
+    memberPurchases.some((p) => p.currency !== preferredCurrency);
 
   const handleDelete = () => {
     if (window.confirm(t('groups.confirmDelete', { name: group.name }))) {
@@ -85,8 +100,19 @@ export function PurchaseGroupCard({
             <h3 className="font-semibold text-gray-900 dark:text-white">
               {group.name}
             </h3>
-            <span className="flex-shrink-0 text-sm font-bold text-gray-900 dark:text-white">
-              {formatCurrency(totalPrice, currency)}
+            <span className="flex-shrink-0 text-right text-sm font-bold text-gray-900 dark:text-white">
+              {showConverted ? (
+                <>
+                  <span className="block">
+                    {formatCurrency(convertedTotal!, preferredCurrency!)}
+                  </span>
+                  <span className="block text-xs font-normal text-gray-400 dark:text-gray-500">
+                    {formatCurrency(totalPrice, currency)}
+                  </span>
+                </>
+              ) : (
+                formatCurrency(totalPrice, currency)
+              )}
             </span>
           </div>
           <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-gray-500 dark:text-gray-400">

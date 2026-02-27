@@ -117,7 +117,9 @@
     "provider": "Provedor",
     "viewOriginal": "Ver anúncio original",
     "deleteSelected": "Excluir selecionados",
-    "deleteSelectedConfirm": "Tem certeza de que deseja excluir {{count}} compra(s) selecionada(s)? Esta ação não pode ser desfeita."
+    "deleteSelectedConfirm": "Tem certeza de que deseja excluir {{count}} compra(s) selecionada(s)? Esta ação não pode ser desfeita.",
+    "selectAll": "Selecionar tudo",
+    "deselectAll": "Desmarcar tudo"
   },
   "tags": {
     "title": "Tags",
@@ -228,6 +230,22 @@
     "cookiesDescription": "My Resources usa o localStorage do navegador para salvar sua preferência de idioma e configurações de convite. IndexedDB é usado para dados de compras. Nenhum cookie de rastreamento é usado.",
     "contact": "Contato",
     "contactDescription": "Para perguntas sobre esta política de privacidade, abra uma issue em nosso repositório no GitHub."
+  },
+  "currency": {
+    "title": "Moeda",
+    "setupTitle": "Selecione sua moeda",
+    "setupDescription": "Escolha sua moeda preferida para conversão de preços. Compras em outras moedas serão convertidas automaticamente usando taxas de câmbio históricas.",
+    "searchCurrency": "Pesquisar moeda...",
+    "setCurrency": "Definir moeda",
+    "changeCurrency": "Alterar",
+    "settingsDescription": "Defina sua moeda preferida para converter automaticamente preços de diferentes moedas usando taxas de câmbio históricas.",
+    "convertingTitle": "Convertendo preços",
+    "convertingDescription": "Obtendo taxas de câmbio e convertendo preços para {{currency}}...",
+    "conversionComplete": "Conversão concluída",
+    "conversionCompleteDescription": "Todos os preços foram convertidos para {{currency}}.",
+    "ratesFetched": "taxas",
+    "fromApi": "Da API",
+    "fromCache": "Em cache"
   },
   "language": {
     "en": "English",

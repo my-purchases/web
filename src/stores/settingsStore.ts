@@ -7,11 +7,14 @@ import { tracker, AnalyticsEvents } from '@/analytics';
 export type Theme = 'light' | 'dark' | 'system';
 
 const THEME_KEY = 'my-purchases-theme';
+const CURRENCY_KEY = 'my-purchases-currency';
 
 interface SettingsState {
   theme: Theme;
+  preferredCurrency: string | null;
   setTheme: (theme: Theme) => void;
   setLanguage: (language: SupportedLanguage) => void;
+  setPreferredCurrency: (currency: string) => void;
   initTheme: () => void;
 }
 
@@ -30,6 +33,7 @@ function applyTheme(theme: Theme): void {
 
 export const useSettingsStore = create<SettingsState>((set) => ({
   theme: (localStorage.getItem(THEME_KEY) as Theme) ?? 'system',
+  preferredCurrency: localStorage.getItem(CURRENCY_KEY),
 
   initTheme: () => {
     const stored = localStorage.getItem(THEME_KEY) as Theme | null;
@@ -61,5 +65,11 @@ export const useSettingsStore = create<SettingsState>((set) => ({
     updateDocumentDirection(language);
     tracker.trackEvent(AnalyticsEvents.LANGUAGE_CHANGED, { language });
     console.info('[Settings] Language changed:', language);
+  },
+
+  setPreferredCurrency: (currency) => {
+    localStorage.setItem(CURRENCY_KEY, currency);
+    set({ preferredCurrency: currency });
+    console.info('[Settings] Preferred currency changed:', currency);
   },
 }));

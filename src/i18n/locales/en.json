@@ -117,7 +117,9 @@
     "provider": "Provider",
     "viewOriginal": "View original listing",
     "deleteSelected": "Delete selected",
-    "deleteSelectedConfirm": "Are you sure you want to delete {{count}} selected purchase(s)? This action cannot be undone."
+    "deleteSelectedConfirm": "Are you sure you want to delete {{count}} selected purchase(s)? This action cannot be undone.",
+    "selectAll": "Select all",
+    "deselectAll": "Deselect all"
   },
   "tags": {
     "title": "Tags",
@@ -228,6 +230,22 @@
     "cookiesDescription": "My Resources uses browser localStorage to save your language preference and invitation settings. IndexedDB is used for purchase data. No tracking cookies are used.",
     "contact": "Contact",
     "contactDescription": "For questions about this privacy policy, please open an issue on our GitHub repository."
+  },
+  "currency": {
+    "title": "Currency",
+    "setupTitle": "Select Your Currency",
+    "setupDescription": "Choose your preferred currency for price conversion. Purchases in other currencies will be automatically converted using historical exchange rates.",
+    "searchCurrency": "Search currency...",
+    "setCurrency": "Set Currency",
+    "changeCurrency": "Change",
+    "settingsDescription": "Set your preferred currency to automatically convert prices from different currencies using historical exchange rates.",
+    "convertingTitle": "Converting Prices",
+    "convertingDescription": "Fetching exchange rates and converting prices to {{currency}}...",
+    "conversionComplete": "Conversion Complete",
+    "conversionCompleteDescription": "All prices have been converted to {{currency}}.",
+    "ratesFetched": "rates",
+    "fromApi": "From API",
+    "fromCache": "Cached"
   },
   "language": {
     "en": "English",

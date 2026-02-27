@@ -117,7 +117,9 @@
     "provider": "Anbieter",
     "viewOriginal": "Originalanzeige ansehen",
     "deleteSelected": "Ausgewählte löschen",
-    "deleteSelectedConfirm": "Möchten Sie wirklich {{count}} ausgewählte Käufe löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+    "deleteSelectedConfirm": "Möchten Sie wirklich {{count}} ausgewählte Käufe löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "selectAll": "Alle auswählen",
+    "deselectAll": "Auswahl aufheben"
   },
   "tags": {
     "title": "Tags",
@@ -228,6 +230,22 @@
     "cookiesDescription": "My Resources verwendet den localStorage des Browsers, um Ihre Spracheinstellung und Einladungseinstellungen zu speichern. IndexedDB wird für Einkaufsdaten verwendet. Es werden keine Tracking-Cookies verwendet.",
     "contact": "Kontakt",
     "contactDescription": "Bei Fragen zu dieser Datenschutzrichtlinie eröffnen Sie bitte ein Issue in unserem GitHub-Repository."
+  },
+  "currency": {
+    "title": "Währung",
+    "setupTitle": "Wählen Sie Ihre Währung",
+    "setupDescription": "Wählen Sie Ihre bevorzugte Währung für die Preisumrechnung. Einkäufe in anderen Währungen werden automatisch anhand historischer Wechselkurse umgerechnet.",
+    "searchCurrency": "Währung suchen...",
+    "setCurrency": "Währung festlegen",
+    "changeCurrency": "Ändern",
+    "settingsDescription": "Legen Sie Ihre bevorzugte Währung fest, um Preise aus verschiedenen Währungen automatisch anhand historischer Wechselkurse umzurechnen.",
+    "convertingTitle": "Preise werden umgerechnet",
+    "convertingDescription": "Wechselkurse werden abgerufen und Preise in {{currency}} umgerechnet...",
+    "conversionComplete": "Umrechnung abgeschlossen",
+    "conversionCompleteDescription": "Alle Preise wurden in {{currency}} umgerechnet.",
+    "ratesFetched": "Kurse",
+    "fromApi": "Von API",
+    "fromCache": "Zwischengespeichert"
   },
   "language": {
     "en": "English",

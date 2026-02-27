@@ -119,7 +119,9 @@
     "deleteSelected": "Удалить выбранные",
     "deleteSelectedConfirm": "Вы уверены, что хотите удалить {{count}} выбранных покупок? Это действие нельзя отменить.",
     "totalItems_few": "{{count}} товара",
-    "totalItems_many": "{{count}} товаров"
+    "totalItems_many": "{{count}} товаров",
+    "selectAll": "Выбрать все",
+    "deselectAll": "Снять выделение"
   },
   "tags": {
     "title": "Теги",
@@ -232,6 +234,22 @@
     "cookiesDescription": "My Resources использует localStorage браузера для сохранения языковых настроек и настроек приглашения. IndexedDB используется для данных о покупках. Отслеживающие cookies не используются.",
     "contact": "Контакты",
     "contactDescription": "По вопросам, связанным с этой политикой конфиденциальности, откройте issue в нашем репозитории на GitHub."
+  },
+  "currency": {
+    "title": "Валюта",
+    "setupTitle": "Выберите вашу валюту",
+    "setupDescription": "Выберите предпочтительную валюту для конвертации цен. Покупки в других валютах будут автоматически конвертированы с использованием исторических курсов обмена.",
+    "searchCurrency": "Поиск валюты...",
+    "setCurrency": "Установить валюту",
+    "changeCurrency": "Изменить",
+    "settingsDescription": "Установите предпочтительную валюту для автоматической конвертации цен из разных валют с использованием исторических курсов обмена.",
+    "convertingTitle": "Конвертация цен",
+    "convertingDescription": "Получение курсов обмена и конвертация цен в {{currency}}...",
+    "conversionComplete": "Конвертация завершена",
+    "conversionCompleteDescription": "Все цены были конвертированы в {{currency}}.",
+    "ratesFetched": "курсы",
+    "fromApi": "Из API",
+    "fromCache": "Из кэша"
   },
   "language": {
     "en": "English",

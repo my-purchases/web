@@ -6,7 +6,7 @@ import type { Purchase } from '@/db';
 import { usePurchaseStore } from '@/stores';
 import { PurchaseCard } from './PurchaseCard';
 import { PurchaseGroupCard } from './PurchaseGroupCard';
-import { ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShoppingBag, ChevronLeft, ChevronRight, Check, Minus } from 'lucide-react';
 import type { TagAssignmentModeState } from '@/components/tags/TagAssignmentBar';
 
 const PAGE_SIZE = 100;
@@ -19,7 +19,7 @@ interface PurchaseListProps {
 
 export function PurchaseList({ tagMode, assignedTargetIds, onTagToggle }: PurchaseListProps) {
   const { t } = useTranslation();
-  const { filters, sortDirection } = usePurchaseStore();
+  const { filters, sortDirection, selectedPurchaseIds, selectAll, clearSelection } = usePurchaseStore();
 
   // Live query: all purchases from IndexedDB
   const allPurchases = useLiveQuery(() => db.purchases.toArray(), []);
@@ -95,6 +95,7 @@ export function PurchaseList({ tagMode, assignedTargetIds, onTagToggle }: Purcha
             new Date(p.purchaseDate) > new Date(latest.purchaseDate) ? p : latest,
           ).purchaseDate
         : group.createdAt;
+      // Use first member's currency, or first member's convertedCurrency if available, fallback to PLN
       const currency = memberPurchases[0]?.currency ?? 'PLN';
 
       return {
@@ -167,15 +168,59 @@ export function PurchaseList({ tagMode, assignedTargetIds, onTagToggle }: Purcha
 
   const showPagination = listingItems.length > PAGE_SIZE;
 
+  // ─── Select all ───────────────────────────────────────────
+  const allFilteredIds = useMemo(
+    () => filteredPurchases.map((p) => p.id),
+    [filteredPurchases],
+  );
+
+  const selectedCount = useMemo(() => {
+    let count = 0;
+    for (const id of allFilteredIds) {
+      if (selectedPurchaseIds.has(id)) count++;
+    }
+    return count;
+  }, [allFilteredIds, selectedPurchaseIds]);
+
+  const isAllSelected = allFilteredIds.length > 0 && selectedCount === allFilteredIds.length;
+  const isPartiallySelected = selectedCount > 0 && selectedCount < allFilteredIds.length;
+  const isTagMode = tagMode?.active;
+
+  const handleSelectAll = () => {
+    if (isAllSelected) {
+      clearSelection();
+    } else {
+      selectAll(allFilteredIds);
+    }
+  };
+
   return (
     <div className="space-y-4">
       {/* Count indicator */}
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          {t('purchases.totalItems', { count: totalCount })}
-          {filteredPurchases.length !== totalCount &&
-            ` (${filteredPurchases.length} ${t('common.filter').toLowerCase()})`}
-        </p>
+        <div className="flex items-center gap-2">
+          {!isTagMode && allFilteredIds.length > 0 && (
+            <button
+              onClick={handleSelectAll}
+              className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded border transition-colors ${
+                isAllSelected
+                  ? 'border-primary-500 bg-primary-500 text-white'
+                  : isPartiallySelected
+                    ? 'border-primary-500 bg-primary-500 text-white'
+                    : 'border-gray-300 hover:border-primary-400 dark:border-gray-600'
+              }`}
+              title={isAllSelected ? t('purchases.deselectAll') : t('purchases.selectAll')}
+            >
+              {isAllSelected && <Check className="h-3 w-3" />}
+              {isPartiallySelected && !isAllSelected && <Minus className="h-3 w-3" />}
+            </button>
+          )}
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {t('purchases.totalItems', { count: totalCount })}
+            {filteredPurchases.length !== totalCount &&
+              ` (${filteredPurchases.length} ${t('common.filter').toLowerCase()})`}
+          </p>
+        </div>
         {showPagination && (
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {t('common.page')} {currentPage} {t('common.of')} {totalPages}

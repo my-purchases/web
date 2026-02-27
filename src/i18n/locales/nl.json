@@ -117,7 +117,9 @@
     "provider": "Aanbieder",
     "viewOriginal": "Originele advertentie bekijken",
     "deleteSelected": "Geselecteerde verwijderen",
-    "deleteSelectedConfirm": "Weet je zeker dat je {{count}} geselecteerde aankoop(en) wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
+    "deleteSelectedConfirm": "Weet je zeker dat je {{count}} geselecteerde aankoop(en) wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+    "selectAll": "Alles selecteren",
+    "deselectAll": "Alles deselecteren"
   },
   "tags": {
     "title": "Tags",
@@ -228,6 +230,22 @@
     "cookiesDescription": "My Resources gebruikt de localStorage van de browser om uw taalvoorkeur en uitnodigingsinstellingen op te slaan. IndexedDB wordt gebruikt voor aankoopgegevens. Er worden geen trackingcookies gebruikt.",
     "contact": "Contact",
     "contactDescription": "Voor vragen over dit privacybeleid kunt u een issue openen in ons GitHub-repository."
+  },
+  "currency": {
+    "title": "Valuta",
+    "setupTitle": "Selecteer uw valuta",
+    "setupDescription": "Kies uw voorkeursvaluta voor prijsconversie. Aankopen in andere valuta's worden automatisch omgerekend met historische wisselkoersen.",
+    "searchCurrency": "Valuta zoeken...",
+    "setCurrency": "Valuta instellen",
+    "changeCurrency": "Wijzigen",
+    "settingsDescription": "Stel uw voorkeursvaluta in om prijzen uit verschillende valuta's automatisch om te rekenen met historische wisselkoersen.",
+    "convertingTitle": "Prijzen omrekenen",
+    "convertingDescription": "Wisselkoersen ophalen en prijzen omrekenen naar {{currency}}...",
+    "conversionComplete": "Omrekening voltooid",
+    "conversionCompleteDescription": "Alle prijzen zijn omgerekend naar {{currency}}.",
+    "ratesFetched": "koersen",
+    "fromApi": "Van API",
+    "fromCache": "Gecacht"
   },
   "language": {
     "en": "English",

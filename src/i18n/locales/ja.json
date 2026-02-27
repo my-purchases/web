@@ -229,6 +229,22 @@
     "contact": "お問い合わせ",
     "contactDescription": "このプライバシーポリシーに関するご質問は、GitHub リポジトリで issue を作成してください。"
   },
+  "currency": {
+    "title": "通貨",
+    "setupTitle": "通貨を選択",
+    "setupDescription": "価格変換に使用する優先通貨を選択してください。他の通貨での購入は、過去の為替レートを使用して自動的に変換されます。",
+    "searchCurrency": "通貨を検索...",
+    "setCurrency": "通貨を設定",
+    "changeCurrency": "変更",
+    "settingsDescription": "優先通貨を設定すると、過去の為替レートを使用して異なる通貨の価格が自動的に変換されます。",
+    "convertingTitle": "価格を変換中",
+    "convertingDescription": "為替レートを取得し、{{currency}}に価格を変換中...",
+    "conversionComplete": "変換完了",
+    "conversionCompleteDescription": "すべての価格が{{currency}}に変換されました。",
+    "ratesFetched": "レート",
+    "fromApi": "APIから",
+    "fromCache": "キャッシュ"
+  },
   "language": {
     "en": "English",
     "pl": "Polski",

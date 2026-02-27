@@ -1,27 +1,35 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useInvitationStore, usePurchaseStore } from '@/stores';
+import { useInvitationStore, usePurchaseStore, useSettingsStore } from '@/stores';
 import { TagGroupManager } from '@/components/tags';
 import { ExportDialog, ImportDialog } from '@/components/data';
 import { LanguageSwitcher, ThemeSwitcher } from '@/components/layout';
+import { CurrencySetupDialog, CurrencyConversionProgress } from '@/components/currency';
 import { Button } from '@/components/common';
 import { tracker, AnalyticsEvents } from '@/analytics';
+import { COMMON_CURRENCIES } from '@/services/currencyService';
+import type { ConversionProgress } from '@/services/currencyService';
 import {
   Download,
   Upload,
   Trash2,
   LogOut,
   AlertTriangle,
+  RefreshCw,
 } from 'lucide-react';
 import { db } from '@/db';
 
 export default function SettingsPage() {
   const { t } = useTranslation();
   const { invitation, clearInvitation } = useInvitationStore();
-  const { clearAllPurchases } = usePurchaseStore();
+  const { clearAllPurchases, rebuildConvertedPrices } = usePurchaseStore();
+  const { preferredCurrency, setPreferredCurrency } = useSettingsStore();
   const [showExport, setShowExport] = useState(false);
   const [showImport, setShowImport] = useState(false);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [showCurrencyPicker, setShowCurrencyPicker] = useState(false);
+  const [conversionProgress, setConversionProgress] = useState<ConversionProgress | null>(null);
+  const [isConverting, setIsConverting] = useState(false);
 
   useEffect(() => {
     tracker.trackPageView('settings');
@@ -33,6 +41,7 @@ export default function SettingsPage() {
     await db.tagGroups.clear();
     await db.tagAssignments.clear();
     await db.syncState.clear();
+    await db.currencyRates.clear();
     clearAllPurchases();
     setShowClearConfirm(false);
     tracker.trackEvent(AnalyticsEvents.DATA_CLEARED);
@@ -43,6 +52,27 @@ export default function SettingsPage() {
     tracker.trackEvent(AnalyticsEvents.INVITATION_REMOVED);
     window.location.reload();
   };
+
+  const handleCurrencyChange = async (currency: string) => {
+    setShowCurrencyPicker(false);
+    setPreferredCurrency(currency);
+    setIsConverting(true);
+    setConversionProgress({ total: 0, fetched: 0, cached: 0 });
+
+    try {
+      await rebuildConvertedPrices(currency, (progress) => {
+        setConversionProgress({ ...progress });
+      });
+    } catch (error) {
+      console.error('[Settings] Currency conversion failed:', error);
+    } finally {
+      setIsConverting(false);
+    }
+  };
+
+  const currentCurrencyInfo = preferredCurrency
+    ? COMMON_CURRENCIES.find((c) => c.code === preferredCurrency)
+    : null;
 
   return (
     <div className="mx-auto max-w-2xl space-y-8">
@@ -68,6 +98,45 @@ export default function SettingsPage() {
             </p>
             <LanguageSwitcher />
           </div>
+        </div>
+      </section>
+
+      {/* Currency */}
+      <section className="space-y-4 rounded-lg border border-gray-200 p-4 dark:border-gray-800">
+        <h3 className="font-semibold text-gray-900 dark:text-white">
+          {t('currency.title')}
+        </h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          {t('currency.settingsDescription')}
+        </p>
+        <div className="flex items-center gap-3">
+          {preferredCurrency ? (
+            <div className="flex items-center gap-3">
+              <div className="rounded-lg bg-primary-50 px-3 py-2 dark:bg-primary-900/20">
+                <span className="font-bold text-primary-700 dark:text-primary-300">
+                  {preferredCurrency}
+                </span>
+                {currentCurrencyInfo && (
+                  <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
+                    {currentCurrencyInfo.symbol} — {currentCurrencyInfo.name}
+                  </span>
+                )}
+              </div>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => setShowCurrencyPicker(true)}
+                disabled={isConverting}
+              >
+                <RefreshCw className="h-3.5 w-3.5" />
+                {t('currency.changeCurrency')}
+              </Button>
+            </div>
+          ) : (
+            <Button onClick={() => setShowCurrencyPicker(true)}>
+              {t('currency.setCurrency')}
+            </Button>
+          )}
         </div>
       </section>
 
@@ -147,6 +216,17 @@ export default function SettingsPage() {
 
       <ExportDialog open={showExport} onClose={() => setShowExport(false)} />
       <ImportDialog open={showImport} onClose={() => setShowImport(false)} />
+      <CurrencySetupDialog
+        open={showCurrencyPicker}
+        onSelect={handleCurrencyChange}
+        onClose={() => setShowCurrencyPicker(false)}
+        dismissable
+      />
+      <CurrencyConversionProgress
+        progress={conversionProgress}
+        targetCurrency={preferredCurrency ?? ''}
+        onClose={() => setConversionProgress(null)}
+      />
     </div>
   );
 }

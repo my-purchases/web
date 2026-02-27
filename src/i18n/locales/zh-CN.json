@@ -117,7 +117,9 @@
     "provider": "提供商",
     "viewOriginal": "查看原始商品",
     "deleteSelected": "删除所选",
-    "deleteSelectedConfirm": "确定要删除{{count}}个选中的购买记录吗？此操作无法撤销。"
+    "deleteSelectedConfirm": "确定要删除{{count}}个选中的购买记录吗？此操作无法撤销。",
+    "selectAll": "全选",
+    "deselectAll": "取消全选"
   },
   "tags": {
     "title": "标签",
@@ -228,6 +230,22 @@
     "cookiesDescription": "My Resources 使用浏览器的 localStorage 保存您的语言偏好和邀请设置。IndexedDB 用于购买数据。不使用跟踪 Cookie。",
     "contact": "联系我们",
     "contactDescription": "如对本隐私政策有疑问，请在我们的 GitHub 仓库中提交 issue。"
+  },
+  "currency": {
+    "title": "货币",
+    "setupTitle": "选择您的货币",
+    "setupDescription": "选择您首选的价格转换货币。其他货币的购买将使用历史汇率自动转换。",
+    "searchCurrency": "搜索货币...",
+    "setCurrency": "设置货币",
+    "changeCurrency": "更改",
+    "settingsDescription": "设置您的首选货币，以使用历史汇率自动转换不同货币的价格。",
+    "convertingTitle": "正在转换价格",
+    "convertingDescription": "正在获取汇率并将价格转换为 {{currency}}...",
+    "conversionComplete": "转换完成",
+    "conversionCompleteDescription": "所有价格已转换为 {{currency}}。",
+    "ratesFetched": "汇率",
+    "fromApi": "来自 API",
+    "fromCache": "已缓存"
   },
   "language": {
     "en": "English",

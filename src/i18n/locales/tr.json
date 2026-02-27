@@ -117,7 +117,9 @@
     "provider": "Sağlayıcı",
     "viewOriginal": "Orijinal ilanı görüntüle",
     "deleteSelected": "Seçilenleri sil",
-    "deleteSelectedConfirm": "{{count}} seçili satın alımı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+    "deleteSelectedConfirm": "{{count}} seçili satın alımı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+    "selectAll": "Tümünü seç",
+    "deselectAll": "Tüm seçimi kaldır"
   },
   "tags": {
     "title": "Etiketler",
@@ -228,6 +230,22 @@
     "cookiesDescription": "My Resources, dil tercihinizi ve davet ayarlarınızı kaydetmek için tarayıcının localStorage'ını kullanır. IndexedDB satın alma verileri için kullanılır. İzleme çerezleri kullanılmaz.",
     "contact": "İletişim",
     "contactDescription": "Bu gizlilik politikası hakkında sorularınız için lütfen GitHub depomuzda bir issue açın."
+  },
+  "currency": {
+    "title": "Para Birimi",
+    "setupTitle": "Para Biriminizi Seçin",
+    "setupDescription": "Fiyat dönüşümü için tercih ettiğiniz para birimini seçin. Diğer para birimlerindeki satın almalar, geçmiş döviz kurları kullanılarak otomatik olarak dönüştürülecektir.",
+    "searchCurrency": "Para birimi ara...",
+    "setCurrency": "Para Birimini Ayarla",
+    "changeCurrency": "Değiştir",
+    "settingsDescription": "Farklı para birimlerindeki fiyatları geçmiş döviz kurlarını kullanarak otomatik olarak dönüştürmek için tercih ettiğiniz para birimini ayarlayın.",
+    "convertingTitle": "Fiyatlar Dönüştürülüyor",
+    "convertingDescription": "Döviz kurları alınıyor ve fiyatlar {{currency}} cinsine dönüştürülüyor...",
+    "conversionComplete": "Dönüştürme tamamlandı",
+    "conversionCompleteDescription": "Tüm fiyatlar {{currency}} cinsine dönüştürüldü.",
+    "ratesFetched": "kur",
+    "fromApi": "API'den",
+    "fromCache": "Önbellekten"
   },
   "language": {
     "en": "English",

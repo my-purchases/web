@@ -120,7 +120,9 @@
     "deleteSelectedConfirm": "هل أنت متأكد أنك تريد حذف {{count}} عملية شراء محددة؟ لا يمكن التراجع عن هذا الإجراء.",
     "totalItems_two": "{{count}} عنصران",
     "totalItems_few": "{{count}} عناصر",
-    "totalItems_many": "{{count}} عنصراً"
+    "totalItems_many": "{{count}} عنصراً",
+    "selectAll": "تحديد الكل",
+    "deselectAll": "إلغاء تحديد الكل"
   },
   "tags": {
     "title": "الوسوم",
@@ -234,6 +236,22 @@
     "cookiesDescription": "يستخدم My Resources مساحة localStorage في المتصفح لحفظ تفضيلات اللغة وإعدادات الدعوة. يُستخدم IndexedDB لبيانات المشتريات. لا يتم استخدام ملفات تعريف ارتباط للتتبع.",
     "contact": "اتصل بنا",
     "contactDescription": "للأسئلة حول سياسة الخصوصية هذه، يرجى فتح issue في مستودعنا على GitHub."
+  },
+  "currency": {
+    "title": "العملة",
+    "setupTitle": "اختر عملتك",
+    "setupDescription": "اختر عملتك المفضلة لتحويل الأسعار. سيتم تحويل المشتريات بعملات أخرى تلقائياً باستخدام أسعار الصرف التاريخية.",
+    "searchCurrency": "البحث عن عملة...",
+    "setCurrency": "تعيين العملة",
+    "changeCurrency": "تغيير",
+    "settingsDescription": "قم بتعيين عملتك المفضلة لتحويل الأسعار تلقائياً من عملات مختلفة باستخدام أسعار الصرف التاريخية.",
+    "convertingTitle": "جارٍ تحويل الأسعار",
+    "convertingDescription": "جارٍ جلب أسعار الصرف وتحويل الأسعار إلى {{currency}}...",
+    "conversionComplete": "اكتمل التحويل",
+    "conversionCompleteDescription": "تم تحويل جميع الأسعار إلى {{currency}}.",
+    "ratesFetched": "أسعار",
+    "fromApi": "من API",
+    "fromCache": "من الذاكرة المؤقتة"
   },
   "language": {
     "en": "English",

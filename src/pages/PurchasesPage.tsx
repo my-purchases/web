@@ -1,19 +1,26 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLiveQuery } from 'dexie-react-hooks';
 import { PurchaseList, PurchaseFilters, CreateGroupModal } from '@/components/purchases';
 import { ProviderPanel } from '@/components/providers';
-import { usePurchaseStore } from '@/stores';
+import { usePurchaseStore, useSettingsStore } from '@/stores';
 import { Button } from '@/components/common';
+import { CurrencySetupDialog, CurrencyConversionProgress } from '@/components/currency';
 import { TagAssignmentBar, useTagToggle } from '@/components/tags/TagAssignmentBar';
 import type { TagAssignmentModeState } from '@/components/tags/TagAssignmentBar';
+import type { ConversionProgress } from '@/services/currencyService';
 import { PackagePlus, Trash2 } from 'lucide-react';
 import { tracker } from '@/analytics';
 import { useEffect } from 'react';
+import { db } from '@/db';
 
 export default function PurchasesPage() {
   const { t } = useTranslation();
-  const { selectedPurchaseIds, deleteSelectedPurchases } = usePurchaseStore();
+  const { selectedPurchaseIds, deleteSelectedPurchases, convertPurchases } = usePurchaseStore();
+  const { preferredCurrency, setPreferredCurrency } = useSettingsStore();
   const [showGroupModal, setShowGroupModal] = useState(false);
+  const [showCurrencySetup, setShowCurrencySetup] = useState(false);
+  const [conversionProgress, setConversionProgress] = useState<ConversionProgress | null>(null);
   const [tagMode, setTagMode] = useState<TagAssignmentModeState>({
     active: false,
     tagGroupId: null,
@@ -21,9 +28,33 @@ export default function PurchasesPage() {
   });
   const { assignedTargetIds, toggleTag } = useTagToggle(tagMode);
 
+  // Check if user has purchases but no preferred currency
+  const purchaseCount = useLiveQuery(() => db.purchases.count(), []);
+
   useEffect(() => {
     tracker.trackPageView('purchases');
   }, []);
+
+  // Show currency setup dialog when user has purchases but no preferred currency
+  useEffect(() => {
+    if (purchaseCount && purchaseCount > 0 && !preferredCurrency) {
+      setShowCurrencySetup(true);
+    }
+  }, [purchaseCount, preferredCurrency]);
+
+  const handleCurrencySelect = async (currency: string) => {
+    setShowCurrencySetup(false);
+    setPreferredCurrency(currency);
+    setConversionProgress({ total: 0, fetched: 0, cached: 0 });
+
+    try {
+      await convertPurchases(currency, (progress) => {
+        setConversionProgress({ ...progress });
+      });
+    } catch (error) {
+      console.error('[Purchases] Currency conversion failed:', error);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -67,6 +98,19 @@ export default function PurchasesPage() {
       <CreateGroupModal
         open={showGroupModal}
         onClose={() => setShowGroupModal(false)}
+      />
+
+      <CurrencySetupDialog
+        open={showCurrencySetup}
+        onSelect={handleCurrencySelect}
+        onClose={() => setShowCurrencySetup(false)}
+        dismissable
+      />
+
+      <CurrencyConversionProgress
+        progress={conversionProgress}
+        targetCurrency={preferredCurrency ?? ''}
+        onClose={() => setConversionProgress(null)}
       />
     </div>
   );

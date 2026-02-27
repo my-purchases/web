@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { db } from '@/db';
 import type { Purchase } from '@/db';
 import { tracker, AnalyticsEvents } from '@/analytics';
+import { batchFetchRates } from '@/services/currencyService';
+import type { ConversionRequest, ConversionProgress } from '@/services/currencyService';
 
 export type SortDirection = 'asc' | 'desc';
 
@@ -52,6 +54,16 @@ interface PurchaseState {
   deleteSelectedPurchases: () => Promise<number>;
   clearProviderPurchases: (providerId: string) => Promise<void>;
   clearAllPurchases: () => Promise<void>;
+
+  // Currency conversion
+  convertPurchases: (
+    preferredCurrency: string,
+    onProgress?: (progress: ConversionProgress) => void,
+  ) => Promise<number>;
+  rebuildConvertedPrices: (
+    preferredCurrency: string,
+    onProgress?: (progress: ConversionProgress) => void,
+  ) => Promise<number>;
 }
 
 const defaultFilters: PurchaseFilters = {
@@ -60,6 +72,13 @@ const defaultFilters: PurchaseFilters = {
   tagFilters: {},
   untaggedOnly: false,
 };
+
+/**
+ * Extract YYYY-MM-DD from an ISO 8601 date string
+ */
+function extractDate(isoDate: string): string {
+  return isoDate.slice(0, 10);
+}
 
 export const usePurchaseStore = create<PurchaseState>((set, get) => ({
   filters: { ...defaultFilters },
@@ -223,5 +242,127 @@ export const usePurchaseStore = create<PurchaseState>((set, get) => ({
     await db.tagAssignments.clear();
     await db.purchaseGroups.clear();
     console.info('[Purchases] All data cleared');
+  },
+
+  /**
+   * Convert all purchases that have a different currency than the preferred one.
+   * Skips purchases that already have the correct convertedCurrency.
+   * Used after initial currency setup or after import.
+   */
+  convertPurchases: async (preferredCurrency, onProgress) => {
+    console.info('[Purchases] Converting purchases to', preferredCurrency);
+
+    const allPurchases = await db.purchases.toArray();
+    const toConvert = allPurchases.filter(
+      (p) => p.currency !== preferredCurrency && p.convertedCurrency !== preferredCurrency,
+    );
+
+    if (toConvert.length === 0) {
+      console.info('[Purchases] No purchases need conversion');
+      // Still update same-currency purchases
+      const sameCurrency = allPurchases.filter(
+        (p) => p.currency === preferredCurrency && p.convertedCurrency !== preferredCurrency,
+      );
+      for (const p of sameCurrency) {
+        await db.purchases.update(p.id, {
+          convertedPrice: p.price,
+          convertedCurrency: preferredCurrency,
+        } as Record<string, unknown>);
+      }
+      return 0;
+    }
+
+    // Build conversion requests
+    const requests: ConversionRequest[] = toConvert.map((p) => ({
+      fromCurrency: p.currency,
+      toCurrency: preferredCurrency,
+      date: extractDate(p.purchaseDate),
+    }));
+
+    // Batch fetch rates
+    const rates = await batchFetchRates(requests, onProgress);
+
+    // Apply conversions
+    let converted = 0;
+    for (const p of toConvert) {
+      const rateKey = `${p.currency}_${preferredCurrency}_${extractDate(p.purchaseDate)}`;
+      const rate = rates.get(rateKey);
+      if (rate !== undefined) {
+        const convertedPrice = Math.round(p.price * rate * 100) / 100;
+        await db.purchases.update(p.id, {
+          convertedPrice,
+          convertedCurrency: preferredCurrency,
+        } as Record<string, unknown>);
+        converted++;
+      }
+    }
+
+    // Update same-currency purchases too
+    const sameCurrency = allPurchases.filter(
+      (p) => p.currency === preferredCurrency && p.convertedCurrency !== preferredCurrency,
+    );
+    for (const p of sameCurrency) {
+      await db.purchases.update(p.id, {
+        convertedPrice: p.price,
+        convertedCurrency: preferredCurrency,
+      } as Record<string, unknown>);
+    }
+
+    console.info('[Purchases] Converted', converted, 'purchases to', preferredCurrency);
+    return converted;
+  },
+
+  /**
+   * Rebuild all converted prices when the user changes their preferred currency.
+   * Unlike convertPurchases, this re-converts ALL purchases including ones
+   * that already have a convertedPrice (since the target currency changed).
+   */
+  rebuildConvertedPrices: async (preferredCurrency, onProgress) => {
+    console.info('[Purchases] Rebuilding converted prices for', preferredCurrency);
+
+    const allPurchases = await db.purchases.toArray();
+    const toConvert = allPurchases.filter((p) => p.currency !== preferredCurrency);
+
+    // Update same-currency purchases immediately
+    const sameCurrency = allPurchases.filter((p) => p.currency === preferredCurrency);
+    for (const p of sameCurrency) {
+      await db.purchases.update(p.id, {
+        convertedPrice: p.price,
+        convertedCurrency: preferredCurrency,
+      } as Record<string, unknown>);
+    }
+
+    if (toConvert.length === 0) {
+      console.info('[Purchases] All purchases already in', preferredCurrency);
+      return 0;
+    }
+
+    // Build conversion requests
+    const requests: ConversionRequest[] = toConvert.map((p) => ({
+      fromCurrency: p.currency,
+      toCurrency: preferredCurrency,
+      date: extractDate(p.purchaseDate),
+    }));
+
+    // Batch fetch rates
+    const rates = await batchFetchRates(requests, onProgress);
+
+    // Apply conversions
+    let converted = 0;
+    for (const p of toConvert) {
+      const rateKey = `${p.currency}_${preferredCurrency}_${extractDate(p.purchaseDate)}`;
+      const rate = rates.get(rateKey);
+      if (rate !== undefined) {
+        const convertedPrice = Math.round(p.price * rate * 100) / 100;
+        await db.purchases.update(p.id, {
+          convertedPrice,
+          convertedCurrency: preferredCurrency,
+        } as Record<string, unknown>);
+        converted++;
+      }
+    }
+
+    console.info('[Purchases] Rebuilt', converted, 'converted prices for', preferredCurrency);
+    return converted;
   },
 }));

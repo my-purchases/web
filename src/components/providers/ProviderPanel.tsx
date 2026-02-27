@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '@/db';
 import { getAllProviders, getProvider } from '@/providers';
-import { useInvitationStore, usePurchaseStore } from '@/stores';
+import { useInvitationStore, usePurchaseStore, useSettingsStore } from '@/stores';
 import type { ImportProgress, ImportResult } from '@/stores/purchaseStore';
 import { syncProvider } from '@/db/sync';
 import { buildAuthorizationUrl as buildAllegroAuthUrl } from '@/providers/allegro/api';
@@ -11,7 +11,9 @@ import { generatePkce, generateState as generateAllegroState, saveCodeVerifier, 
 import { buildAuthorizationUrl as buildOlxAuthUrl } from '@/providers/olx/api';
 import { generateState as generateOlxState, saveState as saveOlxState } from '@/providers/olx/state';
 import { Button } from '@/components/common';
+import { CurrencyConversionProgress } from '@/components/currency';
 import { tracker, AnalyticsEvents } from '@/analytics';
+import type { ConversionProgress } from '@/services/currencyService';
 import {
   RefreshCw,
   Upload,
@@ -30,7 +32,8 @@ import {
 export function ProviderPanel() {
   const { t } = useTranslation();
   const { invitation } = useInvitationStore();
-  const { addPurchases } = usePurchaseStore();
+  const { addPurchases, convertPurchases } = usePurchaseStore();
+  const { preferredCurrency } = useSettingsStore();
   const providers = getAllProviders();
   const syncStates = useLiveQuery(() => db.syncState.toArray(), []);
 
@@ -45,6 +48,9 @@ export function ProviderPanel() {
   const [importingProviderId, setImportingProviderId] = useState<string | null>(null);
   const [importResult, setImportResult] = useState<ImportResult | null>(null);
   const [importResultProvider, setImportResultProvider] = useState<string | null>(null);
+
+  // Currency conversion after import
+  const [conversionProgress, setConversionProgress] = useState<ConversionProgress | null>(null);
 
   const handleSync = async (providerId: string) => {
     setSyncingIds((prev) => new Set(prev).add(providerId));
@@ -118,9 +124,25 @@ export function ProviderPanel() {
         setImportProgress({ ...progress });
       });
 
-      // Clear progress, show summary
-      setImportProgress(null);
-      setImportingProviderId(null);
+      // Convert newly imported purchases if preferred currency is set
+      if (preferredCurrency && (result.added > 0 || result.updated > 0)) {
+        setImportProgress(null);
+        setImportingProviderId(null);
+        setConversionProgress({ total: 0, fetched: 0, cached: 0 });
+
+        try {
+          await convertPurchases(preferredCurrency, (progress) => {
+            setConversionProgress({ ...progress });
+          });
+        } catch (error) {
+          console.error('[ProviderPanel] Post-import conversion failed:', error);
+        }
+      } else {
+        setImportProgress(null);
+        setImportingProviderId(null);
+      }
+
+      // Show summary
       setImportResult(result);
       setImportResultProvider(currentProviderId);
 
@@ -160,7 +182,7 @@ export function ProviderPanel() {
       <input
         ref={fileRef}
         type="file"
-        accept=".json,.csv"
+        accept=".json,.csv,.xlsx"
         onChange={handleFileImport}
         className="hidden"
       />
@@ -433,6 +455,13 @@ export function ProviderPanel() {
           </div>
         </div>
       )}
+
+      {/* Currency Conversion Progress */}
+      <CurrencyConversionProgress
+        progress={conversionProgress}
+        targetCurrency={preferredCurrency ?? ''}
+        onClose={() => setConversionProgress(null)}
+      />
     </div>
   );
 }

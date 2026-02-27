@@ -119,7 +119,9 @@
     "provider": "Dostawca",
     "viewOriginal": "Zobacz oryginalne ogłoszenie",
     "deleteSelected": "Usuń zaznaczone",
-    "deleteSelectedConfirm": "Czy na pewno chcesz usunąć {{count}} zaznaczonych zakupów? Tej operacji nie można cofnąć."
+    "deleteSelectedConfirm": "Czy na pewno chcesz usunąć {{count}} zaznaczonych zakupów? Tej operacji nie można cofnąć.",
+    "selectAll": "Zaznacz wszystko",
+    "deselectAll": "Odznacz wszystko"
   },
   "tags": {
     "title": "Tagi",
@@ -232,6 +234,22 @@
     "cookiesDescription": "My Resources używa localStorage przeglądarki do zapisywania preferencji językowych i ustawień zaproszeń. IndexedDB służy do przechowywania danych zakupów. Nie używamy ciasteczek śledzących.",
     "contact": "Kontakt",
     "contactDescription": "W przypadku pytań dotyczących tej polityki prywatności, prosimy o otwarcie zgłoszenia w naszym repozytorium GitHub."
+  },
+  "currency": {
+    "title": "Waluta",
+    "setupTitle": "Wybierz swoją walutę",
+    "setupDescription": "Wybierz preferowaną walutę do przeliczania cen. Zakupy w innych walutach zostaną automatycznie przeliczone na podstawie historycznych kursów wymiany.",
+    "searchCurrency": "Szukaj waluty...",
+    "setCurrency": "Ustaw walutę",
+    "changeCurrency": "Zmień",
+    "settingsDescription": "Ustaw preferowaną walutę, aby automatycznie przeliczać ceny z różnych walut na podstawie historycznych kursów wymiany.",
+    "convertingTitle": "Przeliczanie cen",
+    "convertingDescription": "Pobieranie kursów wymiany i przeliczanie cen na {{currency}}...",
+    "conversionComplete": "Przeliczanie zakończone",
+    "conversionCompleteDescription": "Wszystkie ceny zostały przeliczone na {{currency}}.",
+    "ratesFetched": "kursy",
+    "fromApi": "Z API",
+    "fromCache": "Z pamięci"
   },
   "language": {
     "en": "English",

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import type { Purchase } from '@/db';
 import { usePurchaseStore } from '@/stores';
+import { useSettingsStore } from '@/stores';
 import { formatDate, formatCurrency } from '@/utils';
 import { ExternalLink, Check, Tag } from 'lucide-react';
 import { TagAssigner } from '@/components/tags/TagAssigner';
@@ -17,8 +18,15 @@ interface PurchaseCardProps {
 export function PurchaseCard({ purchase, showTagAssigner = true, tagMode, isTagged, onTagToggle }: PurchaseCardProps) {
   const { t } = useTranslation();
   const { selectedPurchaseIds, toggleSelection } = usePurchaseStore();
+  const { preferredCurrency } = useSettingsStore();
   const isSelected = selectedPurchaseIds.has(purchase.id);
   const isTagMode = tagMode?.active && onTagToggle;
+
+  const showConverted =
+    preferredCurrency &&
+    purchase.convertedPrice !== undefined &&
+    purchase.convertedCurrency === preferredCurrency &&
+    purchase.currency !== preferredCurrency;
 
   const handleCardClick = () => {
     if (isTagMode) {
@@ -84,9 +92,22 @@ export function PurchaseCard({ purchase, showTagAssigner = true, tagMode, isTagg
             <h3 className="text-sm font-medium text-gray-900 dark:text-white line-clamp-2">
               {purchase.title}
             </h3>
-            <span className="flex-shrink-0 text-sm font-semibold text-gray-900 dark:text-white">
-              {formatCurrency(purchase.price, purchase.currency)}
-            </span>
+            <div className="flex-shrink-0 text-right">
+              {showConverted ? (
+                <>
+                  <span className="block text-sm font-semibold text-gray-900 dark:text-white">
+                    {formatCurrency(purchase.convertedPrice!, purchase.convertedCurrency!)}
+                  </span>
+                  <span className="block text-xs text-gray-400 dark:text-gray-500">
+                    {formatCurrency(purchase.price, purchase.currency)}
+                  </span>
+                </>
+              ) : (
+                <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                  {formatCurrency(purchase.price, purchase.currency)}
+                </span>
+              )}
+            </div>
           </div>
 
           <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-gray-500 dark:text-gray-400">

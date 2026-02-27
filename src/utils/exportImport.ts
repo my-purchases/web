@@ -1,5 +1,5 @@
 import { db } from '@/db';
-import type { Purchase, PurchaseGroup, TagGroup, TagAssignment } from '@/db';
+import type { Purchase, PurchaseGroup, TagGroup, TagAssignment, CurrencyRate } from '@/db';
 import { tracker, AnalyticsEvents } from '@/analytics';
 import { downloadJson } from '@/utils';
 
@@ -12,9 +12,11 @@ export interface ExportData {
   purchaseGroups?: PurchaseGroup[];
   tagGroups?: TagGroup[];
   tagAssignments?: TagAssignment[];
+  currencyRates?: CurrencyRate[];
   settings?: {
     language: string;
     theme: string;
+    preferredCurrency?: string;
   };
 }
 
@@ -38,7 +40,8 @@ export async function exportData(options: ExportOptions): Promise<ExportData> {
 
   if (options.purchases) {
     data.purchases = await db.purchases.toArray();
-    console.info('[Export] Purchases:', data.purchases.length);
+    data.currencyRates = await db.currencyRates.toArray();
+    console.info('[Export] Purchases:', data.purchases.length, 'Currency rates:', data.currencyRates.length);
   }
 
   if (options.groups) {
@@ -56,6 +59,7 @@ export async function exportData(options: ExportOptions): Promise<ExportData> {
     data.settings = {
       language: localStorage.getItem('my-purchases-language') ?? 'en',
       theme: localStorage.getItem('my-purchases-theme') ?? 'system',
+      preferredCurrency: localStorage.getItem('my-purchases-currency') ?? undefined,
     };
   }
 
@@ -78,6 +82,7 @@ export interface ImportResult {
   groupsImported: number;
   tagGroupsImported: number;
   tagAssignmentsImported: number;
+  currencyRatesImported: number;
 }
 
 export function validateExportData(data: unknown): data is ExportData {
@@ -98,6 +103,7 @@ export async function importData(
     groupsImported: 0,
     tagGroupsImported: 0,
     tagAssignmentsImported: 0,
+    currencyRatesImported: 0,
   };
 
   if (mode === 'overwrite') {
@@ -106,6 +112,7 @@ export async function importData(
     await db.purchaseGroups.clear();
     await db.tagGroups.clear();
     await db.tagAssignments.clear();
+    await db.currencyRates.clear();
   }
 
   if (data.purchases?.length) {
@@ -172,12 +179,31 @@ export async function importData(
     console.info('[Import] Tag assignments imported:', result.tagAssignmentsImported);
   }
 
+  if (data.currencyRates?.length) {
+    if (mode === 'merge') {
+      for (const rate of data.currencyRates) {
+        const existing = await db.currencyRates.get(rate.id);
+        if (!existing) {
+          await db.currencyRates.add(rate);
+          result.currencyRatesImported++;
+        }
+      }
+    } else {
+      await db.currencyRates.bulkAdd(data.currencyRates);
+      result.currencyRatesImported = data.currencyRates.length;
+    }
+    console.info('[Import] Currency rates imported:', result.currencyRatesImported);
+  }
+
   if (data.settings) {
     if (data.settings.language) {
       localStorage.setItem('my-purchases-language', data.settings.language);
     }
     if (data.settings.theme) {
       localStorage.setItem('my-purchases-theme', data.settings.theme);
+    }
+    if (data.settings.preferredCurrency) {
+      localStorage.setItem('my-purchases-currency', data.settings.preferredCurrency);
     }
     console.info('[Import] Settings imported');
   }
