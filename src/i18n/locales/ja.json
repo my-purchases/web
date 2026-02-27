@@ -97,7 +97,9 @@
       "totalProcessed": "処理合計",
       "newlyAdded": "新規インポート",
       "alreadyExisted": "既存（スキップ）",
-      "updatedItems": "更新済み（データ変更）"
+      "updatedItems": "更新済み（データ変更）",
+      "enriched": "補完",
+      "enrichedItems": "補完（不足データを追加）"
     }
   },
   "purchases": {

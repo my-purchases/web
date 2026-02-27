@@ -137,6 +137,7 @@ describe('mapRowToPurchase', () => {
     expect(p!.price).toBeCloseTo(110.65, 2); // Total Amount, not Unit Price
     expect(p!.providerItemId).toBe('B00ARPM4XY');
     expect(p!.originalUrl).toBe('https://www.amazon.es/dp/B00ARPM4XY');
+    expect(p!.imageUrl).toBe('https://m.media-amazon.com/images/P/B00ARPM4XY.jpg');
   });
 
   it('maps a PLN row from Amazon.pl — uses Total Amount', () => {
@@ -215,6 +216,18 @@ describe('mapRowToPurchase', () => {
   it('returns null when orderId is missing', () => {
     const row = { ...rows[0], 'Order ID': '' };
     expect(mapRowToPurchase(row, 99)).toBeNull();
+  });
+
+  it('generates imageUrl from ASIN', () => {
+    const p = mapRowToPurchase(rows[1], 1);
+    expect(p!.imageUrl).toBe('https://m.media-amazon.com/images/P/B01JRUH0CY.jpg');
+  });
+
+  it('sets imageUrl to undefined when ASIN is missing', () => {
+    const row = { ...rows[0], 'ASIN': '' };
+    const p = mapRowToPurchase(row, 99);
+    expect(p).not.toBeNull();
+    expect(p!.imageUrl).toBeUndefined();
   });
 
   it('sets importedAt timestamp', () => {

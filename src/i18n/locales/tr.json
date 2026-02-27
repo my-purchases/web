@@ -97,7 +97,9 @@
       "totalProcessed": "Toplam işlenen",
       "newlyAdded": "Yeni içe aktarılan",
       "alreadyExisted": "Zaten mevcut (atlandı)",
-      "updatedItems": "Güncellendi (değişen veriler)"
+      "updatedItems": "Güncellendi (değişen veriler)",
+      "enriched": "Zenginleştirildi",
+      "enrichedItems": "Zenginleştirildi (eksik veriler eklendi)"
     }
   },
   "purchases": {

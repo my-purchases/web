@@ -97,7 +97,9 @@
       "totalProcessed": "कुल संसाधित",
       "newlyAdded": "नया आयातित",
       "alreadyExisted": "पहले से मौजूद (छोड़ दिया गया)",
-      "updatedItems": "अद्यतन किया गया (बदला हुआ डेटा)"
+      "updatedItems": "अद्यतन किया गया (बदला हुआ डेटा)",
+      "enriched": "समृद्ध",
+      "enrichedItems": "समृद्ध (गायब डेटा जोड़ा गया)"
     }
   },
   "purchases": {

@@ -27,6 +27,7 @@ import {
   SkipForward,
   PlusCircle,
   RefreshCcw,
+  ImagePlus,
 } from 'lucide-react';
 
 export function ProviderPanel() {
@@ -110,14 +111,14 @@ export function ProviderPanel() {
 
       // Start progress tracking
       setImportingProviderId(currentProviderId);
-      setImportProgress({ total: 0, processed: 0, added: 0, skipped: 0, updated: 0 });
+      setImportProgress({ total: 0, processed: 0, added: 0, skipped: 0, updated: 0, enriched: 0 });
       setErrors((prev) => ({ ...prev, [currentProviderId]: '' }));
       setSuccessMessages((prev) => ({ ...prev, [currentProviderId]: '' }));
 
       const purchases = await provider.parseImportFile(file);
 
       // Update progress with total from parsed file
-      setImportProgress({ total: purchases.length, processed: 0, added: 0, skipped: 0, updated: 0 });
+      setImportProgress({ total: purchases.length, processed: 0, added: 0, skipped: 0, updated: 0, enriched: 0 });
 
       // Add purchases with progress callback
       const result = await addPurchases(purchases, (progress) => {
@@ -151,6 +152,7 @@ export function ProviderPanel() {
         added: result.added,
         skipped: result.skipped,
         updated: result.updated,
+        enriched: result.enriched,
       });
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Import failed';
@@ -348,7 +350,7 @@ export function ProviderPanel() {
               </div>
 
               {/* Live stats */}
-              <div className="mt-3 flex gap-4 text-xs text-gray-500 dark:text-gray-400">
+              <div className="mt-3 flex flex-wrap gap-4 text-xs text-gray-500 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <PlusCircle className="h-3 w-3 text-green-500" />
                   {t('providers.import.added')}: {importProgress.added}
@@ -360,6 +362,10 @@ export function ProviderPanel() {
                 <span className="flex items-center gap-1">
                   <RefreshCcw className="h-3 w-3 text-blue-500" />
                   {t('providers.import.updated')}: {importProgress.updated}
+                </span>
+                <span className="flex items-center gap-1">
+                  <ImagePlus className="h-3 w-3 text-purple-500" />
+                  {t('providers.import.enriched')}: {importProgress.enriched}
                 </span>
               </div>
             </div>
@@ -436,6 +442,18 @@ export function ProviderPanel() {
                   </span>
                   <span className="font-semibold text-blue-700 dark:text-blue-300">
                     {importResult.updated}
+                  </span>
+                </div>
+              )}
+
+              {importResult.enriched > 0 && (
+                <div className="flex items-center justify-between rounded-lg bg-purple-50 px-4 py-3 dark:bg-purple-900/20">
+                  <span className="flex items-center gap-2 text-sm text-purple-700 dark:text-purple-300">
+                    <ImagePlus className="h-4 w-4" />
+                    {t('providers.import.enrichedItems')}
+                  </span>
+                  <span className="font-semibold text-purple-700 dark:text-purple-300">
+                    {importResult.enriched}
                   </span>
                 </div>
               )}

@@ -136,6 +136,11 @@ export function mapRowToPurchase(row: Record<string, string>, index: number): Pu
     originalUrl = `https://${domain}/dp/${asin}`;
   }
 
+  // Build product image URL from ASIN (Amazon media CDN)
+  const imageUrl = asin
+    ? `https://m.media-amazon.com/images/P/${asin}.jpg`
+    : undefined;
+
   return {
     id,
     providerId: PROVIDER_ID,
@@ -144,6 +149,7 @@ export function mapRowToPurchase(row: Record<string, string>, index: number): Pu
     price: totalAmount || unitPrice * quantity,
     currency,
     purchaseDate: dateStr ? new Date(dateStr).toISOString() : new Date().toISOString(),
+    imageUrl,
     categoryName: undefined,
     originalUrl,
     rawData: {

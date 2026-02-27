@@ -97,7 +97,9 @@
       "totalProcessed": "Totaal verwerkt",
       "newlyAdded": "Nieuw geïmporteerd",
       "alreadyExisted": "Bestond al (overgeslagen)",
-      "updatedItems": "Bijgewerkt (gewijzigde gegevens)"
+      "updatedItems": "Bijgewerkt (gewijzigde gegevens)",
+      "enriched": "Verrijkt",
+      "enrichedItems": "Verrijkt (ontbrekende gegevens toegevoegd)"
     }
   },
   "purchases": {

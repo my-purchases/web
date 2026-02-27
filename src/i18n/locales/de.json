@@ -97,7 +97,9 @@
       "totalProcessed": "Insgesamt verarbeitet",
       "newlyAdded": "Neu importiert",
       "alreadyExisted": "Bereits vorhanden (übersprungen)",
-      "updatedItems": "Aktualisiert (geänderte Daten)"
+      "updatedItems": "Aktualisiert (geänderte Daten)",
+      "enriched": "Ergänzt",
+      "enrichedItems": "Ergänzt (fehlende Daten hinzugefügt)"
     }
   },
   "purchases": {

@@ -97,7 +97,9 @@
       "totalProcessed": "총 처리",
       "newlyAdded": "새로 가져옴",
       "alreadyExisted": "이미 존재함 (건너뜀)",
-      "updatedItems": "업데이트됨 (데이터 변경)"
+      "updatedItems": "업데이트됨 (데이터 변경)",
+      "enriched": "보강",
+      "enrichedItems": "보강됨 (누락 데이터 추가)"
     }
   },
   "purchases": {

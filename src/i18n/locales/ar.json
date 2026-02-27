@@ -97,7 +97,9 @@
       "totalProcessed": "إجمالي المعالج",
       "newlyAdded": "مستورد حديثاً",
       "alreadyExisted": "موجود مسبقاً (تم تخطيه)",
-      "updatedItems": "تم التحديث (بيانات متغيرة)"
+      "updatedItems": "تم التحديث (بيانات متغيرة)",
+      "enriched": "مُثرى",
+      "enrichedItems": "مُثرى (تمت إضافة بيانات مفقودة)"
     }
   },
   "purchases": {

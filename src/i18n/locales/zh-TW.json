@@ -97,7 +97,9 @@
       "totalProcessed": "總計處理",
       "newlyAdded": "新匯入",
       "alreadyExisted": "已存在（已跳過）",
-      "updatedItems": "已更新（資料變更）"
+      "updatedItems": "已更新（資料變更）",
+      "enriched": "補充",
+      "enrichedItems": "已補充（新增缺失資料）"
     }
   },
   "purchases": {

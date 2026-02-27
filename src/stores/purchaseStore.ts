@@ -13,12 +13,14 @@ export interface ImportProgress {
   added: number;
   skipped: number;
   updated: number;
+  enriched: number;
 }
 
 export interface ImportResult {
   added: number;
   skipped: number;
   updated: number;
+  enriched: number;
   total: number;
 }
 
@@ -153,6 +155,7 @@ export const usePurchaseStore = create<PurchaseState>((set, get) => ({
     let added = 0;
     let skipped = 0;
     let updated = 0;
+    let enriched = 0;
 
     // Build a set of existing [providerId+providerItemId] for fast dedup
     const providerIds = [...new Set(purchases.map((p) => p.providerId))];
@@ -179,7 +182,28 @@ export const usePurchaseStore = create<PurchaseState>((set, get) => ({
           existing.currency === purchase.currency &&
           existing.purchaseDate === purchase.purchaseDate
         ) {
-          skipped++;
+          // Core data identical — check if new import can fill in missing fields
+          const fieldsToEnrich: Record<string, unknown> = {};
+          if (!existing.imageUrl && purchase.imageUrl) {
+            fieldsToEnrich.imageUrl = purchase.imageUrl;
+          }
+          if (!existing.categoryName && purchase.categoryName) {
+            fieldsToEnrich.categoryName = purchase.categoryName;
+          }
+          if (!existing.originalUrl && purchase.originalUrl) {
+            fieldsToEnrich.originalUrl = purchase.originalUrl;
+          }
+          if (!existing.rawData && purchase.rawData) {
+            fieldsToEnrich.rawData = purchase.rawData;
+          }
+
+          if (Object.keys(fieldsToEnrich).length > 0) {
+            await db.purchases.update(existingId, fieldsToEnrich);
+            enriched++;
+            console.debug('[Purchases] Enriched existing:', existingId, Object.keys(fieldsToEnrich));
+          } else {
+            skipped++;
+          }
         } else {
           await db.purchases.update(existingId, {
             title: purchase.title,
@@ -203,11 +227,11 @@ export const usePurchaseStore = create<PurchaseState>((set, get) => ({
 
       // Report progress every 50 items or on last item
       if (onProgress && (i % 50 === 0 || i === purchases.length - 1)) {
-        onProgress({ total, processed: i + 1, added, skipped, updated });
+        onProgress({ total, processed: i + 1, added, skipped, updated, enriched });
       }
     }
-    console.info('[Purchases] Added:', added, 'Updated:', updated, 'Skipped:', skipped);
-    return { added, skipped, updated, total };
+    console.info('[Purchases] Added:', added, 'Updated:', updated, 'Enriched:', enriched, 'Skipped:', skipped);
+    return { added, skipped, updated, enriched, total };
   },
 
   deletePurchase: async (id) => {

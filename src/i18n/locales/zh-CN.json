@@ -97,7 +97,9 @@
       "totalProcessed": "总计处理",
       "newlyAdded": "新导入",
       "alreadyExisted": "已存在（已跳过）",
-      "updatedItems": "已更新（数据变更）"
+      "updatedItems": "已更新（数据变更）",
+      "enriched": "补充",
+      "enrichedItems": "已补充（添加了缺失数据）"
     }
   },
   "purchases": {
