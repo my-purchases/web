@@ -123,7 +123,12 @@
     "deleteSelected": "删除所选",
     "deleteSelectedConfirm": "确定要删除{{count}}个选中的购买记录吗？此操作无法撤销。",
     "selectAll": "全选",
-    "deselectAll": "取消全选"
+    "deselectAll": "取消全选",
+    "calculateCosts": "计算费用",
+    "costsSummary": {
+      "selectedItems": "已选商品",
+      "totalConverted": "合计（已换算）"
+    }
   },
   "tags": {
     "title": "标签",

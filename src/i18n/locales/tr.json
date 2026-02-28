@@ -123,7 +123,12 @@
     "deleteSelected": "Seçilenleri sil",
     "deleteSelectedConfirm": "{{count}} seçili satın alımı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
     "selectAll": "Tümünü seç",
-    "deselectAll": "Tüm seçimi kaldır"
+    "deselectAll": "Tüm seçimi kaldır",
+    "calculateCosts": "Maliyetleri hesapla",
+    "costsSummary": {
+      "selectedItems": "Seçilen ürünler",
+      "totalConverted": "Toplam (dönüştürülmüş)"
+    }
   },
   "tags": {
     "title": "Etiketler",

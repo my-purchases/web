@@ -123,7 +123,12 @@
     "deleteSelected": "Elimina selezionati",
     "deleteSelectedConfirm": "Sei sicuro di voler eliminare {{count}} acquisto/i selezionato/i? Questa azione non può essere annullata.",
     "selectAll": "Seleziona tutto",
-    "deselectAll": "Deseleziona tutto"
+    "deselectAll": "Deseleziona tutto",
+    "calculateCosts": "Calcola costi",
+    "costsSummary": {
+      "selectedItems": "Articoli selezionati",
+      "totalConverted": "Totale (convertito)"
+    }
   },
   "tags": {
     "title": "Tag",

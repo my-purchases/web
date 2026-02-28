@@ -123,7 +123,12 @@
     "deleteSelected": "নির্বাচিত মুছুন",
     "deleteSelectedConfirm": "আপনি কি {{count}}টি নির্বাচিত ক্রয় মুছে ফেলতে চান? এই ক্রিয়াটি পূর্বাবস্থায় ফেরানো যাবে না।",
     "selectAll": "সব নির্বাচন করুন",
-    "deselectAll": "সব নির্বাচন বাতিল করুন"
+    "deselectAll": "সব নির্বাচন বাতিল করুন",
+    "calculateCosts": "খরচ গণনা করুন",
+    "costsSummary": {
+      "selectedItems": "নির্বাচিত আইটেম",
+      "totalConverted": "মোট (রূপান্তরিত)"
+    }
   },
   "tags": {
     "title": "ট্যাগ",

@@ -121,7 +121,14 @@
     "provider": "プロバイダー",
     "viewOriginal": "元の出品を表示",
     "deleteSelected": "選択を削除",
-    "deleteSelectedConfirm": "選択した{{count}}件の購入を削除してもよろしいですか？この操作は元に戻せません。"
+    "deleteSelectedConfirm": "選択した{{count}}件の購入を削除してもよろしいですか？この操作は元に戻せません。",
+    "selectAll": "すべて選択",
+    "deselectAll": "すべて選択解除",
+    "calculateCosts": "費用を計算",
+    "costsSummary": {
+      "selectedItems": "選択したアイテム",
+      "totalConverted": "合計（換算済み）"
+    }
   },
   "tags": {
     "title": "タグ",

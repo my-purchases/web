@@ -123,7 +123,12 @@
     "deleteSelected": "चयनित हटाएं",
     "deleteSelectedConfirm": "क्या आप वाकई {{count}} चयनित खरीदारी हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती।",
     "selectAll": "सभी चुनें",
-    "deselectAll": "सभी अचयनित करें"
+    "deselectAll": "सभी अचयनित करें",
+    "calculateCosts": "लागत की गणना करें",
+    "costsSummary": {
+      "selectedItems": "चयनित आइटम",
+      "totalConverted": "कुल (परिवर्तित)"
+    }
   },
   "tags": {
     "title": "टैग",

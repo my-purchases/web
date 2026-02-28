@@ -123,7 +123,12 @@
     "deleteSelected": "Geselecteerde verwijderen",
     "deleteSelectedConfirm": "Weet je zeker dat je {{count}} geselecteerde aankoop(en) wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
     "selectAll": "Alles selecteren",
-    "deselectAll": "Alles deselecteren"
+    "deselectAll": "Alles deselecteren",
+    "calculateCosts": "Kosten berekenen",
+    "costsSummary": {
+      "selectedItems": "Geselecteerde artikelen",
+      "totalConverted": "Totaal (omgerekend)"
+    }
   },
   "tags": {
     "title": "Tags",

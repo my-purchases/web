@@ -123,7 +123,12 @@
     "deleteSelected": "Ausgewählte löschen",
     "deleteSelectedConfirm": "Möchten Sie wirklich {{count}} ausgewählte Käufe löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
     "selectAll": "Alle auswählen",
-    "deselectAll": "Auswahl aufheben"
+    "deselectAll": "Auswahl aufheben",
+    "calculateCosts": "Kosten berechnen",
+    "costsSummary": {
+      "selectedItems": "Ausgewählte Artikel",
+      "totalConverted": "Gesamt (umgerechnet)"
+    }
   },
   "tags": {
     "title": "Tags",

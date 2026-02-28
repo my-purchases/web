@@ -123,7 +123,12 @@
     "deleteSelected": "Delete selected",
     "deleteSelectedConfirm": "Are you sure you want to delete {{count}} selected purchase(s)? This action cannot be undone.",
     "selectAll": "Select all",
-    "deselectAll": "Deselect all"
+    "deselectAll": "Deselect all",
+    "calculateCosts": "Calculate costs",
+    "costsSummary": {
+      "selectedItems": "Selected items",
+      "totalConverted": "Total (converted)"
+    }
   },
   "tags": {
     "title": "Tags",

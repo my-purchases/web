@@ -125,7 +125,12 @@
     "totalItems_few": "{{count}} товара",
     "totalItems_many": "{{count}} товаров",
     "selectAll": "Выбрать все",
-    "deselectAll": "Снять выделение"
+    "deselectAll": "Снять выделение",
+    "calculateCosts": "Рассчитать стоимость",
+    "costsSummary": {
+      "selectedItems": "Выбранные товары",
+      "totalConverted": "Итого (конвертировано)"
+    }
   },
   "tags": {
     "title": "Теги",

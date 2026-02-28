@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { PurchaseList, PurchaseFilters, CreateGroupModal } from '@/components/purchases';
+import { PurchaseList, PurchaseFilters, CreateGroupModal, CalculateCostsModal } from '@/components/purchases';
 import { ProviderPanel } from '@/components/providers';
 import { usePurchaseStore, useSettingsStore } from '@/stores';
 import { Button } from '@/components/common';
@@ -9,7 +9,7 @@ import { CurrencySetupDialog, CurrencyConversionProgress } from '@/components/cu
 import { TagAssignmentBar, useTagToggle } from '@/components/tags/TagAssignmentBar';
 import type { TagAssignmentModeState } from '@/components/tags/TagAssignmentBar';
 import type { ConversionProgress } from '@/services/currencyService';
-import { PackagePlus, Trash2 } from 'lucide-react';
+import { PackagePlus, Trash2, Calculator } from 'lucide-react';
 import { tracker } from '@/analytics';
 import { useEffect } from 'react';
 import { db } from '@/db';
@@ -19,6 +19,7 @@ export default function PurchasesPage() {
   const { selectedPurchaseIds, deleteSelectedPurchases, convertPurchases } = usePurchaseStore();
   const { preferredCurrency, setPreferredCurrency } = useSettingsStore();
   const [showGroupModal, setShowGroupModal] = useState(false);
+  const [showCostsModal, setShowCostsModal] = useState(false);
   const [showCurrencySetup, setShowCurrencySetup] = useState(false);
   const [conversionProgress, setConversionProgress] = useState<ConversionProgress | null>(null);
   const [tagMode, setTagMode] = useState<TagAssignmentModeState>({
@@ -68,6 +69,15 @@ export default function PurchasesPage() {
           <TagAssignmentBar mode={tagMode} onModeChange={setTagMode} />
           {selectedPurchaseIds.size >= 1 && (
             <Button
+              variant="secondary"
+              onClick={() => setShowCostsModal(true)}
+            >
+              <Calculator className="h-4 w-4" />
+              {t('purchases.calculateCosts')} ({selectedPurchaseIds.size})
+            </Button>
+          )}
+          {selectedPurchaseIds.size >= 1 && (
+            <Button
               variant="danger"
               onClick={() => {
                 if (window.confirm(t('purchases.deleteSelectedConfirm', { count: selectedPurchaseIds.size }))) {
@@ -98,6 +108,12 @@ export default function PurchasesPage() {
       <CreateGroupModal
         open={showGroupModal}
         onClose={() => setShowGroupModal(false)}
+      />
+
+      <CalculateCostsModal
+        open={showCostsModal}
+        onClose={() => setShowCostsModal(false)}
+        selectedIds={selectedPurchaseIds}
       />
 
       <CurrencySetupDialog

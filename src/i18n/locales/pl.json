@@ -125,7 +125,12 @@
     "deleteSelected": "Usuń zaznaczone",
     "deleteSelectedConfirm": "Czy na pewno chcesz usunąć {{count}} zaznaczonych zakupów? Tej operacji nie można cofnąć.",
     "selectAll": "Zaznacz wszystko",
-    "deselectAll": "Odznacz wszystko"
+    "deselectAll": "Odznacz wszystko",
+    "calculateCosts": "Oblicz koszty",
+    "costsSummary": {
+      "selectedItems": "Wybrane pozycje",
+      "totalConverted": "Suma (przeliczona)"
+    }
   },
   "tags": {
     "title": "Tagi",

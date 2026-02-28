@@ -123,7 +123,12 @@
     "deleteSelected": "선택 삭제",
     "deleteSelectedConfirm": "선택한 {{count}}개의 구매를 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.",
     "selectAll": "모두 선택",
-    "deselectAll": "모두 선택 해제"
+    "deselectAll": "모두 선택 해제",
+    "calculateCosts": "비용 계산",
+    "costsSummary": {
+      "selectedItems": "선택한 항목",
+      "totalConverted": "합계 (환산)"
+    }
   },
   "tags": {
     "title": "태그",

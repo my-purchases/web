@@ -123,7 +123,12 @@
     "deleteSelected": "Eliminar seleccionados",
     "deleteSelectedConfirm": "¿Estás seguro de que deseas eliminar {{count}} compra(s) seleccionada(s)? Esta acción no se puede deshacer.",
     "selectAll": "Seleccionar todo",
-    "deselectAll": "Deseleccionar todo"
+    "deselectAll": "Deseleccionar todo",
+    "calculateCosts": "Calcular costes",
+    "costsSummary": {
+      "selectedItems": "Artículos seleccionados",
+      "totalConverted": "Total (convertido)"
+    }
   },
   "tags": {
     "title": "Etiquetas",

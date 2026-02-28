@@ -126,7 +126,12 @@
     "totalItems_few": "{{count}} عناصر",
     "totalItems_many": "{{count}} عنصراً",
     "selectAll": "تحديد الكل",
-    "deselectAll": "إلغاء تحديد الكل"
+    "deselectAll": "إلغاء تحديد الكل",
+    "calculateCosts": "حساب التكاليف",
+    "costsSummary": {
+      "selectedItems": "العناصر المحددة",
+      "totalConverted": "الإجمالي (محوّل)"
+    }
   },
   "tags": {
     "title": "الوسوم",
