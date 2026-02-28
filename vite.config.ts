@@ -5,7 +5,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/web/',
+  base: '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -22,6 +22,6 @@ export default defineConfig(({ mode }) => ({
       : [],
   },
   server: {
-    allowedHosts: ['localhost-vite.mobulum.xyz','my-purchases.mobulum.xyz', 'my-purchases.github.io'],
+    allowedHosts: ['localhost-vite.mobulum.xyz','my-purchases.mobulum.com', 'my-purchases.github.io'],
   },
 }))

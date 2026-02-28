@@ -98,7 +98,7 @@ Credentials are stored in localStorage and passed to providers at sync time.
 
 ## Build & Deployment
 
-- **Vite** builds the SPA with `base: '/web/'` for GitHub Pages
+- **Vite** builds the SPA with `base: '/'` for GitHub Pages
 - **esbuild `pure`** strips `console.log/info/debug/trace` in production builds
 - **GitHub Actions** runs `npm ci && npm run build` on push to `main`, then deploys to GitHub Pages
 - **Code splitting** — Pages are lazy-loaded via `React.lazy()` + `Suspense`
