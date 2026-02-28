@@ -29,7 +29,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/web">
+    <BrowserRouter basename="/">
       <Routes>
         <Route element={<Layout />}>
           <Route
