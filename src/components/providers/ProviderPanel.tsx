@@ -131,12 +131,19 @@ export function ProviderPanel() {
         setImportingProviderId(null);
         setConversionProgress({ total: 0, fetched: 0, cached: 0 });
 
+        let finalProgress: ConversionProgress = { total: 0, fetched: 0, cached: 0 };
         try {
           await convertPurchases(preferredCurrency, (progress) => {
-            setConversionProgress({ ...progress });
+            finalProgress = { ...progress };
+            setConversionProgress(finalProgress);
           });
         } catch (error) {
           console.error('[ProviderPanel] Post-import conversion failed:', error);
+        }
+
+        // Auto-close conversion modal if there was nothing to convert
+        if (finalProgress.total === 0) {
+          setConversionProgress(null);
         }
       } else {
         setImportProgress(null);
@@ -191,6 +198,7 @@ export function ProviderPanel() {
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {providers.map((provider) => {
+          const isDisabled = !!provider.meta.disabled;
           const isApi = provider.meta.type === 'api' || provider.meta.type === 'hybrid';
           const isImport = provider.meta.type === 'import' || provider.meta.type === 'hybrid';
           const hasCredentials = !!invitation?.providers[provider.meta.id];
@@ -205,102 +213,112 @@ export function ProviderPanel() {
           return (
             <div
               key={provider.meta.id}
-              className="rounded-lg border border-gray-200 p-4 dark:border-gray-800"
+              className={`rounded-lg border p-4 ${
+                isDisabled
+                  ? 'border-gray-200 bg-gray-50 opacity-60 dark:border-gray-800 dark:bg-gray-900/50'
+                  : 'border-gray-200 dark:border-gray-800'
+              }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {isApi ? (
-                    <Wifi className="h-4 w-4 text-blue-500" />
+                    <Wifi className={`h-4 w-4 ${isDisabled ? 'text-gray-300 dark:text-gray-600' : 'text-blue-500'}`} />
                   ) : (
-                    <HardDrive className="h-4 w-4 text-gray-400" />
+                    <HardDrive className={`h-4 w-4 ${isDisabled ? 'text-gray-300 dark:text-gray-600' : 'text-gray-400'}`} />
                   )}
-                  <span className="font-medium text-gray-900 dark:text-white">
+                  <span className={`font-medium ${isDisabled ? 'text-gray-400 dark:text-gray-500' : 'text-gray-900 dark:text-white'}`}>
                     {provider.meta.name}
                   </span>
                 </div>
-                {hasToken && isApi && (
+                {isDisabled ? (
+                  <span className="rounded-full bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400">
+                    {t('providers.comingSoon')}
+                  </span>
+                ) : hasToken && isApi ? (
                   <span className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
                     <CheckCircle className="h-3 w-3" />
                     {t('providers.connected')}
                   </span>
-                )}
+                ) : null}
               </div>
 
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              <p className={`mt-1 text-xs ${isDisabled ? 'text-gray-400 dark:text-gray-600' : 'text-gray-500 dark:text-gray-400'}`}>
                 {provider.meta.description}
               </p>
 
-              {syncState?.lastSyncAt && (
+              {!isDisabled && syncState?.lastSyncAt && (
                 <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">
                   {t('providers.lastSync')}: {new Date(syncState.lastSyncAt).toLocaleString()}
                 </p>
               )}
 
-              {error && (
+              {!isDisabled && error && (
                 <p className="mt-2 flex items-center gap-1 text-xs text-red-600 dark:text-red-400">
                   <AlertCircle className="h-3 w-3" />
                   {error}
                 </p>
               )}
 
-              {success && (
+              {!isDisabled && success && (
                 <p className="mt-2 flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
                   <CheckCircle className="h-3 w-3" />
                   {success}
                 </p>
               )}
 
-              <div className="mt-3 flex flex-wrap gap-2">
-                {canConnect && (
-                  <Button
-                    size="sm"
-                    onClick={async () => {
-                      if (provider.meta.id === 'allegro') {
-                        // Allegro: PKCE Authorization Code flow
-                        const { codeVerifier, codeChallenge } = await generatePkce();
-                        const state = generateAllegroState();
-                        saveCodeVerifier(codeVerifier);
-                        saveAllegroState(state);
-                        const url = buildAllegroAuthUrl(creds!, { codeChallenge, state });
-                        console.info('[ProviderPanel] Redirecting to Allegro OAuth (PKCE):', url);
-                        window.location.href = url;
-                      } else if (provider.meta.id === 'olx') {
-                        // OLX: Authorization Code flow (no PKCE, uses client_secret)
-                        const state = generateOlxState();
-                        saveOlxState(state);
-                        const url = buildOlxAuthUrl(creds!, { state });
-                        console.info('[ProviderPanel] Redirecting to OLX OAuth:', url);
-                        window.location.href = url;
-                      }
-                    }}
-                  >
-                    <LogIn className="h-3.5 w-3.5" />
-                    {t('providers.connect')}
-                  </Button>
-                )}
-                {isApi && hasToken && (
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => handleSync(provider.meta.id)}
-                    disabled={isSyncing}
-                    isLoading={isSyncing}
-                  >
-                    <RefreshCw className="h-3.5 w-3.5" />
-                    {t('providers.sync')}
-                  </Button>
-                )}
-                {isImport && (
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => startImport(provider.meta.id)}
-                  >
-                    <Upload className="h-3.5 w-3.5" />
-                    {t('providers.importData')}
-                  </Button>
-                )}
-              </div>
+              {!isDisabled && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {canConnect && (
+                    <Button
+                      size="sm"
+                      onClick={async () => {
+                        if (provider.meta.id === 'allegro') {
+                          // Allegro: PKCE Authorization Code flow
+                          const { codeVerifier, codeChallenge } = await generatePkce();
+                          const state = generateAllegroState();
+                          saveCodeVerifier(codeVerifier);
+                          saveAllegroState(state);
+                          const url = buildAllegroAuthUrl(creds!, { codeChallenge, state });
+                          console.info('[ProviderPanel] Redirecting to Allegro OAuth (PKCE):', url);
+                          window.location.href = url;
+                        } else if (provider.meta.id === 'olx') {
+                          // OLX: Authorization Code flow (no PKCE, uses client_secret)
+                          const state = generateOlxState();
+                          saveOlxState(state);
+                          const url = buildOlxAuthUrl(creds!, { state });
+                          console.info('[ProviderPanel] Redirecting to OLX OAuth:', url);
+                          window.location.href = url;
+                        }
+                      }}
+                    >
+                      <LogIn className="h-3.5 w-3.5" />
+                      {t('providers.connect')}
+                    </Button>
+                  )}
+                  {isApi && hasToken && (
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => handleSync(provider.meta.id)}
+                      disabled={isSyncing}
+                      isLoading={isSyncing}
+                    >
+                      <RefreshCw className="h-3.5 w-3.5" />
+                      {t('providers.sync')}
+                    </Button>
+                  )}
+                  {isImport && (
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => startImport(provider.meta.id)}
+                    >
+                      <Upload className="h-3.5 w-3.5" />
+                      {t('providers.importData')}
+                    </Button>
+                  )}
+                </div>
+              )}
             </div>
           );
         })}

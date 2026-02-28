@@ -17,7 +17,7 @@ export function PurchaseFilters() {
     setUntaggedFilter,
   } = usePurchaseStore();
 
-  const providers = getAllProviderMetas();
+  const providers = getAllProviderMetas().filter((p) => !p.disabled);
   const tagGroups = useLiveQuery(() => db.tagGroups.toArray(), []);
 
   const toggleProvider = (providerId: string) => {

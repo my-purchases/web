@@ -26,6 +26,7 @@ export const ebayProvider: PurchaseProvider = {
     supportedImportFormats: ['csv', 'json'],
     description: 'Import from eBay purchase history export',
     websiteUrl: 'https://ebay.com',
+    disabled: true,
   },
 
   async parseImportFile(file: File): Promise<Purchase[]> {

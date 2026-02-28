@@ -20,6 +20,7 @@ export function CurrencyConversionProgress({
   const done = progress.fetched + progress.cached;
   const percentage = progress.total > 0 ? Math.round((done / progress.total) * 100) : 0;
   const isComplete = progress.total > 0 && done >= progress.total;
+  const isNothingToConvert = progress.total === 0 && done === 0;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
@@ -73,8 +74,8 @@ export function CurrencyConversionProgress({
           </div>
         </div>
 
-        {/* Close button — shown only when conversion is complete */}
-        {isComplete && onClose && (
+        {/* Close button — shown when conversion is complete or nothing to convert */}
+        {(isComplete || isNothingToConvert) && onClose && (
           <div className="mt-5">
             <Button className="w-full" onClick={onClose}>
               {t('common.close')}

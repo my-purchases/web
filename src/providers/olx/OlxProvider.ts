@@ -28,6 +28,7 @@ export const olxProvider: PurchaseProvider = {
     supportedImportFormats: ['json'],
     description: 'OLX — buy & sell locally. Connect via OAuth or import JSON.',
     websiteUrl: 'https://olx.pl',
+    disabled: true,
   },
 
   isAuthenticated(credentials: ProviderCredentials): boolean {

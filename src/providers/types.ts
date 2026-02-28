@@ -22,6 +22,7 @@ export interface ProviderMeta {
   supportedImportFormats?: string[]; // e.g., ['csv', 'json']
   description?: string;
   websiteUrl?: string;
+  disabled?: boolean; // If true, provider is shown but greyed out (not yet available)
 }
 
 /**

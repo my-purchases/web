@@ -6,6 +6,7 @@ import { ebayProvider } from './ebay/EbayProvider';
 import { vintedProvider } from './vinted/VintedProvider';
 import { allegroLokalnieProvider } from './allegro-lokalnie/AllegroLokalnieProvider';
 import { aliexpressProvider } from './aliexpress/AliexpressProvider';
+import { temuProvider } from './temu/TemuProvider';
 
 // ─── Provider Registry ──────────────────────────────────────
 
@@ -15,14 +16,17 @@ function register(provider: PurchaseProvider): void {
   providers.set(provider.meta.id, provider);
 }
 
-// Register all providers
+// Register active providers first
 register(allegroProvider);
 register(amazonProvider);
+register(aliexpressProvider);
+register(temuProvider);
+
+// Register disabled providers last
 register(olxProvider);
 register(ebayProvider);
 register(vintedProvider);
 register(allegroLokalnieProvider);
-register(aliexpressProvider);
 
 /**
  * Get a provider by its ID

@@ -25,6 +25,7 @@ export const allegroLokalnieProvider: PurchaseProvider = {
     supportedImportFormats: ['json'],
     description: 'Import from Allegro Lokalnie data export or custom JSON',
     websiteUrl: 'https://allegrolokalnie.pl',
+    disabled: true,
   },
 
   async parseImportFile(file: File): Promise<Purchase[]> {

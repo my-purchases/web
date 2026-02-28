@@ -27,6 +27,7 @@ export const vintedProvider: PurchaseProvider = {
     supportedImportFormats: ['json'],
     description: 'Import from Vinted GDPR data export or custom JSON',
     websiteUrl: 'https://vinted.com',
+    disabled: true,
   },
 
   async parseImportFile(file: File): Promise<Purchase[]> {
