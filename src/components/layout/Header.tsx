@@ -2,11 +2,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
-import { ShoppingCart, Settings, Info, Shield, Package } from 'lucide-react';
+import { ShoppingCart, Settings, Info, Shield, Package, Chrome } from 'lucide-react';
 
 const navItems = [
   { path: '/', icon: ShoppingCart, labelKey: 'nav.purchases' },
   { path: '/settings', icon: Settings, labelKey: 'nav.settings' },
+  { path: '/extension', icon: Chrome, labelKey: 'nav.extension' },
   { path: '/about', icon: Info, labelKey: 'nav.about' },
   { path: '/privacy', icon: Shield, labelKey: 'nav.privacy' },
 ];

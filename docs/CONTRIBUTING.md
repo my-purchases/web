@@ -5,13 +5,13 @@ Thank you for your interest in contributing to My Purchases!
 ## Development Setup
 
 ```bash
-git clone https://github.com/mobulum/my-purchases.git
-cd my-purchases/web
+git clone https://github.com/my-purchases/web.git
+cd web
 npm install
 npm run dev
 ```
 
-The dev server runs at `http://localhost:5173/my-purchases`.
+The dev server runs at `http://localhost:5173/web`.
 
 ## Scripts
 

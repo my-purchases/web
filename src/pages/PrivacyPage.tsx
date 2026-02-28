@@ -26,6 +26,26 @@ export default function PrivacyPage() {
       <h3>{t('privacy.analytics')}</h3>
       <p>{t('privacy.analyticsDescription')}</p>
 
+      <hr />
+
+      <h2>{t('privacy.chromeExtension')}</h2>
+      <p>{t('privacy.chromeExtensionIntro')}</p>
+
+      <h3>{t('privacy.chromeExtensionDataCollection')}</h3>
+      <p>{t('privacy.chromeExtensionDataCollectionDescription')}</p>
+
+      <h3>{t('privacy.chromeExtensionStorage')}</h3>
+      <p>{t('privacy.chromeExtensionStorageDescription')}</p>
+
+      <h3>{t('privacy.chromeExtensionPermissions')}</h3>
+      <p>{t('privacy.chromeExtensionPermissionsDescription')}</p>
+
+      <h3>{t('privacy.chromeExtensionExport')}</h3>
+      <p>{t('privacy.chromeExtensionExportDescription')}</p>
+
+      <h3>{t('privacy.chromeExtensionNoTracking')}</h3>
+      <p>{t('privacy.chromeExtensionNoTrackingDescription')}</p>
+
       <h3>{t('privacy.contact')}</h3>
       <p>{t('privacy.contactDescription')}</p>
     </div>

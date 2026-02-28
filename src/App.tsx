@@ -9,6 +9,7 @@ const PurchasesPage = lazy(() => import('@/pages/PurchasesPage'));
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'));
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage'));
+const ExtensionPage = lazy(() => import('@/pages/ExtensionPage'));
 const AllegroCallbackPage = lazy(() => import('@/pages/AllegroCallbackPage'));
 const OlxCallbackPage = lazy(() => import('@/pages/OlxCallbackPage'));
 
@@ -28,7 +29,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/my-purchases">
+    <BrowserRouter basename="/web">
       <Routes>
         <Route element={<Layout />}>
           <Route
@@ -64,6 +65,14 @@ export default function App() {
             element={
               <Suspense fallback={<PageLoader />}>
                 <PrivacyPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="extension"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ExtensionPage />
               </Suspense>
             }
           />

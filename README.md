@@ -4,7 +4,7 @@ An open-source, privacy-first web application for tracking and organizing your o
 
 ## Live Demo
 
-**[https://mobulum.github.io/my-purchases](https://mobulum.github.io/my-purchases)**
+**[https://my-purchases.github.io/web](https://my-purchases.github.io/web)**
 
 Use invitation code `demo` to explore the app.
 
@@ -42,7 +42,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:5173/my-purchases](http://localhost:5173/my-purchases) and enter code `demo`.
+Open [http://localhost:5173/web](http://localhost:5173/web) and enter code `demo`.
 
 ## Project Structure
 
