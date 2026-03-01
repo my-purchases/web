@@ -89,4 +89,4 @@ Open [http://localhost:5173](http://localhost:5173) and enter code `demo`.
 
 ## License
 
-MIT
+MIT — Copyright (c) 2026 mobulum.com. See [LICENSE](LICENSE).
