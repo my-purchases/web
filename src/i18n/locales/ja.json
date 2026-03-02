@@ -239,20 +239,6 @@
     "support": "サポート",
     "supportDescription": "このプロジェクトが役に立つと思ったら、開発の支援をご検討ください。"
   },
-  "privacy": {
-    "title": "プライバシーポリシー",
-    "intro": "あなたのプライバシーは私たちにとって重要です。このページでは、My Resources がデータをどのように取り扱うかを説明します。",
-    "localData": "ローカルデータストレージ",
-    "localDataDescription": "すべての購入データ、タグ、設定、認証情報は、IndexedDB と localStorage を使用してブラウザにローカル保存されます。私たちのサーバーにデータが送信されることはありません。",
-    "providers": "サードパーティプロバイダー",
-    "providersDescription": "Allegro や eBay などのプロバイダーと同期する際、データはブラウザとプロバイダーのAPI間で直接やり取りされます。私たちはこのデータを仲介したり保存したりしません。",
-    "analytics": "アナリティクス",
-    "analyticsDescription": "アプリケーションの使用状況を把握するために匿名の分析を使用する場合があります。個人データや購入情報はアナリティクスに含まれません。",
-    "cookies": "Cookie とストレージ",
-    "cookiesDescription": "My Resources はブラウザの localStorage を使用して、言語設定と招待設定を保存します。IndexedDB は購入データに使用されます。トラッキング Cookie は使用されません。",
-    "contact": "お問い合わせ",
-    "contactDescription": "このプライバシーポリシーに関するご質問は、GitHub リポジトリで issue を作成してください。"
-  },
   "currency": {
     "title": "通貨",
     "setupTitle": "通貨を選択",

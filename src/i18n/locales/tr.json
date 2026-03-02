@@ -239,20 +239,6 @@
     "support": "Destek",
     "supportDescription": "Bu projeyi faydalı buluyorsanız, geliştirilmesini desteklemeyi düşünün."
   },
-  "privacy": {
-    "title": "Gizlilik Politikası",
-    "intro": "Gizliliğiniz bizim için önemlidir. Bu sayfa, My Resources'ın verilerinizi nasıl işlediğini açıklar.",
-    "localData": "Yerel Veri Depolama",
-    "localDataDescription": "Tüm satın alma verileriniz, etiketleriniz, ayarlarınız ve kimlik bilgileriniz IndexedDB ve localStorage kullanılarak tarayıcınızda yerel olarak depolanır. Bize ait herhangi bir sunucuya veri gönderilmez.",
-    "providers": "Üçüncü Taraf Sağlayıcılar",
-    "providersDescription": "Allegro veya eBay gibi sağlayıcılarla senkronize ettiğinizde, verileriniz tarayıcınız ile sağlayıcının API'si arasında doğrudan değiştirilir. Bu verilere aracılık etmez veya depolamayız.",
-    "analytics": "Analitik",
-    "analyticsDescription": "Uygulamanın nasıl kullanıldığını anlamak için anonim analitik kullanabiliriz. Analitiklere hiçbir kişisel veri veya satın alma bilgisi dahil edilmez.",
-    "cookies": "Çerezler ve Depolama",
-    "cookiesDescription": "My Resources, dil tercihinizi ve davet ayarlarınızı kaydetmek için tarayıcının localStorage'ını kullanır. IndexedDB satın alma verileri için kullanılır. İzleme çerezleri kullanılmaz.",
-    "contact": "İletişim",
-    "contactDescription": "Bu gizlilik politikası hakkında sorularınız için lütfen GitHub depomuzda bir issue açın."
-  },
   "currency": {
     "title": "Para Birimi",
     "setupTitle": "Para Biriminizi Seçin",

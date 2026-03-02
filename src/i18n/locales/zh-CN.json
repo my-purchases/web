@@ -239,20 +239,6 @@
     "support": "支持",
     "supportDescription": "如果您觉得这个项目有用，请考虑支持它的开发。"
   },
-  "privacy": {
-    "title": "隐私政策",
-    "intro": "您的隐私对我们很重要。本页面说明 My Resources 如何处理您的数据。",
-    "localData": "本地数据存储",
-    "localDataDescription": "您的所有购买数据、标签、设置和凭据均使用 IndexedDB 和 localStorage 存储在浏览器本地。不会向我们的服务器发送任何数据。",
-    "providers": "第三方提供商",
-    "providersDescription": "当您与 Allegro 或 eBay 等提供商同步时，您的数据在浏览器和提供商的 API 之间直接交换。我们不会中转或存储这些数据。",
-    "analytics": "分析",
-    "analyticsDescription": "我们可能使用匿名分析来了解应用的使用方式。分析中不包含任何个人数据或购买信息。",
-    "cookies": "Cookie 与存储",
-    "cookiesDescription": "My Resources 使用浏览器的 localStorage 保存您的语言偏好和邀请设置。IndexedDB 用于购买数据。不使用跟踪 Cookie。",
-    "contact": "联系我们",
-    "contactDescription": "如对本隐私政策有疑问，请在我们的 GitHub 仓库中提交 issue。"
-  },
   "currency": {
     "title": "货币",
     "setupTitle": "选择您的货币",

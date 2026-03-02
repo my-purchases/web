@@ -239,20 +239,6 @@
     "support": "Supporto",
     "supportDescription": "Se trovi utile questo progetto, considera di supportare il suo sviluppo."
   },
-  "privacy": {
-    "title": "Informativa sulla privacy",
-    "intro": "La tua privacy è importante per noi. Questa pagina spiega come My Resources gestisce i tuoi dati.",
-    "localData": "Archiviazione locale dei dati",
-    "localDataDescription": "Tutti i tuoi dati di acquisto, tag, impostazioni e credenziali sono archiviati localmente nel tuo browser usando IndexedDB e localStorage. Nessun dato viene inviato a un server di nostra proprietà.",
-    "providers": "Fornitori di terze parti",
-    "providersDescription": "Quando sincronizzi con fornitori come Allegro o eBay, i tuoi dati vengono scambiati direttamente tra il tuo browser e l'API del fornitore. Non intermediamo né archiviamo questi dati.",
-    "analytics": "Analisi",
-    "analyticsDescription": "Potremmo utilizzare analisi anonime per capire come viene utilizzata l'applicazione. Nessun dato personale o informazione sugli acquisti è incluso nelle analisi.",
-    "cookies": "Cookie e archiviazione",
-    "cookiesDescription": "My Resources utilizza il localStorage del browser per salvare le preferenze di lingua e le impostazioni di invito. IndexedDB è utilizzato per i dati degli acquisti. Non vengono utilizzati cookie di tracciamento.",
-    "contact": "Contatto",
-    "contactDescription": "Per domande su questa informativa sulla privacy, apri un issue nel nostro repository GitHub."
-  },
   "currency": {
     "title": "Valuta",
     "setupTitle": "Seleziona la tua valuta",
