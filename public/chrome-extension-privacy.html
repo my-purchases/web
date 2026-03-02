@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — My Purchases</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: #f9fafb;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 42rem;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .header p {
+      margin-top: 0.5rem;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 2rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .section-header p {
+      margin-top: 0.5rem;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .footer a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      background: #f3f4f6;
+      padding: 0.1rem 0.3rem;
+      border-radius: 0.25rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #111827; color: #e5e7eb; }
+      .header h1, .section-header h2, .card h3 { color: #f9fafb; }
+      .header p, .section-header p, .card p { color: #9ca3af; }
+      .card { background: #1f2937; border-color: #374151; }
+      .divider { border-color: #374151; }
+      .footer { border-color: #374151; color: #6b7280; }
+      code { background: #374151; color: #e5e7eb; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="section-header">
+      <h2>Chrome Extension — My Purchases Collector</h2>
+      <p>The My Purchases Collector Chrome extension collects order data from AliExpress. It operates exclusively on aliexpress.com pages and only processes order-related API responses. The complete source code is available at <a href="https://github.com/my-purchases/extensions" style="color:#3b82f6;text-decoration:none;">github.com/my-purchases/extensions</a>.</p>
+    </div>
+
+    <div class="card">
+      <h3>What Data Is Collected</h3>
+      <p>The extension captures the following order data from AliExpress API responses: order ID, product ID, SKU ID, product title, price and currency, quantity, order date, order status, store name, product URL, store page URL, product image URL, and SKU attributes (e.g. color, size, shipping origin). Each record also includes a timestamp of when it was captured. The extension does not collect any personal identity information — no names, email addresses, phone numbers, payment details, shipping addresses, authentication tokens, or browser cookies.</p>
+    </div>
+
+    <div class="card">
+      <h3>How Data Is Collected</h3>
+      <p>The extension uses a content script running in the page context to intercept API responses that AliExpress already sends to your browser. It monitors three channels: <code>fetch</code> requests, <code>XMLHttpRequest</code> responses, and JSONP callbacks — all limited to AliExpress order API endpoints. No additional network requests are made to AliExpress or any other server. The extension only reads responses — it never modifies requests or sends data anywhere. The optional "Collect All" feature automates scrolling and clicking the "load more" button on the order page to capture your complete order history.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Storage</h3>
+      <p>All collected data is stored locally in your browser using <code>chrome.storage.local</code>. The extension does not use <code>chrome.storage.sync</code>, so no data is synced across devices via Google's servers. No other storage mechanisms are used — no localStorage, sessionStorage, IndexedDB, or cookies. Data persists between browser sessions but is automatically removed by Chrome when the extension is uninstalled.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Transmission</h3>
+      <p>The extension makes zero outbound network requests. No data is ever transmitted to any external server, cloud service, API, or third party. All internal communication happens between the extension's components using Chrome extension messaging APIs (<code>chrome.runtime.sendMessage</code>, <code>chrome.tabs.sendMessage</code>) and <code>window.postMessage</code> within the same page.</p>
+    </div>
+
+    <div class="card">
+      <h3>Permissions</h3>
+      <p><strong>Storage</strong> — saves collected orders and collection status locally using <code>chrome.storage.local</code>. <strong>Unlimited Storage</strong> — removes the default 10 MB quota to accommodate large order histories. <strong>Tabs</strong> — required for the auto-collect feature to find your AliExpress order tab (<code>chrome.tabs.query</code>), send start/stop commands to the content script (<code>chrome.tabs.sendMessage</code>), and open the AliExpress orders page from the popup (<code>chrome.tabs.create</code>). <strong>Host access (aliexpress.com)</strong> — allows content scripts to run on AliExpress pages and intercept order API responses. No other permissions are requested.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Export</h3>
+      <p>You can export your orders to CSV, JSON, HTML, or copy them to your clipboard. All exports are user-initiated — no data is exported automatically. Files are generated locally in your browser and downloaded to your device. The JSON format is compatible with the My Purchases web application, but importing requires a manual action on your part. Individual orders can be excluded from exports using the ignore flag.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Retention &amp; Deletion</h3>
+      <p>Collected data is retained until you delete it — there is no automatic expiration. You can delete all orders at once via the trash icon in the popup (requires confirmation), or remove individual orders. When the extension is uninstalled, Chrome automatically removes all stored data. When new orders are captured, duplicates are merged automatically — existing orders with the same ID are updated with the latest data.</p>
+    </div>
+
+    <div class="card">
+      <h3>Third-Party Code</h3>
+      <p>The extension's only runtime dependencies are React, ReactDOM, and lucide-react (icon library). All three are open-source, client-side rendering libraries that make no network requests and collect no data.</p>
+    </div>
+
+    <div class="card">
+      <h3>No Tracking</h3>
+      <p>The extension contains no analytics, telemetry, error reporting, tracking pixels, or usage statistics of any kind. It does not collect device identifiers, browser fingerprints, or IP addresses.</p>
+    </div>
+
+    <div class="card">
+      <h3>Contact</h3>
+      <p>For questions about this privacy policy, please open an issue on our <a href="https://github.com/my-purchases/extensions" style="color:#3b82f6;text-decoration:none;">GitHub repository</a>.</p>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2026 mobulum &middot; <a href="https://my-purchases.mobulum.com">my-purchases.mobulum.com</a></p>
+    </div>
+  </div>
+</body>
+</html>
