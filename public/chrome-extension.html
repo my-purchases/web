@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Purchases Collector — Chrome Extension</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: #f9fafb;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 1rem;
+      background: #dbeafe;
+      margin-bottom: 1rem;
+    }
+
+    .hero-icon svg { width: 2rem; height: 2rem; color: #2563eb; }
+
+    .hero .subtitle {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #2563eb;
+    }
+
+    .hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #111827;
+      margin-top: 0.25rem;
+    }
+
+    .hero .description {
+      margin-top: 0.75rem;
+      color: #6b7280;
+      font-size: 0.95rem;
+      max-width: 36rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .btn svg { width: 1rem; height: 1rem; }
+    .btn .ext-icon { width: 0.875rem; height: 0.875rem; opacity: 0.7; }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #1d4ed8; }
+
+    .btn-dark {
+      background: #111827;
+      color: #fff;
+    }
+    .btn-dark:hover { background: #1f2937; }
+
+    /* Section */
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+
+    /* Steps grid */
+    .steps-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 640px) {
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+
+    .step-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-icon { width: 1.25rem; height: 1.25rem; color: #3b82f6; }
+
+    .step-card h4 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #111827;
+    }
+
+    .step-card p {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    /* Features grid */
+    .features-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 640px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+    }
+
+    .feature-card svg {
+      width: 1rem;
+      height: 1rem;
+      color: #3b82f6;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    .feature-card span {
+      font-size: 0.875rem;
+      color: #374151;
+    }
+
+    /* Requirements card */
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+    }
+
+    .card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .card li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #374151;
+    }
+
+    .card li svg {
+      width: 1rem;
+      height: 1rem;
+      color: #9ca3af;
+      flex-shrink: 0;
+    }
+
+    /* Privacy card */
+    .privacy-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .privacy-title svg { width: 1.25rem; height: 1.25rem; color: #22c55e; }
+
+    .card p {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .card a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+
+    .card a:hover { color: #1d4ed8; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .footer a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      body { background: #111827; color: #e5e7eb; }
+      .hero h1, .section-title, .step-card h4, .feature-card span, .card li { color: #f9fafb; }
+      .hero .subtitle { color: #60a5fa; }
+      .hero .description, .step-card p, .card p { color: #9ca3af; }
+      .hero-icon { background: rgba(37, 99, 235, 0.15); }
+      .hero-icon svg { color: #60a5fa; }
+      .step-number { background: rgba(37, 99, 235, 0.15); color: #93bbfd; }
+      .step-icon, .feature-card svg { color: #60a5fa; }
+      .step-card, .feature-card, .card { background: #1f2937; border-color: #374151; }
+      .btn-dark { background: #f3f4f6; color: #111827; }
+      .btn-dark:hover { background: #e5e7eb; }
+      .card li svg { color: #6b7280; }
+      .card a { color: #60a5fa; }
+      .card a:hover { color: #93bbfd; }
+      .footer { border-color: #374151; color: #6b7280; }
+      .privacy-title svg { color: #4ade80; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+      </div>
+      <p class="subtitle">Chrome Extension</p>
+      <h1>My Purchases Collector</h1>
+      <p class="description">Automatically collect and export your AliExpress orders. No manual copy-pasting — just browse your orders and the extension captures everything.</p>
+      <div class="hero-buttons">
+        <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+          Install from Chrome Web Store
+          <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a href="https://github.com/my-purchases/extensions/tree/master/chrome" target="_blank" rel="noopener noreferrer" class="btn btn-dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          View Source on GitHub
+          <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="section">
+      <h3 class="section-title">How It Works</h3>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">1</span>
+            <svg class="step-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h4>Browse your orders</h4>
+          <p>Go to your AliExpress order history page. The extension automatically detects and captures order data from the page.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">2</span>
+            <svg class="step-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 9 5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></svg>
+          </div>
+          <h4>Collect all orders</h4>
+          <p>Click "Collect All" in the extension popup to automatically scroll through and load all your orders.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">3</span>
+            <svg class="step-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+          </div>
+          <h4>Export your data</h4>
+          <p>Export to CSV, JSON, HTML, or copy directly to clipboard for Google Sheets. Import into My Resources web app.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="section">
+      <h3 class="section-title">Features</h3>
+      <div class="features-grid">
+        <div class="feature-card">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>Automatic API interception — no scraping, no manual work</span>
+        </div>
+        <div class="feature-card">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 9 5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/></svg>
+          <span>One-click "Collect All" to load your entire order history</span>
+        </div>
+        <div class="feature-card">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Export to CSV, JSON, HTML, or clipboard</span>
+        </div>
+        <div class="feature-card">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span>Compatible with My Resources web app import</span>
+        </div>
+        <div class="feature-card">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+          <span>All data stays in your browser — zero tracking</span>
+        </div>
+        <div class="feature-card">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>Open source under MIT license</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Requirements -->
+    <div class="section">
+      <h3 class="section-title">Requirements</h3>
+      <div class="card">
+        <ul>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Google Chrome (or Chromium-based browser)
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            AliExpress account with order history
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Privacy -->
+    <div class="section">
+      <h3 class="section-title">
+        <span class="privacy-title">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+          Privacy
+        </span>
+      </h3>
+      <div class="card">
+        <p>The extension stores all data locally in your browser. No data is sent to any server. No analytics or tracking. Read the full <a href="chrome-extension-privacy.html">privacy policy</a>.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2025 My Purchases &middot; <a href="https://my-purchases.mobulum.com">my-purchases.mobulum.com</a></p>
+    </div>
+  </div>
+</body>
+</html>
