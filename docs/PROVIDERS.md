@@ -7,7 +7,7 @@ My Resources supports eight purchase providers. Each is either **API-based** (fe
 | Provider | Type | Formats | Status | Notes |
 |----------|------|---------|--------|-------|
 | Allegro | Hybrid | API + JSON | Active | OAuth2 API (requires client credentials); also accepts GDPR JSON export |
-| Amazon | Import | CSV, JSON | Active | Parses order history CSV or GDPR JSON export |
+| Amazon | Import | CSV, JSON | Active | Parses order history CSV or GDPR JSON export; also supported by the [Chrome extension](https://github.com/my-purchases/extensions/tree/master/chrome) for automatic collection from 21 Amazon marketplaces |
 | AliExpress | Import | CSV, JSON, XLSX | Active | Parses Shopper Inventory Chrome extension exports (CSV/JSON) or AliExpress GDPR data backup (XLSX) |
 | Temu | Import | CSV | Active | Parses Temu order history CSV export |
 | eBay | Import | CSV, JSON | Coming soon | Parses order history CSV or GDPR JSON export |
@@ -42,6 +42,8 @@ Allegro's API does not support browser CORS. Options:
 ## Import-Only Providers
 
 For providers without public buyer APIs, users can export their data (typically via GDPR data portability requests) and import the resulting files.
+
+Alternatively, the **My Purchases Collector Chrome extension** can automatically collect orders from AliExpress, Temu, Allegro, and Amazon as you browse, and export them in formats compatible with this web app. See [Chrome extension README](https://github.com/my-purchases/extensions/tree/master/chrome) for details.
 
 ### Supported Formats
 

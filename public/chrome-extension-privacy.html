@@ -121,17 +121,17 @@
 
     <div class="section-header">
       <h2>Chrome Extension — My Purchases Collector</h2>
-      <p>The My Purchases Collector Chrome extension collects order data from AliExpress. It operates exclusively on aliexpress.com pages and only processes order-related API responses. The complete source code is available at <a href="https://github.com/my-purchases/extensions" style="color:#3b82f6;text-decoration:none;">github.com/my-purchases/extensions</a>.</p>
+      <p>The My Purchases Collector Chrome extension collects order data from AliExpress, Temu, Allegro, and Amazon. It operates on supported e-commerce pages and only processes order-related data. The complete source code is available at <a href="https://github.com/my-purchases/extensions" style="color:#3b82f6;text-decoration:none;">github.com/my-purchases/extensions</a>.</p>
     </div>
 
     <div class="card">
       <h3>What Data Is Collected</h3>
-      <p>The extension captures the following order data from AliExpress API responses: order ID, product ID, SKU ID, product title, price and currency, quantity, order date, order status, store name, product URL, store page URL, product image URL, and SKU attributes (e.g. color, size, shipping origin). Each record also includes a timestamp of when it was captured. The extension does not collect any personal identity information — no names, email addresses, phone numbers, payment details, shipping addresses, authentication tokens, or browser cookies.</p>
+      <p>The extension captures the following order data from supported platforms: order ID, product ID, SKU ID, product title, price and currency, quantity, order date, order status, store name, product URL, store page URL, product image URL, and SKU attributes (e.g. color, size, shipping origin). Each record also includes a timestamp of when it was captured. The extension does not collect any personal identity information — no names, email addresses, phone numbers, payment details, shipping addresses, authentication tokens, or browser cookies.</p>
     </div>
 
     <div class="card">
       <h3>How Data Is Collected</h3>
-      <p>The extension uses a content script running in the page context to intercept API responses that AliExpress already sends to your browser. It monitors three channels: <code>fetch</code> requests, <code>XMLHttpRequest</code> responses, and JSONP callbacks — all limited to AliExpress order API endpoints. No additional network requests are made to AliExpress or any other server. The extension only reads responses — it never modifies requests or sends data anywhere. The optional "Collect All" feature automates scrolling and clicking the "load more" button on the order page to capture your complete order history.</p>
+      <p>The extension uses two collection methods depending on the platform. For <strong>AliExpress, Temu, and Allegro</strong>, a content script running in the page context intercepts API responses that the site already sends to your browser. It monitors <code>fetch</code> requests, <code>XMLHttpRequest</code> responses, and JSONP callbacks — all limited to order-related API endpoints. For <strong>Amazon</strong>, the extension parses the server-rendered order history HTML using CSS selectors to extract order data from the page DOM. During auto-collect, Amazon pages are fetched in the background (same-origin, using your existing session) with a server-rendered fallback parameter. No additional network requests are made to any external server. The extension only reads data — it never modifies requests or sends data anywhere. The "Collect All" feature automates loading all pages: for AliExpress/Temu/Allegro it clicks pagination buttons, for Amazon it iterates through years and pages.</p>
     </div>
 
     <div class="card">
@@ -146,7 +146,7 @@
 
     <div class="card">
       <h3>Permissions</h3>
-      <p><strong>Storage</strong> — saves collected orders and collection status locally using <code>chrome.storage.local</code>. <strong>Unlimited Storage</strong> — removes the default 10 MB quota to accommodate large order histories. <strong>Tabs</strong> — required for the auto-collect feature to find your AliExpress order tab (<code>chrome.tabs.query</code>), send start/stop commands to the content script (<code>chrome.tabs.sendMessage</code>), and open the AliExpress orders page from the popup (<code>chrome.tabs.create</code>). <strong>Host access (aliexpress.com)</strong> — allows content scripts to run on AliExpress pages and intercept order API responses. No other permissions are requested.</p>
+      <p><strong>Storage</strong> — saves collected orders and collection status locally using <code>chrome.storage.local</code>. <strong>Unlimited Storage</strong> — removes the default 10 MB quota to accommodate large order histories. <strong>Tabs</strong> — required for the auto-collect feature to find your order tab (<code>chrome.tabs.query</code>), send start/stop commands to the content script (<code>chrome.tabs.sendMessage</code>), and open order pages from the popup (<code>chrome.tabs.create</code>). <strong>Host access (aliexpress.com, temu.com, allegro.pl, allegro.cz, amazon.com + 20 regional Amazon domains)</strong> — allows content scripts to run on supported e-commerce pages to intercept order API responses (AliExpress, Temu, Allegro) or parse order page HTML (Amazon). No other permissions are requested.</p>
     </div>
 
     <div class="card">
