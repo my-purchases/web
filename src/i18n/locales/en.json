@@ -334,5 +334,13 @@
     "hi": "हिन्दी",
     "bn": "বাংলা",
     "tr": "Türkçe"
+  },
+  "collector": {
+    "importButton": "Import from My Purchases Collector",
+    "description": "Import purchases exported from the My Purchases Collector browser extension. Data will be automatically assigned to the correct providers.",
+    "invalidJson": "Invalid JSON file. Please select a valid export from My Purchases Collector.",
+    "emptyFile": "The file contains no purchase data.",
+    "invalidFormat": "Unrecognized file format. Expected a My Purchases Collector export.",
+    "providerBreakdown": "Providers in this import:"
   }
 }

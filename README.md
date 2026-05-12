@@ -11,6 +11,7 @@ Use invitation code `demo` to explore the app.
 ## Features
 
 - **Multi-provider support** — Allegro (API + import), Amazon, AliExpress, Temu (CSV/JSON import); eBay, OLX, Vinted, Allegro Lokalnie (coming soon)
+- **My Purchases Collector import** — One-click import of JSON exports from the My Purchases Collector browser extension; automatically assigns items to the correct providers with full deduplication
 - **Cost calculator** — Select purchases and calculate total costs with per-currency breakdown and converted totals
 - **Currency conversion** — Automatic historical exchange rate conversion to your preferred currency
 - **Custom tagging** — Create tag groups (e.g., Category, Location) with custom values and assign them to purchases
@@ -57,7 +58,7 @@ Open [http://localhost:5173](http://localhost:5173) and enter code `demo`.
 │   │   ├── data/             # Export/Import dialogs
 │   │   ├── invitation/       # Welcome & auth screen
 │   │   ├── layout/           # Header, Footer, Layout
-│   │   ├── providers/        # Provider sync/import panel
+│   │   ├── providers/        # Provider sync/import panel + Collector import button
 │   │   ├── purchases/        # Purchase list, cards, filters, groups, cost calculator
 │   │   └── tags/             # Tag assigner, tag group manager
 │   ├── db/                   # Dexie.js database & sync logic

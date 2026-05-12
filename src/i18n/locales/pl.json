@@ -277,5 +277,13 @@
     "hi": "हिन्दी",
     "bn": "বাংলা",
     "tr": "Türkçe"
+  },
+  "collector": {
+    "importButton": "Importuj z My Purchases Collector",
+    "description": "Importuj zakupy wyeksportowane z rozszerzenia przeglądarki My Purchases Collector. Dane zostaną automatycznie przypisane do odpowiednich dostawców.",
+    "invalidJson": "Nieprawidłowy plik JSON. Wybierz prawidłowy eksport z My Purchases Collector.",
+    "emptyFile": "Plik nie zawiera danych zakupowych.",
+    "invalidFormat": "Nierozpoznany format pliku. Oczekiwano eksportu z My Purchases Collector.",
+    "providerBreakdown": "Dostawcy w tym imporcie:"
   }
 }
