@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { PurchaseList, PurchaseFilters, CreateGroupModal, CalculateCostsModal } from '@/components/purchases';
-import { ProviderPanel } from '@/components/providers';
+import { ProviderPanel, CollectorImportButton } from '@/components/providers';
 import { usePurchaseStore, useSettingsStore } from '@/stores';
 import { Button } from '@/components/common';
 import { CurrencySetupDialog, CurrencyConversionProgress } from '@/components/currency';
@@ -59,6 +59,7 @@ export default function PurchasesPage() {
 
   return (
     <div className="space-y-6">
+      <CollectorImportButton />
       <ProviderPanel />
 
       <div className="flex items-center justify-between">

@@ -26,6 +26,22 @@ My Resources is a client-side-only Single Page Application (SPA) deployed on Git
 [User File (CSV/JSON)] → [Provider.parseImportFile()] → Purchase[] → IndexedDB
 ```
 
+### Collector Import Flow
+
+```
+[My Purchases Collector JSON] → [CollectorImportButton]
+       ↓
+  parseCollectorExport()
+   - filter ignoreExport
+   - map providerId (e.g. allegro-pl → allegro)
+   - parse price from priceInfo
+   - resolve providerItemId
+       ↓
+  addPurchases()  (dedup on [providerId+providerItemId])
+       ↓
+     IndexedDB
+```
+
 ### Currency Conversion Flow
 
 After import or when a preferred currency is set, purchases are automatically converted:
@@ -73,6 +89,7 @@ Zustand stores act as the command layer; IndexedDB is the source of truth:
 <BrowserRouter>
   <Layout>                        ← Header + Footer + Outlet
     <PurchasesPage>               ← Main authenticated view
+      <CollectorImportButton />   ← Bulk import from My Purchases Collector extension
       <ProviderPanel />           ← Sync & import controls (disabled providers greyed out)
       <PurchaseFilters />         ← Search, provider filter (active only), sort, tags
       <PurchaseList />            ← Live-queried list from Dexie

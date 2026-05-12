@@ -2,6 +2,8 @@
 
 My Resources supports eight purchase providers. Each is either **API-based** (fetches data directly from the provider), **import-based** (parses user-uploaded files), or **hybrid** (both). Some providers are currently marked as **disabled** (coming soon) and are shown greyed out in the UI.
 
+In addition to the per-provider import system, the app supports **bulk import from the My Purchases Collector browser extension** — a single JSON file that may contain purchases from multiple providers at once.
+
 ## Provider Types
 
 | Provider | Type | Formats | Status | Notes |
@@ -14,6 +16,185 @@ My Resources supports eight purchase providers. Each is either **API-based** (fe
 | OLX | Import | JSON | Coming soon | Parses GDPR JSON export |
 | Vinted | Import | JSON | Coming soon | Parses GDPR JSON export |
 | Allegro Lokalnie | Import | JSON | Coming soon | Parses GDPR JSON export |
+
+## Disabled Providers
+
+Providers can be marked as `disabled: true` in their `ProviderMeta`. Disabled providers:
+- Appear at the end of the provider list in the UI
+- Are rendered greyed out with a "Coming soon" badge
+- Have no actionable buttons (no Import, Sync, or Connect)
+- Are excluded from the purchase filter chips
+
+## My Purchases Collector Import
+
+The **Import from My Purchases Collector** button, displayed above the provider panel, allows importing a single JSON file that contains purchases collected from multiple providers at once.
+
+### Source
+
+The file is exported from the **My Purchases Collector** browser extension, which automatically collects order data as you browse Allegro, Amazon, AliExpress, and Temu.
+
+### File Format
+
+The export is a JSON array of objects. Each object represents one purchased line item:
+
+```json
+{
+  "id": "54cce041-...",
+  "providerId": "allegro-pl",
+  "title": "Karta pamięci Samsung Pro Endurance 32GB",
+  "price": "38.99 PLN",
+  "priceInfo": "38.99 PLN|38|99",
+  "currency": "PLN",
+  "orderDateIso": "2026-05-12",
+  "orderId": "54d3be10-...",
+  "orderLineId": "54cce041-...",
+  "productId": "4c4faa53-...",
+  "skuId": "18069828195",
+  "productUrl": "https://allegro.pl/oferta/...",
+  "imageUrl": "https://a.allegroimg.com/...",
+  "storeName": "Vobis_pl",
+  "storePageUrl": "https://allegro.pl/uzytkownik/Vobis_pl",
+  "status": "Zakup opłacony",
+  "quantity": 1,
+  "tags": [],
+  "timestamp": 1778618190949,
+  "ignoreExport": false,
+  "attributes": ""
+}
+```
+
+### Provider ID Mapping
+
+The extension uses slightly different provider IDs than the app. The following mapping is applied automatically during import:
+
+| Extension `providerId` | App `providerId` |
+|------------------------|-----------------|
+| `allegro-pl` | `allegro` |
+| `amazon` | `amazon` (unchanged) |
+| `aliexpress` | `aliexpress` (unchanged) |
+| `temu` | `temu` (unchanged) |
+
+### Field Mapping
+
+| Extension field | Purchase field | Notes |
+|-----------------|---------------|-------|
+| `providerId` | `providerId` | Mapped via table above |
+| `title` | `title` | |
+| `priceInfo` | `price` | Parsed as `integer + decimal/100`; multiplied by `quantity` |
+| `currency` | `currency` | |
+| `orderDateIso` | `purchaseDate` | ISO 8601 date |
+| `imageUrl` | `imageUrl` | |
+| `productUrl` | `originalUrl` | |
+| `skuId \|\| productId \|\| orderLineId \|\| orderId` | `providerItemId` | First non-empty value; used for deduplication |
+| whole item | `rawData` | Full original object stored for reference |
+| `status` | — | Not stored (field not present in Purchase schema) |
+
+Items with `ignoreExport: true` are skipped during import.
+
+### Deduplication
+
+Import reuses the existing `addPurchases` mechanism, which deduplicates on the compound key `[providerId + providerItemId]`:
+
+- **Identical record** → skipped
+- **Same key but different core data** (e.g., price changed) → updated
+- **Same key, same core data, missing optional fields** → enriched (fills in `imageUrl`, `originalUrl`, `rawData`)
+- **New record** → added
+
+### Import Summary
+
+After import, a modal shows:
+- Total items processed
+- Newly added / already existed / updated / enriched
+- Per-provider breakdown (e.g., `allegro: 462`, `amazon: 507`, `aliexpress: 931`)
+
+---
+
+## Allegro API Integration
+
+Allegro uses OAuth2 with client credentials. The flow:
+
+1. Invitation file contains `clientId`, `clientSecret`, `accessToken`, `refreshToken`
+2. On sync, the app checks if the token is expired
+3. If expired, it calls Allegro's token endpoint to refresh
+4. Fetches `/order/checkout-forms` with pagination
+5. Maps checkout forms to the internal `Purchase` interface
+
+### CORS Considerations
+
+Allegro's API does not support browser CORS. Options:
+- Use a CORS proxy URL (configurable in invitation's `proxyUrl` field)
+- Run a simple proxy server locally
+
+## Import-Only Providers
+
+For providers without public buyer APIs, users can export their data (typically via GDPR data portability requests) and import the resulting files.
+
+Alternatively, the **My Purchases Collector Chrome extension** can automatically collect orders from AliExpress, Temu, Allegro, and Amazon as you browse, and export them in formats compatible with this web app. See [Chrome extension README](https://github.com/my-purchases/extensions/tree/master/chrome) for details.
+
+### Supported Formats
+
+**CSV** (Amazon, eBay):
+- Standard order history CSV exports
+- Auto-detects column headers and maps to purchase fields
+
+**CSV** (Temu):
+- Exported from Temu order history
+- Headers: `"Order ID","Item description at order time","Order time","Shipped date","Price","Price tax","Shipping cost","Order total","Order detail URL"`
+- Prices use European format with currency symbol (e.g., `"70,48 zł"`, `"$12.99"`, `"15,00 €"`)
+- Supports multiple currencies (PLN, USD, EUR)
+
+**CSV** (AliExpress — Shopper Inventory Chrome extension):
+- Exported from the [Aliexpress Shopper Inventory](https://chromewebstore.google.com/detail/aliexpress-shopper-invento/bfojcbgpgnfajmbdkdnpckjaemkbpbph) Chrome extension
+- Headers: `Order Date,Order ID,Title,Qty,Price,Store,Product ID,SKU ID,Attributes,Price Info,Currency,Status,Product Url,Product Image Url,Store Url,Tags`
+- Price parsed from strings like `"US $120.95"` or `"129,46zł"`
+
+**JSON** (AliExpress — Shopper Inventory Chrome extension):
+- Exported from the same Chrome extension
+- Array of objects with fields: `id`, `orderId`, `title`, `price`, `currency`, `quantity`, `orderDateIso`, `status`, `storeName`, `productUrl`, `imageUrl`, etc.
+
+**XLSX** (AliExpress — GDPR data backup):
+- Obtained via AliExpress privacy/data portability request
+- Uses the "Order Information" sheet from `aliexpress_user_data_backup_*.xlsx`
+- Prices are in cents (e.g., `15115` = $151.15) — no currency field, defaults to USD
+- `order_id` is the line-item ID, `parent_orderid` is the parent order ID
+
+**JSON** (all providers):
+- GDPR data exports
+- Flexible schema detection — the parser looks for arrays of items in common locations (`items`, `purchases`, `orders`, `data`)
+
+## Adding a New Provider
+
+1. Create a folder under `src/providers/<name>/`
+2. Implement the `PurchaseProvider` interface from `src/providers/types.ts`
+3. Register in `src/providers/registry.ts` (active providers first, disabled last)
+4. Add the provider name to all 17 locale files under the `providers` section
+5. If the provider is also exported by My Purchases Collector under a different `providerId`, add the mapping to `PROVIDER_ID_MAP` in `src/components/providers/CollectorImportButton.tsx`
+
+```typescript
+// src/providers/my-provider/MyProvider.ts
+import type { PurchaseProvider, ProviderMeta } from '../types';
+
+const meta: ProviderMeta = {
+  id: 'my-provider',
+  name: 'My Provider',
+  description: 'Description of provider',
+  type: 'import',       // 'api' | 'import' | 'hybrid'
+  supportedFormats: ['json'],
+  website: 'https://example.com',
+  // disabled: true,     // Set to true for coming-soon providers
+};
+
+export const MyProvider: PurchaseProvider = {
+  meta,
+  async parseImportFile(file: File) {
+    // Parse file and return Purchase[]
+  },
+  async validateImportFile(file: File) {
+    // Return string[] of errors, or empty array if valid
+  },
+};
+```
+
 
 ## Disabled Providers
 
