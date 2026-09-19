@@ -93,6 +93,7 @@ class AnalyticsTracker {
   /**
    * Placeholder for sending events to an analytics service in production
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private sendToAnalyticsService(_payload: Record<string, unknown>): void {
     // TODO: Integrate with Google Analytics, Plausible, or PostHog
     // Example: window.gtag?.('event', payload.event, payload);
